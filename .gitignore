@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
+=======
+
+# Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
+# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
+
+>>>>>>> origin/MJBranch
 ### Eclipse ###
 .project
 .classpath
@@ -15,6 +22,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+<<<<<<< HEAD
 
 # External tool builders
 .externalToolBuilders/
@@ -43,6 +51,36 @@ local.properties
 # Tern plugin
 .tern-project
 
+=======
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+>>>>>>> origin/MJBranch
 # TeXlipse plugin
 .texlipse
 
@@ -94,4 +132,17 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+=======
+# End of https://www.toptal.com/developers/gitignore/api/eclipse,java
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,intellij,java
+
+.idea
+
+*.iml
+>>>>>>> origin/MJBranch
