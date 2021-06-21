@@ -5,6 +5,18 @@ import java.util.regex.*;
 
 public class MemberHandler {
 	
+	/**
+	 * MemberHandler클래스
+	 * 
+	 * 이 클래스에서는 다음의 4가지 기능을 구현합니다
+	 * (1) 회원가입
+	 * (2) 로그인처리
+	 * (3) 아이디 및 비밀번호 찾기
+	 * (4) 회원탈퇴
+	 * 
+	 * @author 민주
+	 */
+	
 	Scanner kb = new Scanner(System.in);
 	
 	ArrayList<Member> members;
@@ -26,7 +38,7 @@ public class MemberHandler {
 	}
 	
 	void joinMember() { //회원가입 method
-		//회원코드와 포인트는 알아서 들어가게
+		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
 			System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 			System.out.println("=== 회원가입을 시작합니다 ===");
@@ -102,7 +114,7 @@ public class MemberHandler {
 					}
 				}
 			}
-			members.add(new Member(0/*추후수정*/, ID, password, name, age, phoneNum, email, 0));
+			members.add(new Member(0/*진행중: 추후수정*/, ID, password, name, age, phoneNum, email, 0));
 			System.out.println("=== 회원가입이 완료되었습니다 ===");
 			System.out.println("=== 감사합니다 ===");
 		} catch(MyMadeException e) {
@@ -115,7 +127,7 @@ public class MemberHandler {
 		
 	}
 	
-	Member login() { //로그인 처리 method, 예외처리 해야 함
+	Member login() { //로그인 처리 method, 진행중: 예외처리 해야 함
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== 로그인을 시작합니다 ===");
 		if(members.size() > 0) {
@@ -146,7 +158,7 @@ public class MemberHandler {
 		return null;
 	}
 
-	void findingId() { //id찾기 method, 예외처리 해야 함
+	void findingId() { //id찾기 method, 진행중: 예외처리 해야 함
 		System.out.println("=== ID 및 비밀번호 찾기 도우미입니다 ===");
 		System.out.println("=== 찾으시려는 계정의 이름을 입력해주세요 ===");
 		String name = kb.nextLine();
@@ -165,7 +177,7 @@ public class MemberHandler {
 		
 	}
 	
-	void leaveMember(int memberCode) { //회원 탈퇴 method, 예외처리 해야 함
+	void leaveMember(int memberCode) { //회원 탈퇴 method, 진행중: 예외처리 해야 함
 
 		for(int i = 0 ; i < members.size() ; i++) {
 			if(members.get(i).getMemberCode() == memberCode) {
