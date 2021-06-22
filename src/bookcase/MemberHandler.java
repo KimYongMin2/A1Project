@@ -104,12 +104,7 @@ public class MemberHandler {
 			/*입력*/String ageString = kb.nextLine();
 			isEmpty(ageString);
 			int age = Integer.parseInt(ageString);
-			boolean chk3 = true;
-			while(chk3) {
-				if(!(age > 0 && age < 100)) {
-					throw new MyMadeException("[!] 사람의 나이가 아닙니다");
-				}
-			}
+
 			
 			// (5) 전화번호 입력(정규식으로, 형식을 맞춰 입력하게 처리)
 			System.out.println("[전화번호를 다음의 형식에 따라 입력해주세요]");
