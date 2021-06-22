@@ -134,24 +134,21 @@ public class MemberHandler {
 			System.out.println("[입력을 원치 않으시면 그냥 엔터를 눌러주세요]");
 			String email = null;
 			/*입력*/String inputemail = kb.nextLine(); //이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
-			if(inputemail == "") { //공란은 입력하면, email에는 null값이 들어가는 것
+			if(inputemail.equals("")) { //공란은 입력하면, email에는 null
 			} else {
-				boolean chk4 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
-				if(!chk4) {
-					boolean chk5 = true;
-					while(chk5){
+				boolean chk4 = true;
+				while(chk4) {
+					boolean chk5 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
+					if(chk5) {chk4 = false;}
+					else {
 						System.out.println("[!] 이메일 형식에 부합하지 않습니다.");
-						/*입력*/email = kb.nextLine();
-						chk3 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
-						if(chk3) {
-							break;
-						}
-					}
+						/*입력*/inputemail = kb.nextLine();
+					}	
+					email = inputemail; //뭔가를 입력하면, email에 그 값이 들어가도록
 				}
-				email = inputemail; //뭔가를 입력하면, email에 그 값이 들어가도록
 			}
 			
-			// (7) 입력 값을 넣어 객체 생성하여 완료하기
+			// (7) 입력 값을 넣어서, 객체 생성 후 ArrayList에 넣고, DB에도 INSERT
 			MemberCRUD memberCrud = MemberCRUD.getInstance();
 			Member newMember = memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
 			members.add(newMember);

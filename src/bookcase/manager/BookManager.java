@@ -1,10 +1,10 @@
 package bookcase.manager;
 
-import bookcase.Book;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import bookcase.*;
 
 public class BookManager {
     private static List<Book> bookList = new ArrayList<>();
@@ -91,6 +91,16 @@ public class BookManager {
         Book book = new Book(bookCode, bName, bWriter, bPublisher,
                 bGenre, bPrice, bUsing, bAgeUsing);
         bookList.add(book);
+        
+        /***
+         * 북테이블 DB와 연결!, 북 테이블에 INSERT시키기
+         * @author 민주
+         */
+        
+        BookCRUD bookCrud = BookCRUD.getInstance();
+		Book book = bookCrud.insertBook(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
+		members.add(newMember);
+		System.out.println("=== 새로운 책을 추가했습니다. ===");
 
     }
 
