@@ -29,6 +29,7 @@ public class MemberPage {
             switch (menuButton) {
                 case 1:
                     // 도서목록 검색
+                    new ShowBookList(member).showBookListStart();
                     break;
                 case 2:
                     // 도서 대여
