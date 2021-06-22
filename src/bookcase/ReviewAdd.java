@@ -113,7 +113,7 @@ public class ReviewAdd {
 				rScore = sc.nextDouble();
 
 				if (rScore <= 5) {
-					chk = false;
+					chk1 = false;
 					break;
 				}
 			}
