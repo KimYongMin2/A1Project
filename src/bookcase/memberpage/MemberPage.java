@@ -1,5 +1,6 @@
 package bookcase.memberpage;
 
+import BookRentPage.BookRentPage;
 import bookcase.Member;
 
 import java.util.Scanner;
@@ -33,6 +34,7 @@ public class MemberPage {
                     break;
                 case 2:
                     // 도서 대여
+                    new BookRentPage(member).BookUsingStart();
                     break;
                 case 3:
                     // 도서 반납
