@@ -48,13 +48,14 @@ public class BookRentPage {
 	                temp = i;
 	                chk = true;
 	            }
+	            
 	        }		 
         	if(!chk) {
         		System.out.println("원하시는 책을 찾지 못했습니다.");
         	}
         	else {
         		if(!books.get(temp).isbUsing()) {
-        			books.get(temp).setbUsing(true);
+        			book = books.get(temp);
         		}
         		else {
         			System.out.println("이미 대여중인 책입니다.");
@@ -70,5 +71,6 @@ public class BookRentPage {
     	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), "20210101", "20210622", 0);
     	
     	UsingBooks.add(usingBook);
+    	book.setbUsing(true);
     }
 }
