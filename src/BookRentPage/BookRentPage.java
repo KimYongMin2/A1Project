@@ -14,7 +14,7 @@ public class BookRentPage {
     private int menuButton = 0;
     private Member member;
     private Book book;
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
     private int temp = 0;
     private int bookcode=0;
     private List<Using> usingBooks = new ArrayList<>();

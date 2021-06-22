@@ -17,12 +17,12 @@ public class ReviewAdd {
 	private double rScore; // 별점
 	private Member member;
 	private Book book;
-	private List<Book> books= new ArrayList<>();;
+	private List<Book> books = new ArrayList<>();
 	private int temp;
 	private Review review;
 	private List<Review> reviewList = new ArrayList<>();
 	private Scanner sc = new Scanner(System.in);
-	private int menuButton ;
+	private int menuButton;
 
 	public List<Review> getReviewList() {
 		return reviewList;
@@ -40,24 +40,24 @@ public class ReviewAdd {
 	// ArrayList<String> reviewList = new ArrayList ;
 // ArrayList<>(Arrays.asList(Member.getmemberCode, Book.getbookCode, RComment,
 
-	
+
 	public void reviewAddStart() {
 		while (menuButton != 3) {
 			System.out.println("1. 리뷰입력    2. 리스트보기     3. 종료");
 			System.out.print("해당 메뉴를 선택해주세요 : ");
 			menuButton = Integer.parseInt(sc.nextLine());
-			switch (menuButton){
-				case 1 :
+			switch (menuButton) {
+				case 1:
 					findBook();
 					setReviewComent();
 					review = new Review(0, book.getBookCode(), member.getMemberCode(), rScore, rComment);
 					reviewList.add(review);
 					break;
-				case 2 :
+				case 2:
 					for (int i = 0; i < reviewList.size(); i++) {
 						System.out.println(reviewList.get(i));
 					}
-				case 3 :
+				case 3:
 					System.out.println("종료합니다");
 					break;
 				default:
@@ -98,7 +98,7 @@ public class ReviewAdd {
 				System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
 				rScore = sc.nextDouble();
 
-				if (rScore <=5) {
+				if (rScore <= 5) {
 					chk = false;
 					break;
 				}
@@ -107,22 +107,27 @@ public class ReviewAdd {
 		System.out.println("별점이 입력되었습니다.");
 	}
 
-	public void findBook(){
-        // 책확인
-		Scanner sc = new Scanner(System.in);
-        System.out.print("리뷰 남길 책 이름을 작성해주세요 : ");
-        String bName = sc.nextLine();
-        books = new BookManager().getBookList();
+	public void findBook() {
+		// 책확인
+		boolean check = false;
+		while (!check) {
+			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
+			String bName = sc.nextLine();
+			books = new BookManager().getBookList();
 
-        for(int i =0; i <books.size(); i++) {
-            if(bName.equals(books.get(i).getbName())) {
-                temp = i;
-            }
-        }
-        book = books.get(temp);
-    }
-	
-
+			for (int i = 0; i < books.size(); i++) {
+				if (bName.equals(books.get(i).getbName())) {
+					temp = i;
+					check = true;
+				}
+			}
+			if (!check) {
+				System.out.println("찾지못하였습니다.");
+			} else {
+				book = books.get(temp);
+			}
+		}
+	}
 }
 // 멤버코드 -> 받아서 (memberCode)
 // 책코드 -> 책 검색 (bookCode)

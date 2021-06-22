@@ -31,21 +31,22 @@ public class ReturnBook {
     public void findBook(){
         // 책확인
         boolean check = false;
-        while (!check)
-        System.out.print("반납하려는 책 이름을 작성해주세요 : ");
-        String bName = scanner.nextLine();
-        books = new BookManager().getBookList();
+        while (!check) {
+            System.out.print("반납하려는 책 이름을 작성해주세요 : ");
+            String bName = scanner.nextLine();
+            books = new BookManager().getBookList();
 
-        for(int i =0; i <books.size(); i++) {
-            if(bName.equals(books.get(i).getbName())) {
-                temp = i;
-                check = true;
+            for (int i = 0; i < books.size(); i++) {
+                if (bName.equals(books.get(i).getbName())) {
+                    temp = i;
+                    check = true;
+                }
             }
-        }
-        if (!check){
-            System.out.println("찾지못하였습니다.");
-        }else {
-            book = books.get(temp);
+            if (!check) {
+                System.out.println("찾지못하였습니다.");
+            } else {
+                book = books.get(temp);
+            }
         }
     }
 

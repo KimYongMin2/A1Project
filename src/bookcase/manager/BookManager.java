@@ -114,6 +114,7 @@ public class BookManager {
     }
 
     public void reBook(List<Book> bookList){
+        findCheck = false;
         System.out.println("수정할 도서코드를 입력해주세요 : ");
         bookCode = Integer.parseInt(scanner.nextLine());
 
