@@ -386,5 +386,8 @@ public class MemberHandler {
 		}
 	}
 	
+	public int showMyPoint(Member member) { //잔여 포인트 조회
+		return member.getPoint();
+	}
 	
 }

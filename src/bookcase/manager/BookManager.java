@@ -206,6 +206,10 @@ public class BookManager {
             System.out.println(book);
         }
     }
+    /**
+     * 전체 책 리스트 조회
+		아무것도 없으면 리스트가 없습니다라고 뜨게 수정하기 
+     */
 
     public void showUsingBookList(){
         System.out.println("대여중인 리스트입니다");
