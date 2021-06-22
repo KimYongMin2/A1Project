@@ -7,10 +7,12 @@ public class Book {
     private String bPublisher;
     private String bGenre;
     private int bPrice;
-    private boolean bUsing;
-    private boolean bAgeUsing;
+    private String bUsing;
+    private String bAgeUsing;
 
-    public Book(int bookCode, String bName, String bWriter, String bPublisher, String bGenre, int bPrice, boolean bUsing, boolean bAgeUsing) {
+    public Book(int bookCode, String bName, 
+    		String bWriter, String bPublisher, String bGenre, 
+    		int bPrice, String bUsing, String bAgeUsing) {
         this.bookCode = bookCode;
         this.bName = bName;
         this.bWriter = bWriter;
@@ -69,19 +71,19 @@ public class Book {
         this.bPrice = bPrice;
     }
 
-    public boolean isbUsing() {
+    public String getbUsing() {
         return bUsing;
     }
 
-    public void setbUsing(boolean bUsing) {
+    public void setbUsing(String bUsing) {
         this.bUsing = bUsing;
     }
 
-    public boolean isbAgeUsing() {
+    public String getbAgeUsing() {
         return bAgeUsing;
     }
 
-    public void setbAgeUsing(boolean bAgeUsing) {
+    public void setbAgeUsing(String bAgeUsing) {
         this.bAgeUsing = bAgeUsing;
     }
 

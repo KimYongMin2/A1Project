@@ -1,17 +1,19 @@
 package bookcase.manager;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import bookcase.*;
 
 public class BookManager {
-    private static List<Book> bookList;
+	
+    private static Connection con = JDBCconnecting.connecting();
+	private static BookCRUD bookCrud = BookCRUD.getInstance();
+	private static ArrayList<Book> bookList = bookCrud.getBookList(con);;
+	
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
-    private boolean bAgeUsing;
+    private String bAgeUsing;
     private int temp;
     private int menuButton = 0;
     private boolean findCheck = false;
@@ -46,7 +48,7 @@ public class BookManager {
                     break;
                 case 4:
                     // 전체 첵 리스트 조회
-                    showAllBookList();
+                    showAllBookList(bookList);
                     break;
                 case 5:
                     // 대여중인 책 리스트 조회
@@ -64,8 +66,6 @@ public class BookManager {
 
 
     public void addBook(){
-    	Connection con = JDBCconnecting.connecting();
-
         System.out.print("책 이름을 입력해주세요 : ");
         bName = scanner.nextLine();
 
@@ -81,16 +81,16 @@ public class BookManager {
         System.out.print("가격을 입력해주세요 : ");
         bPrice = Integer.parseInt(scanner.nextLine());
 
-        boolean bUsing = false;
+        String bUsing = "false";
 
         System.out.println("연령제한이 있습니까?");
         System.out.print("(1) 네 (2) 아니오");
         int chks = Integer.parseInt(scanner.nextLine());
         
         if(chks == 1) {
-        	bUsing = true;
+        	bAgeUsing = "true";
         } else if(chks == 2) {
-        	bUsing = false;
+        	bAgeUsing = "false";
         } else {
         	System.out.println("잘못 입력하셨습니다.");
         }
@@ -99,46 +99,38 @@ public class BookManager {
          * 북테이블 DB와 연결!, 북 테이블에 INSERT시키기
          * @author 민주
          */
-        BookCRUD bookCrud = BookCRUD.getInstance();
 		bookCrud.insertBook(con, new Book(0, bName, bWriter, bPublisher,
                 bGenre, bPrice, bUsing, bAgeUsing));
-		
-		bookList = bookCrud.getBookList(con);
 		System.out.println("=== 새로운 책을 추가했습니다. ===");
 
     }
 
-    public void deleteBook(List<Book> bookList){
-    	Connection con = JDBCconnecting.connecting();
-    	
+    public void deleteBook(ArrayList<Book> bookList) {	
         findCheck = false;
+        
         System.out.print("삭제할 도서명을 입력해주세요 : ");
         String bookName = scanner.nextLine();
-
-        for (int i = 0; i < bookList.size(); i++) {
-            if(bookName.equals( bookList.get(i).getbName())){
-                bookList.remove(i);
-                
-                /**
-                 * DB랑 연결
-                 * @author 민주
-                 */
-                BookCRUD bookCrud = BookCRUD.getInstance();
-                bookCrud.deleteBook(con, bookList.get(i));
-                
-                System.out.println("삭제되었습니다");
-                findCheck = true;
-            }
+        
+        if(bookList != null) {
+	        for (int i = 0; i < bookList.size(); i++) {
+	            if(bookName.equals( bookList.get(i).getbName())){
+	                bookList.remove(i);
+	                bookCrud.deleteBook(con, bookList.get(i));
+	                System.out.println("삭제되었습니다");
+	                findCheck = true;
+	            }
+	        }
+	        
+	        if(!findCheck) {
+	        	System.out.println("해당하는 도서를 찾지 못했습니다.");
+	        }
+        } else {
+        	System.out.println("아직 책이 한권도 없습니다.");
         }
-        if(!findCheck) {
-        	System.out.println("해당하는 도서를 찾지 못했습니다.");
-        }
-   
     }
 
-    public void reBook(List<Book> bookList){
-    	Connection con = JDBCconnecting.connecting();
-    	
+    public void reBook(ArrayList<Book> bookList){
+
         findCheck = false;
         
         System.out.println("수정할 도서코드를 입력해주세요 : ");
@@ -187,8 +179,8 @@ public class BookManager {
                     bookList.get(temp).setbPrice(bPrice);
                     break;
                 case 6:
-                    System.out.print("연련제한 여부를 입력하세요 : ");
-                    bAgeUsing = Boolean.parseBoolean(scanner.nextLine());
+                    System.out.print("연령제한 여부를 입력하세요 : ");
+                    bAgeUsing = scanner.nextLine();
                     bookList.get(temp).setbAgeUsing(bAgeUsing);
                     break;
                 default:
@@ -200,7 +192,6 @@ public class BookManager {
              * DB랑 연결
              * @author 민주
              */
-            BookCRUD bookCrud = BookCRUD.getInstance();
             bookCrud.updateBook(con, bookList.get(temp));
             
         }else {
@@ -208,29 +199,24 @@ public class BookManager {
         }
     }
 
-    public void showAllBookList(){
+    public void showAllBookList(ArrayList<Book> bookList){
         System.out.println("전체 리스트입니다");
         for (Book book : bookList) {
             System.out.println(book);
-            System.out.println(book.getBookCode() + book.getbName());
         }
     }
 
     public void showUsingBookList(){
         System.out.println("대여중인 리스트입니다");
         for (Book book : bookList) {
-            if(book.isbUsing()){
+            if(book.getbUsing().equals("true")){
                 System.out.println(book);
                 System.out.println(book.getBookCode() + book.getbName());
             }
         }
     }
-    public List<Book> getBookList() {
+    public ArrayList<Book> getBookList() {
         return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
     }
 
 }
