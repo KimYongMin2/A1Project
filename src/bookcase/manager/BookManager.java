@@ -9,7 +9,7 @@ public class BookManager {
 	
     private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud = BookCRUD.getInstance();
-	private static ArrayList<Book> bookList = bookCrud.getBookList(con);;
+	private static ArrayList<Book> bookList = new ArrayList<Book>();
 	
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
@@ -32,6 +32,7 @@ public class BookManager {
 
             System.out.print(" 메뉴를 선택해주세요 : ");
             menuButton = Integer.parseInt(scanner.nextLine());
+            bookList = bookCrud.getBookList(con);
 
             switch (menuButton) {
                 case 1:
@@ -114,7 +115,6 @@ public class BookManager {
         if(bookList != null) {
 	        for (int i = 0; i < bookList.size(); i++) {
 	            if(bookName.equals( bookList.get(i).getbName())){
-	                bookList.remove(i);
 	                bookCrud.deleteBook(con, bookList.get(i));
 	                System.out.println("삭제되었습니다");
 	                findCheck = true;
@@ -133,7 +133,7 @@ public class BookManager {
 
         findCheck = false;
         
-        System.out.println("수정할 도서코드를 입력해주세요 : ");
+        System.out.println("수정할 도서코드 입력해주세요 : ");
         int bookCode = Integer.parseInt(scanner.nextLine());
 
         for (int i = 0; i < bookList.size(); i++) {
@@ -192,9 +192,10 @@ public class BookManager {
              * DB랑 연결
              * @author 민주
              */
-            bookCrud.updateBook(con, bookList.get(temp));
+            bookCrud.updateBook(con, bookList.get(temp)); /*오류*/
+            System.out.println("수정 완료되었습니다!");
             
-        }else {
+        } else {
             System.out.println("파일을 찾지 못하였습니다.");
         }
     }
