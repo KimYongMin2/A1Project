@@ -29,6 +29,7 @@ public class MHTestDriver {
 				System.out.println("3. 아이디찾기");
 				System.out.println("4. 회원탈퇴");
 				System.out.println("5. 종료");
+				System.out.println("6. 내 정보 수정");
 				System.out.println("=============");
 				int menu = Integer.parseInt(kb.nextLine());
 				switch (menu) {
@@ -50,8 +51,10 @@ public class MHTestDriver {
 					break;
 				case 5:
 					System.exit(0);
+				case 6:
+					mh.updateMember(member);
 				default:
-					throw new IllegalArgumentException("Unexpected value");
+					System.out.println("잘못된 입력입니다.");
 				}
 			} 
 			
