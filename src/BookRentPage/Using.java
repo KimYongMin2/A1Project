@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Rental {
+public class Using {
 		private int RentalCode;
 		private String RentalDate;
 		private String ReturnDate;
@@ -12,7 +12,7 @@ public class Rental {
 		private int BookCode;
 		
 	
-		public Rental(int rentalCode, String rentalDate, String returnDate, int memberCode, int bookCode) {
+		public Using(int rentalCode, String rentalDate, String returnDate, int memberCode, int bookCode) {
 			RentalCode = rentalCode;
 			RentalDate = rentalDate;
 			ReturnDate = returnDate;
