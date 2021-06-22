@@ -40,6 +40,7 @@ public class MemberHandler {
 	public void joinMember() { //회원가입 method
 		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
+			members = memberCrud.getMemberList(con);
 			System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 			System.out.println("=== 회원가입을 시작합니다 ===");
 			
@@ -57,13 +58,16 @@ public class MemberHandler {
 			boolean chk = true;
 			if(members.size() > 0) {
 				while(chk) {
-					if(members.contains(ID)) {
-						System.out.println("[!] 이미 존재하는 ID입니다.");
-						System.out.println("확인 후 다시 입력해주세요.");
-						/*입력*/ID = kb.nextLine();
-						isEmpty(ID);
-						if(!members.contains(ID)) {chk = false;}
-						break;
+					for(int i = 0 ; i < members.size() ; i++) {
+						if(members.get(i).getId().equals(ID)) {
+							System.out.println("[!] 이미 존재하는 ID입니다.");
+							System.out.println("확인 후 다시 입력해주세요.");
+							/*입력*/ID = kb.nextLine();
+							isEmpty(ID);
+						} else {
+							chk = false;
+							break;
+						}
 					}
 				}
 			}
@@ -100,15 +104,20 @@ public class MemberHandler {
 			/*입력*/String ageString = kb.nextLine();
 			isEmpty(ageString);
 			int age = Integer.parseInt(ageString);
-			
+			boolean chk3 = true;
+			while(chk3) {
+				if(!(age > 0 && age < 100)) {
+					throw new MyMadeException("[!] 사람의 나이가 아닙니다");
+				}
+			}
 			
 			// (5) 전화번호 입력(정규식으로, 형식을 맞춰 입력하게 처리)
 			System.out.println("[전화번호를 다음의 형식에 따라 입력해주세요]");
 			System.out.println("[형식] 010-9999-9999 [주의] - 까지 입력해주세요");
 			/*입력*/String phoneNum = kb.nextLine();
 			isEmpty(phoneNum);
-			boolean chk3 = Pattern.matches("^([0-9]{3})(\\-)([0-9]{3,4})(\\-)([0-9]{3,4})$", phoneNum);
-			if(!chk3) {
+			boolean chk4 = Pattern.matches("^([0-9]{3})(\\-)([0-9]{3,4})(\\-)([0-9]{3,4})$", phoneNum);
+			if(!chk4) {
 				throw new MyMadeException("[!] 전화번호 형식에 부합하지 않습니다"); // 추후 사용자 정의 exception으로 변경
 			}
 			
@@ -120,12 +129,12 @@ public class MemberHandler {
 			/*입력*/String inputemail = kb.nextLine(); //이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
 			if(inputemail.equals("")) { //공란은 입력하면, email에는 null
 			} else {
-				boolean chk4 = true;
-				while(chk4) {
-					boolean chk5 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
-					if(chk5) {
+				boolean chk5 = true;
+				while(chk5) {
+					boolean chk6 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
+					if(chk6) {
 						email = inputemail;
-						chk4 = false;}
+						chk5 = false;}
 					else {
 						System.out.println("[!] 이메일 형식에 부합하지 않습니다.");
 						/*입력*/inputemail = kb.nextLine();
@@ -267,73 +276,115 @@ public class MemberHandler {
 	}
 	
 	public void updateMember(Member member) {
+		try {
+			members = memberCrud.getMemberList(con);
+			System.out.println("=== 내 정보 수정을 시작합니다 ===");
+			System.out.println("--------------------------------------------");
+			System.out.println("1. ID     2. 비밀번호     3. 이름");
+			System.out.println("4. 나이       5. 전화번호      6. 이메일");
+			System.out.println("--------------------------------------------");
+			System.out.println("수정할 메뉴를 입력해주세요 : ");
+			int menuButton = Integer.parseInt(kb.nextLine());
 
-        boolean findCheck = false;
-        
-        System.out.println("수정할 도서코드 입력해주세요 : ");
-        int bookCode = Integer.parseInt(scanner.nextLine());
+			switch (menuButton) {
+			case 1:
+				System.out.print("새로운 ID를 입력해주세요. : ");
+				System.out.println("[안내] ID는 영어, 숫자로만 입력해주세요");
+				String newID = kb.nextLine();
+				isEmpty(newID);
+				boolean chkId = Pattern.matches("^[a-zA-Z0-9]*$", newID);
+				if(!chkId) {
+					throw new MyMadeException("[!] 잘못 된 입력값입니다.");
+				}
+				boolean chk = true;
+				if(members.size() > 0) {
+					while(chk) {
+						for(int i = 0 ; i < members.size() ; i++) {
+							if(members.get(i).getId().equals(newID)) {
+								System.out.println("[!] 이미 존재하는 ID입니다.");
+								System.out.println("확인 후 다시 입력해주세요.");
+								newID = kb.nextLine();
+								isEmpty(newID);
+							} else {
+								chk = false;
+								break;
+							}
+						}
+					}
+				}
+				member.setId(newID);
+				break;
+			case 2:
+				boolean chk1 = true;
+				String newPassword = null;
+				while(chk1) {
+					System.out.print("새로운 비밀번호를 입력하세요 : ");
+					newPassword = kb.nextLine();
+					isEmpty(newPassword);
+					System.out.println("비밀 번호 확인을 위해 한번 더 입력해주세요 : ");
+					String rePassword = kb.nextLine();
+					isEmpty(rePassword);
+					if(!newPassword.equals(rePassword)) {
+						System.out.println("[!] 비밀번호가 일치하지 않습니다");
+						System.out.println("[!] 다시 입력해주세요.");
+					} else {
+						chk1 = false;
+					}
+				}
+				member.setPassWord(newPassword);
+				break;
+			case 3:
+				System.out.print("새로운 이름을 입력하세요 : ");
+				String newMName = kb.nextLine();
+				isEmpty(newMName);
+				boolean chk2 = Pattern.matches("^[a-zA-Z가-힣]*$", newMName);
+				if(!chk2) {
+					throw new MyMadeException("[!] 이름은 영어와 한글로만 입력해주세요");
+				}
+				member.setmName(newMName);
+				break;
+			case 4:
+				System.out.print("새로운 나이를 입력하세요 : ");
+				int newAge = Integer.parseInt(kb.nextLine());
+				boolean chk3 = true;
+				while(chk3) {
+					if(!(newAge > 0 && newAge<100)) {
+						throw new MyMadeException("[!] 사람의 나이가 아닙니다");
+					}
+				}
+				member.setAge(newAge);
+				break;
+			case 5:
+				System.out.print("새로운 전화번호를 입력하세요 : ");
+				System.out.println("[형식] 010-9999-9999 [주의] - 까지 입력해주세요");
+				String newPhoneNum = kb.nextLine();
+				isEmpty(newPhoneNum);
+				boolean chk4 = Pattern.matches("^([0-9]{3})(\\-)([0-9]{3,4})(\\-)([0-9]{3,4})$", newPhoneNum);
+				if(!chk4) {
+					throw new MyMadeException("[!] 전화번호 형식에 부합하지 않습니다"); // 추후 사용자 정의 exception으로 변경
+				}
+				member.setPhoneNum(newPhoneNum);
+				break;
+			case 6:
+				System.out.print("새로운 이메일을 입력하세요 : ");
+				String newEmail = kb.nextLine();
+				boolean chk5 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", newEmail);
+				if(!chk5) {
+					throw new MyMadeException("[!] 이메일 형식에 부합하지 않습니다");
+				}
+				member.setEmail(newEmail);
+				break;
+			default:
+				System.out.print("잘못입력하셨습니다");
+				break;
+			}
 
-        for (int i = 0; i < bookList.size(); i++) {
-            if(bookCode == bookList.get(i).getBookCode()){
-                temp = i;
-                findCheck = true;
-            }
-        }
-        
-        if (findCheck){
-            System.out.println();
-            System.out.println("--------------------------------------------");
-            System.out.println("1. 책이름     2. 지은이     3. 출판사");
-            System.out.println("4. 장르       5. 가격      6. 연령제한 여부");
-            System.out.println("--------------------------------------------");
-            System.out.println("수정할 목록을 설정해주세요 : ");
-            menuButton = Integer.parseInt(scanner.nextLine());
-
-            switch (menuButton) {
-                case 1:
-                    System.out.print("책 이름을 입력하세요 : ");
-                    bName = scanner.nextLine();
-                    bookList.get(temp).setbName(bName);
-                    break;
-                case 2:
-                    System.out.print("지은이를 입력하세요 : ");
-                    bWriter = scanner.nextLine();
-                    bookList.get(temp).setbWriter(bWriter);
-                    break;
-                case 3:
-                    System.out.print("출판사를 입력하세요 : ");
-                    bPublisher = scanner.nextLine();
-                    bookList.get(temp).setbPublisher(bPublisher);
-                    break;
-                case 4:
-                    System.out.print("장르를 입력하세요 : ");
-                    bGenre = scanner.nextLine();
-                    bookList.get(temp).setbGenre(bGenre);
-                    break;
-                case 5:
-                    System.out.print("가격을 입력하세요 : ");
-                    bPrice = Integer.parseInt(scanner.nextLine());
-                    bookList.get(temp).setbPrice(bPrice);
-                    break;
-                case 6:
-                    System.out.print("연령제한 여부를 입력하세요 : ");
-                    bAgeUsing = scanner.nextLine();
-                    bookList.get(temp).setbAgeUsing(bAgeUsing);
-                    break;
-                default:
-                    System.out.print("잘못입력하셨습니다");
-                    break;
-            }
-            
-            /**
-             * DB랑 연결
-             * @author 민주
-             */
-            bookCrud.updateBook(con, bookList.get(temp)); /*오류*/
-            System.out.println("수정 완료되었습니다!");
-            
-        } else {
-            System.out.println("파일을 찾지 못하였습니다.");
-        }
+			memberCrud.updateMember(con, member);
+			System.out.println("수정 완료되었습니다!");
+		} catch(MyMadeException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+	
+	
 }
