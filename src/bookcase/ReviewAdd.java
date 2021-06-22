@@ -42,29 +42,43 @@ public class ReviewAdd {
 
 
 	public void reviewAddStart() {
-		while (menuButton != 3) {
-			System.out.println("1. 리뷰입력    2. 리스트보기     3. 종료");
-			System.out.print("해당 메뉴를 선택해주세요 : ");
-			menuButton = Integer.parseInt(sc.nextLine());
-			switch (menuButton) {
-				case 1:
-					findBook();
-					setReviewComent();
-					review = new Review(0, book.getBookCode(), member.getMemberCode(), rScore, rComment);
-					reviewList.add(review);
-					break;
-				case 2:
-					for (int i = 0; i < reviewList.size(); i++) {
-						System.out.println(reviewList.get(i));
-					}
-				case 3:
-					System.out.println("종료합니다");
-					break;
-				default:
-					System.out.println("잘못 입력하셨습니다");
-					break;
-			}
+		while (menuButton != 4) {
+			try {
+				System.out.println("1. 리뷰입력    2. 리스트보기     3. 책목록    4. 종료");
+				System.out.print("해당 메뉴를 선택해주세요 : ");
+				String inputString = sc.nextLine();
+				menuButton = Integer.parseInt(inputString);
 
+				switch (menuButton) {
+					case 1:
+						findBook();
+						setReviewComent();
+						review = new Review(0, book.getBookCode(), member.getMemberCode(), rScore, rComment);
+						reviewList.add(review);
+						System.out.println("리뷰생성");
+						break;
+					case 2:
+						for (int i = 0; i < reviewList.size(); i++) {
+							System.out.println(reviewList.get(i));
+						}
+						break;
+					case 3:
+						books = new BookManager().getBookList();
+						for (Book book1 : books) {
+							System.out.println(book1);
+						}
+						break;
+					case 4:
+						System.out.println("종료합니다");
+						break;
+					default:
+						System.out.println("잘못 입력하셨습니다");
+						break;
+				}
+
+			}catch (NumberFormatException e){
+				System.out.println("숫자");
+			}
 		}
 	}
 

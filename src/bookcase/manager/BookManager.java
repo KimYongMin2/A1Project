@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookManager {
-    private List<Book> bookList = new ArrayList<>();
+    private static List<Book> bookList = new ArrayList<>();
     private int bookCode;
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
