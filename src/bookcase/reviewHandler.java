@@ -12,7 +12,15 @@ public class reviewHandler {
 	private static ArrayList<Review> reviews = new ArrayList<Review>();
 	
 	public void joinReview() {
-		reviewCrud.insertReview(con, new Review(0, 2, 4, 4.0, "aaa"));
+		// test 위해 임의로 넣은 값
+		
+		System.out.println("[평점을 입력해주세요]");
+		double rStore = Double.parseDouble(kb.nextLine());
+		
+		System.out.println("[한줄평을 입력해주세요]");
+		String rcomment = kb.nextLine();
+		
+		reviewCrud.insertReview(con, new Review(0, 2, 4, rStore, rcomment));
 	}
 	
 	public void showReview() {

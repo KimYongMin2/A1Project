@@ -14,11 +14,11 @@ public class reviewtest {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			while(true) {
-				System.out.println("=============");
+				System.out.println("======================");
 				System.out.println("1. 리뷰리스트 전체보기");
 				System.out.println("2. 리뷰 작성");
 				System.out.println("3. 종료");
-				System.out.println("=============");
+				System.out.println("======================");
 				int menu = Integer.parseInt(kb.nextLine());
 				switch (menu) {
 				case 1: 
