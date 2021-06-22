@@ -62,6 +62,6 @@ public class Using {
 					+ ", MemberCode=" + MemberCode + ", BookCode=" + BookCode + "]";
 		}
 
-=
+
 		
 }
