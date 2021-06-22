@@ -1,3 +1,5 @@
+package BookRentPage;
+
 import bookcase.Book;
 import bookcase.Member;
 import bookcase.manager.BookManager;
@@ -34,5 +36,7 @@ public class BookRentPage {
         
         bookcode = book.getBookCode();
     }
+    
+    public void 
     
 }
