@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookManager {
-    public static void main(String[] args) {
-        BookManager bookManager = new BookManager();
-        bookManager.bookManagerStart();
-    }
     private List<Book> bookList = new ArrayList<>();
     private int bookCode;
     private String bName, bWriter, bPublisher, bGenre;

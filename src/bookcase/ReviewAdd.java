@@ -17,7 +17,7 @@ public class ReviewAdd {
 	private double rScore; // 별점
 	private Member member;
 	private Book book;
-	private List<Book> books;
+	private List<Book> books= new ArrayList<>();;
 	private int temp;
 	private Review review;
 	private List<Review> reviewList = new ArrayList<>();
