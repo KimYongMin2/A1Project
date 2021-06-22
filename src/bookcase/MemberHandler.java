@@ -265,4 +265,75 @@ public class MemberHandler {
 			System.out.println("[경고] 잘못된 입력입니다.");
 		}
 	}
+	
+	public void updateMember(Member member) {
+
+        boolean findCheck = false;
+        
+        System.out.println("수정할 도서코드 입력해주세요 : ");
+        int bookCode = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < bookList.size(); i++) {
+            if(bookCode == bookList.get(i).getBookCode()){
+                temp = i;
+                findCheck = true;
+            }
+        }
+        
+        if (findCheck){
+            System.out.println();
+            System.out.println("--------------------------------------------");
+            System.out.println("1. 책이름     2. 지은이     3. 출판사");
+            System.out.println("4. 장르       5. 가격      6. 연령제한 여부");
+            System.out.println("--------------------------------------------");
+            System.out.println("수정할 목록을 설정해주세요 : ");
+            menuButton = Integer.parseInt(scanner.nextLine());
+
+            switch (menuButton) {
+                case 1:
+                    System.out.print("책 이름을 입력하세요 : ");
+                    bName = scanner.nextLine();
+                    bookList.get(temp).setbName(bName);
+                    break;
+                case 2:
+                    System.out.print("지은이를 입력하세요 : ");
+                    bWriter = scanner.nextLine();
+                    bookList.get(temp).setbWriter(bWriter);
+                    break;
+                case 3:
+                    System.out.print("출판사를 입력하세요 : ");
+                    bPublisher = scanner.nextLine();
+                    bookList.get(temp).setbPublisher(bPublisher);
+                    break;
+                case 4:
+                    System.out.print("장르를 입력하세요 : ");
+                    bGenre = scanner.nextLine();
+                    bookList.get(temp).setbGenre(bGenre);
+                    break;
+                case 5:
+                    System.out.print("가격을 입력하세요 : ");
+                    bPrice = Integer.parseInt(scanner.nextLine());
+                    bookList.get(temp).setbPrice(bPrice);
+                    break;
+                case 6:
+                    System.out.print("연령제한 여부를 입력하세요 : ");
+                    bAgeUsing = scanner.nextLine();
+                    bookList.get(temp).setbAgeUsing(bAgeUsing);
+                    break;
+                default:
+                    System.out.print("잘못입력하셨습니다");
+                    break;
+            }
+            
+            /**
+             * DB랑 연결
+             * @author 민주
+             */
+            bookCrud.updateBook(con, bookList.get(temp)); /*오류*/
+            System.out.println("수정 완료되었습니다!");
+            
+        } else {
+            System.out.println("파일을 찾지 못하였습니다.");
+        }
+	}
 }
