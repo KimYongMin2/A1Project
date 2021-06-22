@@ -1,15 +1,8 @@
 package bookcase;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import com.sun.swing.internal.plaf.metal.resources.metal_zh_TW;
-
-import bookcase.Book;
-import bookcase.Member;
-import bookcase.manager.BookManager;
-import jdk.nashorn.internal.runtime.FindProperty;
+import bookcase.manager.*;
 
 public class ReviewAdd {
 

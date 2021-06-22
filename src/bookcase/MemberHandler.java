@@ -99,7 +99,7 @@ public class MemberHandler {
 				throw new MyMadeException("[!] 이름은 영어와 한글로만 입력해주세요");
 			}
 			
-			// (4) 나이 입력 ==> 이상한 값 입력안되도록 바꿀 것
+			// (4) 나이 입력
 			System.out.println("[나이를 입력해주세요]");
 			/*입력*/String ageString = kb.nextLine();
 			isEmpty(ageString);
@@ -341,12 +341,6 @@ public class MemberHandler {
 			case 4:
 				System.out.print("새로운 나이를 입력하세요 : ");
 				int newAge = Integer.parseInt(kb.nextLine());
-				boolean chk3 = true;
-				while(chk3) {
-					if(!(newAge > 0 && newAge<100)) {
-						throw new MyMadeException("[!] 사람의 나이가 아닙니다");
-					}
-				}
 				member.setAge(newAge);
 				break;
 			case 5:
