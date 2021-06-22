@@ -27,8 +27,8 @@ public class MemberCRUD {
 			
 			while(rs.next()){
 				list.add(new Member(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(6),
-						rs.getInt(7)));
+						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
+						rs.getInt(8)));
 			}
 			
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class MemberCRUD {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String updateSql = "UPDATE MEMBER SET ID = ?, PASSWORD = ?, MNAME = ?, AGE = ?, PHONENUME = ?, EMAIL = ?"
+			String updateSql = "UPDATE MEMBER SET ID = ?, PASSWORD = ?, MNAME = ?, AGE = ?, PHONENUM = ?, EMAIL = ?"
 					+ "WHERE MEMBERCODE = ?";
 			pstmt = con.prepareStatement(updateSql);
 			pstmt.setString(1, member.getId());
