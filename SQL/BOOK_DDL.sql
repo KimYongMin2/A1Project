@@ -4,7 +4,7 @@ BName varchar(50) constraint BOOK_BName_nn not null,
 BWriter varchar(50) constraint BOOK_BWriter_nn not null,
 BPublisher varchar(50) constraint BOOK_BPublisher_nn not null,
 BGenre varchar(10) constraint BOOK_BGenre_nn not null,
-BPrice integer constraint BOOK_BPrice_nn not null
+BPrice integer constraint BOOK_BPrice_nn not null 
 );
 
 CREATE SEQUENCE BOOK_CODE_PK
@@ -17,3 +17,10 @@ MODIFY (BGenre varchar(50));
 ALTER TABLE BOOK ADD(bUsing VARCHAR2(50));
 
 ALTER TABLE BOOK ADD(bAgeUsing VARCHAR2(50));
+
+COMMENT ON COLUMN BOOK.BookCode IS '도서코드';
+COMMENT ON COLUMN BOOK.BName IS '도서명';
+COMMENT ON COLUMN BOOK.BWriter IS '저자';
+COMMENT ON COLUMN BOOK.BPublisher IS '출판사';
+COMMENT ON COLUMN BOOK.BGenre IS '장르';
+COMMENT ON COLUMN BOOK.BPrice IS '가격';
