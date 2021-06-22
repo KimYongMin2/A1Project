@@ -91,7 +91,7 @@ public class BookCRUD {
 			return book;
 		}
 
-		// 3. UPDATE 메소드: 반환타입: 반영횟수
+		// 3. UPDATE 메소드
 		public void updateBook(Connection con, Book book) {
 			
 			int result = 0;
@@ -99,8 +99,7 @@ public class BookCRUD {
 			
 			try {
 				String updateSql = "UPDATE BOOK SET BNAME = ?, BWRITER = ?, BPUBLISHER = ?, BGENRE = ?, BPRICE = ?"
-						+ "BAGEUSING = ?"
-						+ "WHERE BOOKCODE = ?";
+						+ ", BAGEUSING = ? WHERE BOOKCODE = ?";
 				pstmt = con.prepareStatement(updateSql);
 		
 				pstmt.setString(1, book.getbName());
@@ -132,9 +131,9 @@ public class BookCRUD {
 			PreparedStatement pstmt = null;
 
 			try {
-				String deleteSql = "DELETE FROM BOOK WHERE BNAME = ?";
+				String deleteSql = "DELETE FROM BOOK WHERE BOOKCODE = ?";
 				pstmt = con.prepareStatement(deleteSql);
-				pstmt.setString(1, book.getbName());
+				pstmt.setInt(1, book.getBookCode());
 				result = pstmt.executeUpdate();
 
 			} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함

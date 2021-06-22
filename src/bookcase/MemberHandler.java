@@ -20,11 +20,10 @@ public class MemberHandler {
 
 	Scanner kb = new Scanner(System.in);
 	
-	ArrayList<Member> members;
-	
-	public MemberHandler() {
-		members = new ArrayList<Member>();
-	}
+    private static Connection con = JDBCconnecting.connecting();
+	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
+	private static ArrayList<Member> members = new ArrayList<Member>();
+
 
 	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
 		while(true) {
@@ -41,8 +40,6 @@ public class MemberHandler {
 	public void joinMember() { //회원가입 method
 		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
-			Connection con = JDBCconnecting.connecting();
-			
 			System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 			System.out.println("=== 회원가입을 시작합니다 ===");
 			
@@ -137,11 +134,7 @@ public class MemberHandler {
 			}
 			
 			// (7) 입력 값을 넣어서, 객체 생성 후 ArrayList에 넣고, DB에도 INSERT
-			MemberCRUD memberCrud = MemberCRUD.getInstance();
-			Member newMember = memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
-			
-			
-			members.add(newMember);
+			memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
 			System.out.println("=== 회원가입이 완료되었습니다 ===");
 			System.out.println("=== 감사합니다 ===");
 			
@@ -160,6 +153,7 @@ public class MemberHandler {
 		System.out.println("=== 로그인을 시작합니다 ===");
 		
 		try {
+			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
 				System.out.println("[ID를 입력해주세요]");
 				/*입력*/String ID = kb.nextLine();
@@ -207,6 +201,7 @@ public class MemberHandler {
 		 */
 		
 		try {
+			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
 				System.out.println("=== 찾으시려는 계정의 계정주 명을 입력해주세요 ===");
 				/*입력*/String name = kb.nextLine();
@@ -248,7 +243,7 @@ public class MemberHandler {
 		 */
 		
 		try {
-			Connection con = JDBCconnecting.connecting();
+			members = memberCrud.getMemberList(con);
 			for(int i = 0 ; i < members.size() ; i++) {
 				if(members.get(i).getMemberCode() == member.getMemberCode()) {
 					System.out.println("[정말 탈퇴하시겠습니까?]");
@@ -256,8 +251,6 @@ public class MemberHandler {
 					System.out.println("[2] no");
 					int choose = Integer.parseInt(kb.next());
 					if(choose == 1) {
-						members.remove(i);
-						MemberCRUD memberCrud = MemberCRUD.getInstance();
 						memberCrud.deleteMember(con, member);
 						System.out.println("[!] 탈퇴 되었습니다");
 					} else {
