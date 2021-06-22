@@ -24,17 +24,20 @@ public class BookRentPage {
     }
 
     public void BookUsingStart() {
+        findBook();
+        addUsingBook();
+    }
+    public void findBook(){
         // 책확인
         System.out.print("대여하려는 책 이름을 작성해주세요 : ");
         String bName = scanner.nextLine();
         books = new BookManager().getBookList();
-        
+
         for(int i =0; i <books.size(); i++) {
-        	if(bName.equals(books.get(i).getbName())) {
-        		temp = i;
-        	}
+            if(bName.equals(books.get(i).getbName())) {
+                temp = i;
+            }
         }
-        
         book = books.get(temp);
     }
 

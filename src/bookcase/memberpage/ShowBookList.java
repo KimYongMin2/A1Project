@@ -29,13 +29,15 @@ public class ShowBookList {
         switch (menuButton){
             case 1 :
                 // 내가 대여중인 도서 보기 (반납기한도)
-                new ShowBookList(member).showBookListStart();
+                showMyUsingBook();
                 break;
             case 2 :
                 // 별점랭킹 추천 조회
+                showStarBook();
                 break;
             case 3 :
                 // 대여가능한 도서 조회
+                showCanUsingBook();
                 break;
             case 4 :
                 // 종료
