@@ -32,8 +32,30 @@ public class BookRentPage {
     }
 
     public void BookUsingStart() {
-        findBook();
-        addUsingBook();
+    	while (menuButton != 2) {
+            System.out.println("--------------------------------------------");
+            System.out.println("1. 도서 대여하기 ");
+            System.out.println("2. 종료");
+            System.out.println("--------------------------------------------");
+
+            System.out.print(" 메뉴를 선택해주세요 : ");
+            menuButton = Integer.parseInt(scanner.nextLine());
+
+            switch (menuButton) {
+                case 1:
+                    // 대여
+                	findBook();
+                    addUsingBook();
+                    break;
+                case 2:
+                    // 종료
+                    break;
+                default:
+                    System.out.println("잘못 입력하셨습니다");
+                    break;
+            }
+        }
+        
     }
     public void findBook(){
         // 책확인
@@ -53,6 +75,7 @@ public class BookRentPage {
 	        }		 
         	if(!chk) {
         		System.out.println("원하시는 책을 찾지 못했습니다.");
+        		break;
         	}
         	else {
         		if(!books.get(temp).isbUsing()) {
