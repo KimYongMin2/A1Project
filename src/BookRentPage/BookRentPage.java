@@ -81,7 +81,7 @@ public class BookRentPage {
         		break;
         	}
         	else {
-        		if(!books.get(temp).isbUsing()) {
+        		if(books.get(temp).getbUsing().equals("true")) {
         			book = books.get(temp);
         		}
         		else {
@@ -109,6 +109,6 @@ public class BookRentPage {
     	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), toDay, afterWeek, 0);
     	
     	usingBooks.add(usingBook);
-    	book.setbUsing(true);
+    	book.setbUsing("true");
     }
 }
