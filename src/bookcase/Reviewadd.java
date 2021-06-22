@@ -28,7 +28,7 @@ public class Reviewadd {
 	}
 
 	// ArrayList<String> reviewList = new ArrayList ;
-	// ArrayList<>(Arrays.asList(Member.getmemberCode, Book.getbookCode, RComment,
+// ArrayList<>(Arrays.asList(Member.getmemberCode, Book.getbookCode, RComment,
 
 	
 	public void reviewAddStart() {
@@ -81,7 +81,7 @@ public class Reviewadd {
 	public void findBook(){
         // 책확인
 		Scanner sc = new Scanner(System.in);
-        System.out.print("대여하려는 책 이름을 작성해주세요 : ");
+        System.out.print("리뷰 남길 책 이름을 작성해주세요 : ");
         String bName = sc.nextLine();
         books = new BookManager().getBookList();
 
