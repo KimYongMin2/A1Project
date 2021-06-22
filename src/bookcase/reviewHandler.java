@@ -12,6 +12,14 @@ public class reviewHandler {
 	private static ArrayList<Review> reviews = new ArrayList<Review>();
 	
 	public void joinReview() {
-		reviewCrud.insertReview(con, new Review(0, 1, 1, 4.0, "aaa"));
+		reviewCrud.insertReview(con, new Review(0, 2, 4, 4.0, "aaa"));
+	}
+	
+	public void showReview() {
+		reviews = reviewCrud.getReviewList(con);
+		
+		for(Review review : reviews) {
+			System.out.println(review);
+		}
 	}
 }
