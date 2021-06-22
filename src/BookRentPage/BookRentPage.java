@@ -39,7 +39,7 @@ public class BookRentPage {
         // 책확인
     	boolean chk = false;
     	books = new BookManager().getBookList();
-    	while(chk) {
+    	while(!chk) {
 			System.out.println("============= 대여 페이지 입니다 ============");
 			System.out.println("대여하려는 책 이름을 작성해주세요 : ");
         	String bName = scanner.nextLine();
