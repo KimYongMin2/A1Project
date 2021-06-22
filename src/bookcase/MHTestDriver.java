@@ -18,7 +18,7 @@ public class MHTestDriver {
 			
 			Scanner kb = new Scanner(System.in);
 			MemberHandler mh = new MemberHandler();
-			
+			Member member = null;
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
@@ -36,13 +36,13 @@ public class MHTestDriver {
 					mh.joinMember();
 					break;
 				case 2: 
-					mh.login();
+					member = mh.login();
 					break;
 				case 3: 
 					mh.findingId();
 					break;
 				case 4:
-					mh.leaveMember(0);
+					mh.leaveMember(member);
 					break;
 				case 5:
 					System.exit(0);
