@@ -95,6 +95,7 @@ public class BookManager {
     }
 
     public void deleteBook(List<Book> bookList){
+        findCheck = false;
         System.out.print("삭제할 도서코드를 입력해주세요 : ");
         bookCode = Integer.parseInt(scanner.nextLine());
 
