@@ -152,7 +152,9 @@ public class MemberHandler {
 			}
 			
 			// (7) 입력 값을 넣어 객체 생성하여 완료하기
-			members.add(new Member(0/*진행중: 추후수정*/, ID, password, name, age, phoneNum, email, 0));
+			MemberCRUD memberCrud = MemberCRUD.getInstance();
+			Member newMember = memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
+			members.add(newMember);
 			System.out.println("=== 회원가입이 완료되었습니다 ===");
 			System.out.println("=== 감사합니다 ===");
 			
@@ -247,7 +249,7 @@ public class MemberHandler {
 		}
 	}
 
-	public void leaveMember(int memberCode) { //회원 탈퇴 method
+	public void leaveMember(Member member) { //회원 탈퇴 method
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== 회원 탈퇴 도우미를 시작합니다 ===");
 		
@@ -259,14 +261,17 @@ public class MemberHandler {
 		 */
 		
 		try {
+			Connection con = connecting();
 			for(int i = 0 ; i < members.size() ; i++) {
-				if(members.get(i).getMemberCode() == memberCode) {
+				if(members.get(i).getMemberCode() == member.getMemberCode()) {
 					System.out.println("[정말 탈퇴하시겠습니까?]");
 					System.out.println("[1] yes");
 					System.out.println("[2] no");
 					int choose = Integer.parseInt(kb.next());
 					if(choose == 1) {
 						members.remove(i);
+						MemberCRUD memberCrud = MemberCRUD.getInstance();
+						memberCrud.deleteMember(con, member);
 						System.out.println("[!] 탈퇴 되었습니다");
 					} else {
 						System.out.println("[!] 탈퇴를 취소했습니다");

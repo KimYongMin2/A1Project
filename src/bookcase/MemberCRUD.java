@@ -50,7 +50,7 @@ public class MemberCRUD {
 	}
 
 	// 2. INSERT 메소드 : 반환타입: 반영 횟수
-	int insertDept(Connection con, Member member){
+	Member insertMember(Connection con, Member member){
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -80,11 +80,11 @@ public class MemberCRUD {
 				}
 			}
 		}
-		return result;
+		return member;
 	}
 
 	// 3. UPDATE 메소드: 반환타입: 반영횟수
-	int updateDept(Connection con, Member member) {
+	void updateMember(Connection con, Member member) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -114,18 +114,17 @@ public class MemberCRUD {
 				}
 			}
 		}
-		return result;
 	}
 	
 	// 4. DELETE 메소드: 반환타입: 반영횟수
-	int deleteDept(Connection con, int memberCode) {
+	void deleteMember(Connection con, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
 			String deleteSql = "DELETE FROM MEMBER WHERE MEMBERCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
-			pstmt.setInt(1, memberCode);
+			pstmt.setInt(1, member.getMemberCode());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
@@ -139,6 +138,5 @@ public class MemberCRUD {
 				}
 			}
 		}
-		return result;
 	}
 }
