@@ -12,6 +12,15 @@ public class BookManager {
         bookManager.bookManagerStart();
     }
     private List<Book> bookList = new ArrayList<>();
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
+
     private int bookCode;
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
