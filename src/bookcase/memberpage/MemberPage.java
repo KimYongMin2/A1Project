@@ -38,6 +38,7 @@ public class MemberPage {
                     break;
                 case 3:
                     // 도서 반납
+                    new ReturnBook(member).returnBookStart();
                     break;
                 case 4:
                     // 리뷰작성
