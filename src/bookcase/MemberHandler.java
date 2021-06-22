@@ -40,7 +40,7 @@ public class MemberHandler {
 		members = new ArrayList<Member>();
 	}
 
-	void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
+	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
 		while(true) {
 			if(string.equals("")) {
 				System.out.println("[!] 공란입니다. 다시 입력해주세요.");
@@ -51,8 +51,8 @@ public class MemberHandler {
 			}
 		}
 	}
-	
-	void joinMember() { //회원가입 method
+
+	public void joinMember() { //회원가입 method
 		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
 			Connection con = connecting();
@@ -166,7 +166,7 @@ public class MemberHandler {
 		
 	}
 	
-	Member login() { //로그인 처리 method
+	public Member login() { //로그인 처리 method
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== 로그인을 시작합니다 ===");
 		
@@ -208,7 +208,7 @@ public class MemberHandler {
 		}
 	}
 
-	void findingId() { //id찾기 method
+	public void findingId() { //id찾기 method
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== ID 및 비밀번호 찾기 도우미를 시작합니다 ===");
 		
@@ -246,8 +246,8 @@ public class MemberHandler {
 			System.out.println("[경고] 잘못된 입력입니다.");
 		}
 	}
-	
-	void leaveMember(int memberCode) { //회원 탈퇴 method
+
+	public void leaveMember(int memberCode) { //회원 탈퇴 method
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== 회원 탈퇴 도우미를 시작합니다 ===");
 		
