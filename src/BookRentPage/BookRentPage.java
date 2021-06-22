@@ -5,7 +5,10 @@ import bookcase.Member;
 import bookcase.Using;
 import bookcase.manager.BookManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -92,7 +95,18 @@ public class BookRentPage {
     
     public void addUsingBook() {
     	// 대여리스트에 책 리스트 추가
-    	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), "20210101", "20210622", 0);
+    	// 대여 날짜 오늘로 설정
+    	Date today = new Date();        
+		SimpleDateFormat date = new SimpleDateFormat("yyMMdd");
+		String toDay = date.format(today);
+        
+		// 대여기간 1주일 기한
+		Calendar week = Calendar.getInstance();
+		week.add(Calendar.DATE , +7);
+		String afterWeek = new java.text.SimpleDateFormat("yyMMdd").format(week.getTime());    	
+        
+        
+    	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), toDay, afterWeek, 0);
     	
     	usingBooks.add(usingBook);
     	book.setbUsing(true);
