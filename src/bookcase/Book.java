@@ -85,4 +85,10 @@ public class Book {
         this.bAgeUsing = bAgeUsing;
     }
 
+	@Override
+	public String toString() {
+		return "Book [bookCode=" + bookCode + ", bName=" + bName + ", bWriter=" + bWriter + ", bPublisher=" + bPublisher
+				+ ", bGenre=" + bGenre + ", bPrice=" + bPrice + ", bUsing=" + bUsing + ", bAgeUsing=" + bAgeUsing + "]";
+	}
+    
 }

@@ -84,4 +84,12 @@ public class Member {
     public void setPoint(int point) {
         this.point = point;
     }
+
+	@Override
+	public String toString() {
+		return "Member [memberCode=" + memberCode + ", id=" + id + ", passWord=" + passWord + ", mName=" + mName
+				+ ", age=" + age + ", phoneNum=" + phoneNum + ", email=" + email + ", point=" + point + "]";
+	}
+    
+    
 }
