@@ -133,18 +133,20 @@ public class MemberHandler {
 			System.out.println("[(선택사항)이메일을 입력해주세요]");
 			System.out.println("[입력을 원치 않으시면 그냥 엔터를 눌러주세요]");
 			String email = null;
+			
 			/*입력*/String inputemail = kb.nextLine(); //이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
 			if(inputemail.equals("")) { //공란은 입력하면, email에는 null
 			} else {
 				boolean chk4 = true;
 				while(chk4) {
 					boolean chk5 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", inputemail);
-					if(chk5) {chk4 = false;}
+					if(chk5) {
+						email = inputemail;
+						chk4 = false;}
 					else {
 						System.out.println("[!] 이메일 형식에 부합하지 않습니다.");
 						/*입력*/inputemail = kb.nextLine();
 					}	
-					email = inputemail; //뭔가를 입력하면, email에 그 값이 들어가도록
 				}
 			}
 			
