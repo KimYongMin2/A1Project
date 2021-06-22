@@ -20,9 +20,9 @@ public class ReviewAdd {
 	private List<Book> books;
 	private int temp;
 	private Review review;
-	private List<Review> reviewList;
+	private List<Review> reviewList = new ArrayList<>();
 	private Scanner sc = new Scanner(System.in);
-	private int menuButton = 0;
+	private int menuButton ;
 
 	public List<Review> getReviewList() {
 		return reviewList;
@@ -34,6 +34,7 @@ public class ReviewAdd {
 
 	public ReviewAdd(Member member) {
 		this.member = member;
+		menuButton = 0;
 	}
 
 	// ArrayList<String> reviewList = new ArrayList ;
@@ -53,8 +54,8 @@ public class ReviewAdd {
 					reviewList.add(review);
 					break;
 				case 2 :
-					for (Review review1 : reviewList) {
-						System.out.println(review1);
+					for (int i = 0; i < reviewList.size(); i++) {
+						System.out.println(reviewList.get(i));
 					}
 				case 3 :
 					System.out.println("종료합니다");

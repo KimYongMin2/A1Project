@@ -6,6 +6,7 @@ import bookcase.Member;
 import bookcase.Using;
 import bookcase.manager.BookManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,8 +15,8 @@ public class ReturnBook {
     private int menuButton = 0;
     private Member member;
     private Book book;
-    private List<Using> usingBooks;
-    private List<Book> books;
+    private List<Using> usingBooks = new ArrayList<>();;
+    private List<Book> books = new ArrayList<>();;
     private int temp;
 
     public ReturnBook(Member member){

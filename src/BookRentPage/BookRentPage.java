@@ -5,6 +5,7 @@ import bookcase.Member;
 import bookcase.Using;
 import bookcase.manager.BookManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,14 +17,14 @@ public class BookRentPage {
     private List<Book> books;
     private int temp = 0;
     private int bookcode=0;
-    private List<Using> UsingBooks;
+    private List<Using> usingBooks = new ArrayList<>();
 
     public List<Using> getUsingBooks() {
-        return UsingBooks;
+        return usingBooks;
     }
 
     public void setUsingBooks(List<Using> usingBooks) {
-        UsingBooks = usingBooks;
+        usingBooks = usingBooks;
     }
 
     public BookRentPage(Member member){
@@ -70,7 +71,7 @@ public class BookRentPage {
     	// 대여리스트에 책 리스트 추가
     	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), "20210101", "20210622", 0);
     	
-    	UsingBooks.add(usingBook);
+    	usingBooks.add(usingBook);
     	book.setbUsing(true);
     }
 }

@@ -12,15 +12,6 @@ public class BookManager {
         bookManager.bookManagerStart();
     }
     private List<Book> bookList = new ArrayList<>();
-
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
     private int bookCode;
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
@@ -29,6 +20,9 @@ public class BookManager {
     private int menuButton = 0;
     private boolean findCheck = false;
     private static Scanner scanner = new Scanner(System.in);
+    public BookManager(){
+        bookList = null;
+    }
     public void bookManagerStart(){
         while (menuButton != 6) {
             System.out.println("--------------------------------------------");
@@ -199,6 +193,13 @@ public class BookManager {
                 System.out.println(book.getBookCode() + book.getbName());
             }
         }
+    }
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
 }
