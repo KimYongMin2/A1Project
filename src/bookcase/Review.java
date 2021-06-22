@@ -45,6 +45,7 @@ public class Review {
 	public void setrComment(String rComment) {
 		this.rComment = rComment;
 	}
+	
 }
 
 //리뷰코드

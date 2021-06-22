@@ -3,8 +3,13 @@ package bookcase;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.sun.swing.internal.plaf.metal.resources.metal_zh_TW;
+
 import bookcase.Book;
 import bookcase.Member;
+import bookcase.manager.BookManager;
+import jdk.nashorn.internal.runtime.FindProperty;
 
 public class Reviewadd {
 
@@ -12,6 +17,11 @@ public class Reviewadd {
 	double rScore; // 별점
 	Member member;
 	Book book;
+	List<Book> books;
+	private int temp;
+	Review review;
+	List<Review> reviewList;
+	
 	
 	public Reviewadd(Member member) {
 		this.member = member;
@@ -19,9 +29,9 @@ public class Reviewadd {
 
 	// ArrayList<String> reviewList = new ArrayList ;
 	// ArrayList<>(Arrays.asList(Member.getmemberCode, Book.getbookCode, RComment,
-	// Rscore));
 
-	public static void main(String[] args) {
+	
+	public void reviewAddStart() {
 
 		Scanner sc = new Scanner(System.in);
 
@@ -61,8 +71,29 @@ public class Reviewadd {
 			}
 		}
 		System.out.println("별점이 입력되었습니다.");
+		
+		findBook();
+		
+		review = new Review(0,book.getBookCode(), member.getMemberCode(), rScore, rComment);
+		reviewList.add(review);
 	}
+    
+	public void findBook(){
+        // 책확인
+		Scanner sc = new Scanner(System.in);
+        System.out.print("대여하려는 책 이름을 작성해주세요 : ");
+        String bName = sc.nextLine();
+        books = new BookManager().getBookList();
+
+        for(int i =0; i <books.size(); i++) {
+            if(bName.equals(books.get(i).getbName())) {
+                temp = i;
+            }
+        }
+        book = books.get(temp);
+    }
 	
+
 }
 // 멤버코드 -> 받아서 (memberCode)
 // 책코드 -> 책 검색 (bookCode)
