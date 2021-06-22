@@ -30,12 +30,12 @@ public class BookCRUD {
 			
 			try {
 				stmt = con.createStatement();
-				String sql = "SELECT * FROM BOOK ORDER BY MemberCode";
+				String sql = "SELECT * FROM BOOK ORDER BY BOOKCODE";
 				rs = stmt.executeQuery(sql);
 				
 				while(rs.next()){
 					list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3),
-							rs.getString(4), rs.getString(5), rs.getInt(6), rs.getBoolean(7), rs.getBoolean(8)));
+							rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8)));
 				}
 				
 			} catch (SQLException e) {
@@ -64,7 +64,7 @@ public class BookCRUD {
 			
 			try {
 				String insertSql = "INSERT INTO BOOK VALUES "
-						+ "(BOOK_CODE_PK.NEXTVAL, ?, ?, ?, ?, ?)";
+						+ "(BOOK_CODE_PK.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 				pstmt = con.prepareStatement(insertSql);
 				
 				pstmt.setString(1, book.getbName());
@@ -72,6 +72,8 @@ public class BookCRUD {
 				pstmt.setString(3, book.getbPublisher());
 				pstmt.setString(4, book.getbGenre());
 				pstmt.setInt(5, book.getbPrice());
+				pstmt.setString(6, book.getbUsing());
+				pstmt.setString(7, book.getbAgeUsing());
 					
 				result = pstmt.executeUpdate();
 				
@@ -97,6 +99,7 @@ public class BookCRUD {
 			
 			try {
 				String updateSql = "UPDATE BOOK SET BNAME = ?, BWRITER = ?, BPUBLISHER = ?, BGENRE = ?, BPRICE = ?"
+						+ "BAGEUSING = ?"
 						+ "WHERE BOOKCODE = ?";
 				pstmt = con.prepareStatement(updateSql);
 		
@@ -105,7 +108,8 @@ public class BookCRUD {
 				pstmt.setString(3, book.getbPublisher());
 				pstmt.setString(4, book.getbGenre());
 				pstmt.setInt(5, book.getbPrice());
-				pstmt.setInt(6, book.getBookCode());
+				pstmt.setString(6, book.getbAgeUsing());
+				pstmt.setInt(7, book.getBookCode());
 					
 				result = pstmt.executeUpdate();
 				
@@ -128,9 +132,9 @@ public class BookCRUD {
 			PreparedStatement pstmt = null;
 
 			try {
-				String deleteSql = "DELETE FROM MEMBER WHERE BOOKCODE = ?";
+				String deleteSql = "DELETE FROM BOOK WHERE BNAME = ?";
 				pstmt = con.prepareStatement(deleteSql);
-				pstmt.setInt(1, book.getBookCode());
+				pstmt.setString(1, book.getbName());
 				result = pstmt.executeUpdate();
 
 			} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
