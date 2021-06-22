@@ -2,6 +2,7 @@ package BookRentPage;
 
 import bookcase.Book;
 import bookcase.Member;
+import bookcase.Using;
 import bookcase.manager.BookManager;
 
 import java.util.List;
@@ -15,9 +16,11 @@ public class BookRentPage {
     private List<Book> books;
     private int temp = 0;
     private int bookcode=0;
+    private List<Using> UsingBooks;
+    
 
     public BookRentPage(Member member){
-        this.member =member;
+        this.member = member;
     }
 
     public void BookUsingStart() {
@@ -36,7 +39,9 @@ public class BookRentPage {
         
         bookcode = book.getBookCode();
     }
+
     
-    public void 
-    
+    public void addUsingBook() {
+    	
+    }
 }
