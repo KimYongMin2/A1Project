@@ -42,7 +42,11 @@ public class MHTestDriver {
 					mh.findingId();
 					break;
 				case 4:
-					mh.leaveMember(member);
+					if(member == null) {
+						System.out.println("로그인을 먼저 해주세요.");
+					} else {
+						mh.leaveMember(member);
+					}
 					break;
 				case 5:
 					System.exit(0);
