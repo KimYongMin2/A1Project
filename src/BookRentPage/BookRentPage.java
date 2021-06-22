@@ -17,7 +17,14 @@ public class BookRentPage {
     private int temp = 0;
     private int bookcode=0;
     private List<Using> UsingBooks;
-    
+
+    public List<Using> getUsingBooks() {
+        return UsingBooks;
+    }
+
+    public void setUsingBooks(List<Using> usingBooks) {
+        UsingBooks = usingBooks;
+    }
 
     public BookRentPage(Member member){
         this.member = member;
