@@ -6,7 +6,18 @@ public class Review {
 	private int bookCode;
 	private double rScore;
 	private String rComment;
-	
+
+	@Override
+	public String toString() {
+		return "Review{" +
+				"reviewCode=" + reviewCode +
+				", memberCode=" + memberCode +
+				", bookCode=" + bookCode +
+				", rScore=" + rScore +
+				", rComment='" + rComment + '\'' +
+				'}';
+	}
+
 	public Review(int reviewCode, int memberCode, int bookCode, double rScore, String rComment) {
 		this.reviewCode = reviewCode;
 		this.memberCode = memberCode;

@@ -11,19 +11,28 @@ import bookcase.Member;
 import bookcase.manager.BookManager;
 import jdk.nashorn.internal.runtime.FindProperty;
 
-public class Reviewadd {
+public class ReviewAdd {
 
-	String rComment; // 한줄평
-	double rScore; // 별점
-	Member member;
-	Book book;
-	List<Book> books;
+	private String rComment; // 한줄평
+	private double rScore; // 별점
+	private Member member;
+	private Book book;
+	private List<Book> books;
 	private int temp;
-	Review review;
-	List<Review> reviewList;
-	
-	
-	public Reviewadd(Member member) {
+	private Review review;
+	private List<Review> reviewList;
+	private Scanner sc = new Scanner(System.in);
+	private int menuButton = 0;
+
+	public List<Review> getReviewList() {
+		return reviewList;
+	}
+
+	public void setReviewList(List<Review> reviewList) {
+		this.reviewList = reviewList;
+	}
+
+	public ReviewAdd(Member member) {
 		this.member = member;
 	}
 
@@ -32,12 +41,36 @@ public class Reviewadd {
 
 	
 	public void reviewAddStart() {
+		while (menuButton != 3) {
+			System.out.println("1. 리뷰입력    2. 리스트보기     3. 종료");
+			System.out.print("해당 메뉴를 선택해주세요 : ");
+			menuButton = Integer.parseInt(sc.nextLine());
+			switch (menuButton){
+				case 1 :
+					findBook();
+					setReviewComent();
+					review = new Review(0, book.getBookCode(), member.getMemberCode(), rScore, rComment);
+					reviewList.add(review);
+					break;
+				case 2 :
+					for (Review review1 : reviewList) {
+						System.out.println(review1);
+					}
+				case 3 :
+					System.out.println("종료합니다");
+					break;
+				default:
+					System.out.println("잘못 입력하셨습니다");
+					break;
+			}
 
-		Scanner sc = new Scanner(System.in);
+		}
+	}
 
+	public void setReviewComent() {
 		// 리뷰입력
 		System.out.println("=====한줄평을 입력해주세요.=====");
-		String rComment = sc.nextLine();
+		rComment = sc.nextLine();
 
 		boolean chk = true;
 		if (rComment.length() > 40) {
@@ -55,7 +88,7 @@ public class Reviewadd {
 		System.out.println("한줄평이 입력되었습니다.");
 
 		System.out.println("=====별점을 입력해주세요.=====");
-		double rScore = sc.nextDouble();
+		rScore = sc.nextDouble();
 
 		boolean chk1 = true;
 		if (rScore > 5 || rScore < 0) {
@@ -71,13 +104,8 @@ public class Reviewadd {
 			}
 		}
 		System.out.println("별점이 입력되었습니다.");
-		
-		findBook();
-		
-		review = new Review(0,book.getBookCode(), member.getMemberCode(), rScore, rComment);
-		reviewList.add(review);
 	}
-    
+
 	public void findBook(){
         // 책확인
 		Scanner sc = new Scanner(System.in);

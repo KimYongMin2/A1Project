@@ -2,7 +2,7 @@ package bookcase.memberpage;
 
 import BookRentPage.BookRentPage;
 import bookcase.Member;
-import bookcase.Reviewadd;
+import bookcase.ReviewAdd;
 
 import java.util.Scanner;
 
@@ -43,7 +43,7 @@ public class MemberPage {
                     break;
                 case 4:
                     // 리뷰작성
-                    new Reviewadd(member).reviewAddStart();
+                    new ReviewAdd(member).reviewAddStart();
                     break;
                 case 5:
                     // 내정보
