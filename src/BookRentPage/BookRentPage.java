@@ -36,21 +36,37 @@ public class BookRentPage {
     }
     public void findBook(){
         // 책확인
-        System.out.print("대여하려는 책 이름을 작성해주세요 : ");
-        String bName = scanner.nextLine();
-        books = new BookManager().getBookList();
-
-        for(int i =0; i <books.size(); i++) {
-            if(bName.equals(books.get(i).getbName())) {
-                temp = i;
-            }
-        }
-        book = books.get(temp);
+    	boolean chk = false;
+    	books = new BookManager().getBookList();
+    	System.out.println("============= 대여 페이지 입니다 ============");
+    	while(chk) {
+    		System.out.println("대여하려는 책 이름을 작성해주세요 : ");
+        	String bName = scanner.nextLine();
+        	
+        	for(int i = 0; i < books.size(); i++) {
+	            if(bName.equals(books.get(i).getbName())) {
+	                temp = i;
+	                chk = true;
+	            }
+	        }		 
+        	if(!chk) {
+        		System.out.println("원하시는 책을 찾지 못했습니다.");
+        	}
+        	else {
+        		if(!books.get(temp).isbUsing()) {
+        			books.get(temp).setbUsing(true);
+        		}
+        		else {
+        			System.out.println("이미 대여중인 책입니다.");
+        		}
+        		
+        	}
+    	}
     }
 
     
     public void addUsingBook() {
-    	// 
+    	// 대여리스트에 책 리스트 추가
     	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), "20210101", "20210622", 0);
     	
     	UsingBooks.add(usingBook);
