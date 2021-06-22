@@ -40,6 +40,7 @@ public class BookRentPage {
 
     
     public void addUsingBook() {
+    	// 
     	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), "20210101", "20210622", 0);
     	
     	UsingBooks.add(usingBook);
