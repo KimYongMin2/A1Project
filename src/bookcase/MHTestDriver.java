@@ -4,6 +4,7 @@ import java.util.*;
 
 public class MHTestDriver {
 	
+	
 	/**
 	 * MemberHandler의 테스트 환경입니다!...
 	 * 
@@ -13,38 +14,48 @@ public class MHTestDriver {
 	 */
 	
 	public static void main(String[] args) {
+		try {
+			
+			Scanner kb = new Scanner(System.in);
+			MemberHandler mh = new MemberHandler();
+			
+			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			while(true) {
+				System.out.println("=============");
+				System.out.println("1. 회원가입");
+				System.out.println("2. 로그인");
+				System.out.println("3. 아이디찾기");
+				System.out.println("4. 회원탈퇴");
+				System.out.println("5. 종료");
+				System.out.println("=============");
+				int menu = Integer.parseInt(kb.nextLine());
+				switch (menu) {
+				case 1: 
+					mh.joinMember();
+					break;
+				case 2: 
+					mh.login();
+					break;
+				case 3: 
+					mh.findingId();
+					break;
+				case 4:
+					mh.leaveMember(0);
+					break;
+				case 5:
+					System.exit(0);
+				default:
+					throw new IllegalArgumentException("Unexpected value");
+				}
+			} 
+			
+			
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		Scanner kb = new Scanner(System.in);
-		MemberHandler mh = new MemberHandler();
-		
-		while(true) {
-			System.out.println("=============");
-			System.out.println("1. 회원가입");
-			System.out.println("2. 로그인");
-			System.out.println("3. 아이디찾기");
-			System.out.println("4. 회원탈퇴");
-			System.out.println("5. 종료");
-			System.out.println("=============");
-			int menu = Integer.parseInt(kb.nextLine());
-			switch (menu) {
-			case 1: 
-				mh.joinMember();
-				break;
-			case 2: 
-				mh.login();
-				break;
-			case 3: 
-				mh.findingId();
-				break;
-			case 4:
-				mh.leaveMember(0);
-				break;
-			case 5:
-				System.exit(0);
-			default:
-				throw new IllegalArgumentException("Unexpected value");
-			}
-		} 
 	}
 
 }

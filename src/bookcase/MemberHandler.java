@@ -1,5 +1,6 @@
 package bookcase;
 
+import java.sql.*;
 import java.util.*;
 import java.util.regex.*;
 
@@ -16,6 +17,20 @@ public class MemberHandler {
 	 * 
 	 * @author 민주
 	 */
+	
+	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	private String user = "USER1";
+	private String password = "tiger";
+	
+	private Connection connecting() {
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return con;
+	}
 	
 	Scanner kb = new Scanner(System.in);
 	
@@ -40,6 +55,8 @@ public class MemberHandler {
 	void joinMember() { //회원가입 method
 		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
+			Connection con = connecting();
+			
 			System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 			System.out.println("=== 회원가입을 시작합니다 ===");
 			
