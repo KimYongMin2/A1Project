@@ -1,5 +1,6 @@
 package bookcase.manager;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,8 +8,7 @@ import java.util.Scanner;
 import bookcase.*;
 
 public class BookManager {
-    private static List<Book> bookList = new ArrayList<>();
-    private int bookCode;
+    private static List<Book> bookList;
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
     private boolean bAgeUsing;
@@ -64,8 +64,7 @@ public class BookManager {
 
 
     public void addBook(){
-        System.out.print("도서코드를 입력해주세요 : ");
-        bookCode = Integer.parseInt(scanner.nextLine());
+    	Connection con = JDBCconnecting.connecting();
 
         System.out.print("책 이름을 입력해주세요 : ");
         bName = scanner.nextLine();
@@ -84,49 +83,66 @@ public class BookManager {
 
         boolean bUsing = false;
 
-        System.out.println("연련제한이 있습니까?");
-        System.out.print("True    False : ");
-        bAgeUsing = Boolean.parseBoolean(scanner.nextLine());
-
-        Book book = new Book(bookCode, bName, bWriter, bPublisher,
-                bGenre, bPrice, bUsing, bAgeUsing);
-        bookList.add(book);
+        System.out.println("연령제한이 있습니까?");
+        System.out.print("(1) 네 (2) 아니오");
+        int chks = Integer.parseInt(scanner.nextLine());
+        
+        if(chks == 1) {
+        	bUsing = true;
+        } else if(chks == 2) {
+        	bUsing = false;
+        } else {
+        	System.out.println("잘못 입력하셨습니다.");
+        }
         
         /***
          * 북테이블 DB와 연결!, 북 테이블에 INSERT시키기
          * @author 민주
          */
-        
         BookCRUD bookCrud = BookCRUD.getInstance();
-		Book book = bookCrud.insertBook(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
-		members.add(newMember);
+		bookCrud.insertBook(con, new Book(0, bName, bWriter, bPublisher,
+                bGenre, bPrice, bUsing, bAgeUsing));
+		
+		bookList = bookCrud.getBookList(con);
 		System.out.println("=== 새로운 책을 추가했습니다. ===");
 
     }
 
     public void deleteBook(List<Book> bookList){
+    	Connection con = JDBCconnecting.connecting();
+    	
         findCheck = false;
-        System.out.print("삭제할 도서코드를 입력해주세요 : ");
-        bookCode = Integer.parseInt(scanner.nextLine());
+        System.out.print("삭제할 도서명을 입력해주세요 : ");
+        String bookName = scanner.nextLine();
 
         for (int i = 0; i < bookList.size(); i++) {
-            if(bookCode == bookList.get(i).getBookCode()){
-                temp = i;
+            if(bookName.equals( bookList.get(i).getbName())){
+                bookList.remove(i);
+                
+                /**
+                 * DB랑 연결
+                 * @author 민주
+                 */
+                BookCRUD bookCrud = BookCRUD.getInstance();
+                bookCrud.deleteBook(con, bookList.get(i));
+                
+                System.out.println("삭제되었습니다");
                 findCheck = true;
             }
         }
-        if (findCheck){
-            bookList.remove(temp);
-            System.out.println("삭제되었습니다");
-        }else {
-            System.out.println("파일을 찾지 못하였습니다.");
+        if(!findCheck) {
+        	System.out.println("해당하는 도서를 찾지 못했습니다.");
         }
+   
     }
 
     public void reBook(List<Book> bookList){
+    	Connection con = JDBCconnecting.connecting();
+    	
         findCheck = false;
+        
         System.out.println("수정할 도서코드를 입력해주세요 : ");
-        bookCode = Integer.parseInt(scanner.nextLine());
+        int bookCode = Integer.parseInt(scanner.nextLine());
 
         for (int i = 0; i < bookList.size(); i++) {
             if(bookCode == bookList.get(i).getBookCode()){
@@ -134,6 +150,7 @@ public class BookManager {
                 findCheck = true;
             }
         }
+        
         if (findCheck){
             System.out.println();
             System.out.println("--------------------------------------------");
@@ -178,6 +195,14 @@ public class BookManager {
                     System.out.print("잘못입력하셨습니다");
                     break;
             }
+            
+            /**
+             * DB랑 연결
+             * @author 민주
+             */
+            BookCRUD bookCrud = BookCRUD.getInstance();
+            bookCrud.updateBook(con, bookList.get(temp));
+            
         }else {
             System.out.println("파일을 찾지 못하였습니다.");
         }

@@ -21,7 +21,7 @@ public class BookCRUD {
 	}
 	
 	// 1. SELECT
-		ArrayList<Book> getMemberList(Connection con) {
+		public ArrayList<Book> getBookList(Connection con) {
 			
 			ArrayList<Book> list = new ArrayList<Book>();
 			
@@ -57,7 +57,7 @@ public class BookCRUD {
 		}
 
 		// 2. INSERT 메소드 : 반환타입: 반영 횟수
-		Book insertBook(Connection con, Book book){
+		public Book insertBook(Connection con, Book book){
 			
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -90,7 +90,7 @@ public class BookCRUD {
 		}
 
 		// 3. UPDATE 메소드: 반환타입: 반영횟수
-		void updateBook(Connection con, Book book) {
+		public void updateBook(Connection con, Book book) {
 			
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -123,7 +123,7 @@ public class BookCRUD {
 		}
 		
 		// 4. DELETE 메소드: 반환타입: 반영횟수
-		void deleteBook(Connection con, Book book) {
+		public void deleteBook(Connection con, Book book) {
 			int result = 0;
 			PreparedStatement pstmt = null;
 
