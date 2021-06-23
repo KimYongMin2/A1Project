@@ -59,7 +59,7 @@ public class ShowBookList {
 	}
 
 	public void showMyUsingBook(){
-		books = rentalCrud.getMyRentalList(con);
+		books = rentalCrud.getMyRentalList(con, member);
 		if (books == null) {
 			System.out.println("아직 대여하신 도서가 한 권도 없습니다");
 		} else {
