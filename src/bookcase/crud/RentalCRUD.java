@@ -60,7 +60,11 @@ public class RentalCRUD {
 		return list;
 	}
 
-	// 1-2. SELECT // 내가 대여중인 모든 도서 가져오기
+	// 1-2. SELECT 
+	/***
+	 * 내가 대여중인 모든 도서 가져오기
+	 * @author 민주
+	 */
 	public ArrayList<Book> getMyRentalList(Connection con, Member member) {
 
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -95,7 +99,11 @@ public class RentalCRUD {
 		return list;
 	}
 	
-	// 1-3. 대여가능한 도서 목록 가져오기
+	// 1-3. SELECT
+	/***
+	 * 대여가능한 도서 목록 가져오기
+	 * @author 민주
+	 */
 	public ArrayList<Book> getPossibleList(Connection con) {
 
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -161,7 +169,7 @@ public class RentalCRUD {
 		return using;
 	}
 
-	//4. DELETE 메소드
+	// 4. DELETE 메소드
 	public void deleteRental(Connection con, int bCode) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -171,6 +179,34 @@ public class RentalCRUD {
 			pstmt = con.prepareStatement(deleteSql);
 			pstmt.setInt(1, bCode);
 			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	// 4-1. DELETE
+	/***
+	 * 내가 대여중인 책을, 렌탈리스트에서 삭제하기
+	 * @author 민주
+	 */
+	public void ReturnMyBook(Connection con, Member member) {
+
+		PreparedStatement pstmt = null;
+
+		try {
+			String deleteSql = "DELETE FROM RENTAL WHERE MEMBERCODE = ?";
+			pstmt = con.prepareStatement(deleteSql);
+			pstmt.setInt(1, member.getMemberCode());
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

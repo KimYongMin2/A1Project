@@ -72,7 +72,7 @@ public class ReturnBookPage implements Show {
     public void returnBook(){
         // 책확인
         chk = false;
-        bookList = bookCrud.getBookList(con);
+        bookList = rentalCrud.getMyRentalList(con, member);
         showReturnBookPage();
 
         System.out.println("반납하려는 책 이름을 작성해주세요 : ");
@@ -105,8 +105,7 @@ public class ReturnBookPage implements Show {
 
     public void deleteUsingBook() {
         book.setbUsing("false");
-        int bCode = book.getBookCode();
-        rentalCrud.deleteRental(con, bCode);
+        rentalCrud.ReturnMyBook(con, member);
         bookCrud.updateBook(con, book);
     }
 }
