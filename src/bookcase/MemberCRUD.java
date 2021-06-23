@@ -27,8 +27,7 @@ public class MemberCRUD {
 			
 			while(rs.next()){
 				list.add(new Member(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-						rs.getInt(8)));
+						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)));
 			}
 			
 		} catch (SQLException e) {
@@ -57,7 +56,7 @@ public class MemberCRUD {
 		
 		try {
 			String insertSql = "INSERT INTO MEMBER VALUES "
-					+ "(MEMBER_CODE_PK.NEXTVAL, ?, ?, ?, ?, ?, ?, 0)";
+					+ "(MEMBER_CODE_PK.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(insertSql);
 			
 			pstmt.setString(1, member.getId());
