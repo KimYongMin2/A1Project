@@ -99,7 +99,7 @@ public class BookCRUD {
 			
 			try {
 				String updateSql = "UPDATE BOOK SET BNAME = ?, BWRITER = ?, BPUBLISHER = ?, BGENRE = ?, BPRICE = ?"
-						+ ", BAGEUSING = ? WHERE BOOKCODE = ?";
+						+ ", BUSING = ?, BAGEUSING = ? WHERE BOOKCODE = ?";
 				pstmt = con.prepareStatement(updateSql);
 		
 				pstmt.setString(1, book.getbName());
@@ -107,8 +107,9 @@ public class BookCRUD {
 				pstmt.setString(3, book.getbPublisher());
 				pstmt.setString(4, book.getbGenre());
 				pstmt.setInt(5, book.getbPrice());
-				pstmt.setString(6, book.getbAgeUsing());
-				pstmt.setInt(7, book.getBookCode());
+				pstmt.setString(6, book.getbUsing());
+				pstmt.setString(7, book.getbAgeUsing());
+				pstmt.setInt(8, book.getBookCode());
 					
 				result = pstmt.executeUpdate();
 				

@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import bookcase.Book;
+import bookcase.Review;
 import bookcase.Using;
 
 /***
@@ -56,7 +57,39 @@ public class RentalCRUD {
 		}
 		return list;
 	}
+
+	
+// 2. INSERT 메소드 : 반환타입: 반영 횟수
+Using insertRental(Connection con, Using using){
+	
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	try {
+		String insertSql = "INSERT INTO RENTAL VALUES "
+				+ "(rental_code_pk.nextval, ?, ?, ?, ?)";
+		pstmt = con.prepareStatement(insertSql);
+		
+		pstmt.setString(1, using.getRentalDate());
+		pstmt.setString(2, using.getReturnDate());
+		pstmt.setInt(3, using.getMemberCode());
+		pstmt.setInt(4, using.getBookCode());
+			
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return using;
 }
 
-	//2. INSERT 메소드 
+}
 

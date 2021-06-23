@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class BookRentPage implements Show {
     private static Connection con = JDBCconnecting.connecting();
     private static BookCRUD bookCrud = BookCRUD.getInstance();
+    private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
     private static ArrayList<Book> bookList = new ArrayList<Book>();
 
     static Scanner scanner = new Scanner(System.in);
@@ -82,11 +83,11 @@ public class BookRentPage implements Show {
         		System.out.println("원하시는 책을 찾지 못했습니다.");
         		break;
         	}
-        	else {
-        		if(bookList.get(temp).getbUsing().equals("true")) {
+        	else { // chk = true
+        		if(bookList.get(temp).getbUsing().equals("false")) {
         			book = bookList.get(temp);
         		}
-        		else {
+        		else { // bUsing = true
         			System.out.println("이미 대여중인 책입니다.");
         		}
         		
@@ -106,10 +107,12 @@ public class BookRentPage implements Show {
 		week.add(Calendar.DATE , +7);
 		String afterWeek = new java.text.SimpleDateFormat("yyMMdd").format(week.getTime());    	
         
-        
-    	Using usingBook = new Using(book.getBookCode(), member.getMemberCode(), toDay, afterWeek, 0);
+    	Using usingBook = new Using(0, toDay, afterWeek, member.getMemberCode(), book.getBookCode());
     	
     	usingBooks.add(usingBook);
     	book.setbUsing("true");
+  
+    	rentalCrud.insertRental(con, usingBook);
+    	bookCrud.updateBook(con, book);
     }
 }

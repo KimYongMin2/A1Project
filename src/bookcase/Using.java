@@ -7,7 +7,7 @@ public class Using {
     private String returnDate;
     private int rentalCode;
 
-    public Using(int bookCode, int memberCode, String rentalDate, String returnDate, int rentalCode) {
+    public Using(int rentalCode, String rentalDate, String returnDate, int memberCode, int bookCode) {
         this.bookCode = bookCode;
         this.memberCode = memberCode;
         this.rentalDate = rentalDate;
