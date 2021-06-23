@@ -84,8 +84,12 @@ public class ReturnBookPage implements Show {
         }
         else { // chk = true
             book = bookList.get(temp);
-            deleteUsingBook();
-            System.out.println("반납이 완료되었습니다.");
+            if(book.getbUsing().equals("true")) {
+                deleteUsingBook();
+                System.out.println("반납이 완료되었습니다.");
+            }else{
+                System.out.println("반납 불가능한 책입니다");
+            }
         }
     }
 
