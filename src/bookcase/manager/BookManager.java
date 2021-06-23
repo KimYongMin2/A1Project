@@ -4,8 +4,10 @@ import java.sql.*;
 import java.util.*;
 
 import bookcase.*;
+import bookcase.show.Show;
+import bookcase.util.ScannerUtil;
 
-public class BookManager {
+public class BookManager implements Show {
 	
     private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud = BookCRUD.getInstance();
@@ -17,21 +19,11 @@ public class BookManager {
     private int temp;
     private int menuButton = 0;
     private boolean findCheck = false;
-    private static Scanner scanner = new Scanner(System.in);
 
     public void bookManagerStart(){
         while (menuButton != 6) {
-            System.out.println("--------------------------------------------");
-            System.out.println("1. 도서 추가하기 ");
-            System.out.println("2. 도서 삭제하기 ");
-            System.out.println("3. 도서 수정하기 ");
-            System.out.println("4. 전체 책 리스트 조회 ");
-            System.out.println("5. 대여중인 책 리스트 조회 ");
-            System.out.println("6. 종료");
-            System.out.println("--------------------------------------------");
-
-            System.out.print(" 메뉴를 선택해주세요 : ");
-            menuButton = Integer.parseInt(scanner.nextLine());
+            showBookManagerMenu();
+            setMenuButton("메뉴를 선택해주세요");
             bookList = bookCrud.getBookList(con);
 
             switch (menuButton) {
@@ -66,28 +58,32 @@ public class BookManager {
     }
 
 
+
+
+
+
     public void addBook(){
         System.out.print("책 이름을 입력해주세요 : ");
-        bName = scanner.nextLine();
+        bName = ScannerUtil.getInputString();
 
         System.out.print("지은이를 입력해주세요 : ");
-        bWriter = scanner.nextLine();
+        bWriter = ScannerUtil.getInputString();
 
         System.out.print("출판사를 입력해주세요 : ");
-        bPublisher = scanner.nextLine();
+        bPublisher = ScannerUtil.getInputString();
 
         System.out.print("장르를 입력해주세요 : ");
-        bGenre = scanner.nextLine();
+        bGenre = ScannerUtil.getInputString();
 
         System.out.print("가격을 입력해주세요 : ");
-        bPrice = Integer.parseInt(scanner.nextLine());
+        bPrice = ScannerUtil.getInputInteger();
 
         String bUsing = "false";
 
         System.out.println("연령제한이 있습니까?");
         System.out.print("(1) 네 (2) 아니오");
-        int chks = Integer.parseInt(scanner.nextLine());
-        
+        int chks = ScannerUtil.getInputInteger();
+
         if(chks == 1) {
         	bAgeUsing = "true";
         } else if(chks == 2) {
@@ -95,7 +91,7 @@ public class BookManager {
         } else {
         	System.out.println("잘못 입력하셨습니다.");
         }
-        
+
         /***
          * 북테이블 DB와 연결!, 북 테이블에 INSERT시키기
          * @author 민주
@@ -110,18 +106,14 @@ public class BookManager {
         findCheck = false;
         
         System.out.print("삭제할 도서명을 입력해주세요 : ");
-        String bookName = scanner.nextLine();
+        String bookName = ScannerUtil.getInputString();
         
         if(bookList != null) {
-	        for (int i = 0; i < bookList.size(); i++) {
-	            if(bookName.equals( bookList.get(i).getbName())){
-	                bookCrud.deleteBook(con, bookList.get(i));
-	                System.out.println("삭제되었습니다");
-	                findCheck = true;
-	            }
-	        }
-	        
-	        if(!findCheck) {
+            findBook(bookList, bookName);
+            if(findCheck){
+                bookCrud.deleteBook(con, bookList.get(temp));
+                System.out.println("삭제되었습니다");
+            }else{
 	        	System.out.println("해당하는 도서를 찾지 못했습니다.");
 	        }
         } else {
@@ -129,58 +121,48 @@ public class BookManager {
         }
     }
 
+
     public void reBook(ArrayList<Book> bookList){
 
         findCheck = false;
         
-        System.out.println("수정할 도서코드 입력해주세요 : ");
-        int bookCode = Integer.parseInt(scanner.nextLine());
+        System.out.println("수정할 도서이름 입력해주세요 : ");
+        String bName = ScannerUtil.getInputString();
 
-        for (int i = 0; i < bookList.size(); i++) {
-            if(bookCode == bookList.get(i).getBookCode()){
-                temp = i;
-                findCheck = true;
-            }
-        }
-        
+        findBook(bookList, bName);
         if (findCheck){
-            System.out.println();
-            System.out.println("--------------------------------------------");
-            System.out.println("1. 책이름     2. 지은이     3. 출판사");
-            System.out.println("4. 장르       5. 가격      6. 연령제한 여부");
-            System.out.println("--------------------------------------------");
-            System.out.println("수정할 목록을 설정해주세요 : ");
-            menuButton = Integer.parseInt(scanner.nextLine());
+            showReBookMenu();
+            setMenuButton("수정할 목록을 설정해주세요 : ");
 
             switch (menuButton) {
                 case 1:
                     System.out.print("책 이름을 입력하세요 : ");
-                    bName = scanner.nextLine();
+                    bName = ScannerUtil.getInputString();
                     bookList.get(temp).setbName(bName);
                     break;
                 case 2:
                     System.out.print("지은이를 입력하세요 : ");
-                    bWriter = scanner.nextLine();
+                    bWriter = ScannerUtil.getInputString();
                     bookList.get(temp).setbWriter(bWriter);
                     break;
                 case 3:
                     System.out.print("출판사를 입력하세요 : ");
-                    bPublisher = scanner.nextLine();
+                    bPublisher = ScannerUtil.getInputString();
                     bookList.get(temp).setbPublisher(bPublisher);
                     break;
                 case 4:
                     System.out.print("장르를 입력하세요 : ");
-                    bGenre = scanner.nextLine();
+                    bGenre = ScannerUtil.getInputString();
                     bookList.get(temp).setbGenre(bGenre);
                     break;
                 case 5:
                     System.out.print("가격을 입력하세요 : ");
-                    bPrice = Integer.parseInt(scanner.nextLine());
+                    bPrice = ScannerUtil.getInputInteger();
                     bookList.get(temp).setbPrice(bPrice);
                     break;
                 case 6:
                     System.out.print("연령제한 여부를 입력하세요 : ");
-                    bAgeUsing = scanner.nextLine();
+                    bAgeUsing =ScannerUtil.getInputString();
                     bookList.get(temp).setbAgeUsing(bAgeUsing);
                     break;
                 default:
@@ -197,6 +179,17 @@ public class BookManager {
             
         } else {
             System.out.println("파일을 찾지 못하였습니다.");
+        }
+    }
+
+
+
+    private void findBook(ArrayList<Book> bookList, String bookName) {
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookName.equals(bookList.get(i).getbName())) {
+                temp = i;
+                findCheck = true;
+            }
         }
     }
 
@@ -224,4 +217,8 @@ public class BookManager {
         return bookList;
     }
 
+    private void setMenuButton(String s) {
+        System.out.print(s);
+        menuButton = ScannerUtil.getInputInteger();
+    }
 }

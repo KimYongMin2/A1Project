@@ -4,6 +4,7 @@ import bookcase.Book;
 import bookcase.Member;
 import bookcase.Using;
 import bookcase.manager.BookManager;
+import bookcase.show.Show;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class BookRentPage {
+public class BookRentPage implements Show {
     static Scanner scanner = new Scanner(System.in);
     private int menuButton = 0;
     private Member member;
@@ -36,10 +37,7 @@ public class BookRentPage {
 
     public void BookUsingStart() {
     	while (menuButton != 2) {
-            System.out.println("--------------------------------------------");
-            System.out.println("1. 도서 대여하기 ");
-            System.out.println("2. 종료");
-            System.out.println("--------------------------------------------");
+            showBookUsingMenu();
 
             System.out.print(" 메뉴를 선택해주세요 : ");
             menuButton = Integer.parseInt(scanner.nextLine());
@@ -60,6 +58,8 @@ public class BookRentPage {
         }
         
     }
+
+
     public void findBook(){
         // 책확인
     	boolean chk = false;
@@ -91,7 +91,6 @@ public class BookRentPage {
         	}
     	}
     }
-
     
     public void addUsingBook() {
     	// 대여리스트에 책 리스트 추가
