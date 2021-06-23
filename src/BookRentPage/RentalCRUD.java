@@ -61,7 +61,7 @@ public class RentalCRUD {
 
 	
 // 2. INSERT 메소드 : 반환타입: 반영 횟수
-Using insertRental(Connection con, Using using){
+ public Using insertRental(Connection con, Using using){
 	
 	int result = 0;
 	PreparedStatement pstmt = null;
@@ -94,14 +94,14 @@ Using insertRental(Connection con, Using using){
 
 
 //4. DELETE 메소드: 
-	void deleteRental(Connection con, Using using) {
+	public void deleteRental(Connection con, int bCode) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
 			String deleteSql = "DELETE FROM RENTAL WHERE RENTALCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
-			pstmt.setInt(1, using.getRentalCode());
+			pstmt.setInt(1, bCode);
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
