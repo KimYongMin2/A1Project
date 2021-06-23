@@ -9,6 +9,7 @@ import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Using;
 import bookcase.show.*;
+import bookcase.util.CommonFunction;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
@@ -28,6 +29,8 @@ public class ReturnBookPage implements Show {
     private int temp = 0;
     private int bookcode=0;
 
+    private String bName;
+
     public ArrayList<Using> getUsingBooks() {
         return usingBooks;
     }
@@ -44,14 +47,12 @@ public class ReturnBookPage implements Show {
         while (menuButton != 2) {
             try {
                 showBookReturnMenu();
-
-                System.out.print(" 해당사항을 선택해주세요 : ");
-                menuButton = ScannerUtil.getInputInteger();
+                CommonFunction.setMenuButton("해당사항을 선택해주세요", menuButton);
 
                 switch (menuButton) {
                     case 1:
                         // 반납
-                        findBook();
+                        returnBook();
                         break;
                     case 2:
                         // 종료
@@ -68,20 +69,17 @@ public class ReturnBookPage implements Show {
     }
 
 
-    public void findBook(){
+    public void returnBook(){
         // 책확인
         chk = false;
         bookList = bookCrud.getBookList(con);
-        System.out.println("============= 반납 페이지 입니다 ============");
-        System.out.println("반납하려는 책 이름을 작성해주세요 : ");
-        String bName = ScannerUtil.getInputString();
+        showReturnBookPage();
 
-        for(int i = 0; i < bookList.size(); i++) {
-            if(bName.equals(bookList.get(i).getbName())) {
-                temp = i;
-                chk = true;
-            }
-        }
+        System.out.println("반납하려는 책 이름을 작성해주세요 : ");
+        bName = ScannerUtil.getInputString();
+
+        findBook();
+
         if(!chk) {
             System.out.println("원하시는 책을 찾지 못했습니다.");
         }
@@ -92,6 +90,15 @@ public class ReturnBookPage implements Show {
                 System.out.println("반납이 완료되었습니다.");
             }else{
                 System.out.println("반납 불가능한 책입니다");
+            }
+        }
+    }
+
+    private void findBook() {
+        for(int i = 0; i < bookList.size(); i++) {
+            if(bName.equals(bookList.get(i).getbName())) {
+                temp = i;
+                chk = true;
             }
         }
     }

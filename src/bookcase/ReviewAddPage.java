@@ -6,6 +6,7 @@ import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Review;
 import bookcase.show.Show;
+import bookcase.util.CommonFunction;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
@@ -47,8 +48,7 @@ public class ReviewAddPage implements Show {
 				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
 				showReviewAddMenu();
-				System.out.print("해당 메뉴를 선택해주세요 : ");
-				menuButton = ScannerUtil.getInputInteger();
+				CommonFunction.setMenuButton("해당 메뉴를 선택해주세요", menuButton);
 
 				switch (menuButton) {
 				case 1:
@@ -97,6 +97,13 @@ public class ReviewAddPage implements Show {
 
 	}
 
+	private void setComment() {
+		showCommentMenu();
+		rComment = ScannerUtil.getInputString();
+		checkComment();
+		System.out.println("한줄평이 입력되었습니다.");
+	}
+
 	private void setScore() {
 		showScoreMenu();
 		rScore = ScannerUtil.getInputDouble();
@@ -116,13 +123,6 @@ public class ReviewAddPage implements Show {
 				}
 			}
 		}
-	}
-
-	private void setComment() {
-		showCommentMenu();
-		rComment = ScannerUtil.getInputString();
-		checkComment();
-		System.out.println("한줄평이 입력되었습니다.");
 	}
 
 	private void checkComment() {

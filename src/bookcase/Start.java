@@ -2,6 +2,7 @@ package bookcase;
 
 import bookcase.object.Member;
 import bookcase.show.Show;
+import bookcase.util.CommonFunction;
 
 import java.util.Scanner;
 
@@ -10,14 +11,11 @@ public class Start implements Show {
         MemberHandler mh = new MemberHandler();
         int menuButton = 0;
         Member member;
-        
-        Scanner scanner = new Scanner(System.in);
 
         while (menuButton != 5) {
             try {
                 showStartMenu();
-                System.out.print("해당 사항을 입력해주세요 : ");
-                menuButton = Integer.parseInt(scanner.nextLine());
+                CommonFunction.setMenuButton("해당사항을 입력해주세요 : ",menuButton);
 
                 switch (menuButton) {
                     case 1:

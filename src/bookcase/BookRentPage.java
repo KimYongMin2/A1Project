@@ -29,6 +29,7 @@ public class BookRentPage implements Show {
     private int temp = 0;
     private int bookcode=0;
     private List<Using> usingBooks = new ArrayList<>();
+    private String bName;
 
     public List<Using> getUsingBooks() {
         return usingBooks;
@@ -74,30 +75,32 @@ public class BookRentPage implements Show {
         // 책확인
     	chk = false;
         bookList = bookCrud.getBookList(con);
-			System.out.println("============= 대여 페이지 입니다 ============");
-			System.out.println("대여하려는 책 이름을 작성해주세요 : ");
-        	String bName = ScannerUtil.getInputString();
+
+        showRentalBookPage();
+
+        System.out.println("대여하려는 책 이름을 작성해주세요 : ");
+        bName = ScannerUtil.getInputString();
         	
-        	for(int i = 0; i < bookList.size(); i++) {
-	            if(bName.equals(bookList.get(i).getbName())) {
-	                temp = i;
-	                chk = true;
-                    book = bookList.get(temp);
-                }
-	        }
-        	if(!chk) {
-        		System.out.println("원하시는 책을 찾지 못했습니다.");
+        for(int i = 0; i < bookList.size(); i++) {
+            if(bName.equals(bookList.get(i).getbName())) {
+                temp = i;
+	            chk = true;
+                book = bookList.get(temp);
+            }
+        }
+        if(!chk) {
+        	System.out.println("원하시는 책을 찾지 못했습니다.");
+        }
+        else { // chk = true
+        	if(bookList.get(temp).getbUsing().equals("false")) {
+        		System.out.println("대여가 완료되었습니다.");
+        	    addUsingBook();
         	}
-        	else { // chk = true
-        		if(bookList.get(temp).getbUsing().equals("false")) {
-        			System.out.println("대여가 완료되었습니다.");
-        		    addUsingBook();
-        		}
-        		else { // bUsing = true
-        			System.out.println("이미 대여중인 책입니다.");
-        		}
-        		
+        	else { // bUsing = true
+        		System.out.println("이미 대여중인 책입니다.");
         	}
+
+        }
     }
 
     public void addUsingBook() {

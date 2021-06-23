@@ -1,10 +1,10 @@
 package bookcase;
 
 import bookcase.object.Member;
-import bookcase.util.ScannerUtil;
+import bookcase.show.Show;
+import bookcase.util.CommonFunction;
 
-
-public class MemberPage {
+public class MemberPage implements Show {
     private int menuButton = 0;
     private Member member;
     public MemberPage(Member member){
@@ -14,17 +14,8 @@ public class MemberPage {
     public void memberPageStart(){
         while (menuButton != 6) {
             try {
-                System.out.println("--------------------------------------");
-                System.out.println("1. 도서목록 검색");
-                System.out.println("2. 도서대여");
-                System.out.println("3. 도서반납");
-                System.out.println("4. 리뷰작성");
-                System.out.println("5. 내정보보기");
-                System.out.println("6. 종료");
-                System.out.println("--------------------------------------");
-
-                System.out.print("해당 메뉴를 선택해주세요 : ");
-                menuButton = ScannerUtil.getInputInteger();
+                showMemberPageMenu();
+                CommonFunction.setMenuButton("해당 메뉴를 선택해주세요 : ", menuButton);
 
                 switch (menuButton) {
                     case 1:
@@ -60,5 +51,4 @@ public class MemberPage {
             }
         }
     }
-
 }

@@ -6,6 +6,7 @@ import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Using;
 import bookcase.show.Show;
+import bookcase.util.CommonFunction;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
@@ -30,9 +31,7 @@ public class ShowBookListPage implements Show {
 		while (menuButton != 4) {
 			try {
 				showBookListPageMenu();
-
-				System.out.print("해당사항을 선택해주세요 : ");
-				menuButton = ScannerUtil.getInputInteger();
+				CommonFunction.setMenuButton("해당사항을 선택해주세요 : ", menuButton);
 
 				switch (menuButton) {
 					case 1:

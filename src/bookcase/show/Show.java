@@ -95,4 +95,27 @@ public interface Show {
         System.out.println("=====한줄평을 입력해주세요.=====");
         System.out.println("--------------------------------------------------------");
     }
+
+    default void showReturnBookPage() {
+        System.out.println("--------------------------------------------------------");
+        System.out.println("반납 페이지 입니다");
+        System.out.println("--------------------------------------------------------");
+    }
+
+    default void showRentalBookPage() {
+        System.out.println("--------------------------------------------------------");
+        System.out.println("대여 페이지 입니다");
+        System.out.println("--------------------------------------------------------");
+    }
+
+    default void showMemberPageMenu() {
+        System.out.println("--------------------------------------------------------");
+        System.out.println("1. 도서목록 검색");
+        System.out.println("2. 도서대여");
+        System.out.println("3. 도서반납");
+        System.out.println("4. 리뷰작성");
+        System.out.println("5. 내정보보기");
+        System.out.println("6. 종료");
+        System.out.println("--------------------------------------------------------");
+    }
 }

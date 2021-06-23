@@ -22,8 +22,7 @@ public class MyInfoPage implements Show {
 		while (menuButton != 4) {
 		    try {
                 showEditMyInfoMenu();
-                setMenuButton("메뉴를 선택해주세요");
-
+                CommonFunction.setMenuButton("메뉴를 선택해주세요 : ", menuButton);
                 switch (menuButton) {
                     case 1: //회원 정보 수정
                         mh.updateMember(member);
