@@ -137,7 +137,7 @@ public class MemberHandler {
 			}
 			
 			// (7) 입력 값을 넣어서, 객체 생성 후 ArrayList에 넣고, DB에도 INSERT
-			memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email, 0));
+			memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email));
 			System.out.println("=== 회원가입이 완료되었습니다 ===");
 			System.out.println("=== 감사합니다 ===");
 			
@@ -374,8 +374,6 @@ public class MemberHandler {
 		}
 	}
 	
-	public int showMyPoint(Member member) { //잔여 포인트 조회
-		return member.getPoint();
-	}
+
 	
 }
