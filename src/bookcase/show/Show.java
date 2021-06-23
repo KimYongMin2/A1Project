@@ -34,12 +34,13 @@ public interface Show {
     }
     
     default void showEditMyInfoMenu() {
-        System.out.println("--------------------------------------------------------");
-         System.out.println("1. 내 정보 수정하기 ");
-         System.out.println("2. 회원 탈퇴");
-         System.out.println("3. 내 정보 보기");
-         System.out.println("4. 종료");
-        System.out.println("--------------------------------------------------------");
+    	System.out.println("--------------------------------------------------------");
+    	System.out.println("1. 내가 대출 중인 도서 반납기한 조회하기");
+    	System.out.println("1. 내 정보 수정하기 ");
+    	System.out.println("2. 회원 탈퇴");
+    	System.out.println("3. 내 정보 보기");
+    	System.out.println("4. 종료");
+    	System.out.println("--------------------------------------------------------");
     }
 
     default void showStartMenu() {

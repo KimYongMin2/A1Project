@@ -1,8 +1,8 @@
 package bookcase;
 
-import bookcase.object.Member;
-import bookcase.show.Show;
-import bookcase.util.CommonFunction;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
 
 public class Start implements Show {
     public void startStart(){
