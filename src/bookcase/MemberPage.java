@@ -45,6 +45,7 @@ public class MemberPage {
                     break;
                 case 5:
                     // 내정보
+                	new MyInfoPage(member).MyInfoEditStrat();
                     break;
                 case 6:
                     // 종료

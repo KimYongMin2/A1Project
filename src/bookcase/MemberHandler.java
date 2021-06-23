@@ -274,7 +274,7 @@ public class MemberHandler {
 		}
 	}
 	
-	public void updateMember(Member member) {
+	public void updateMember(Member member) { //회원 정보 수정
 		try {
 			members = memberCrud.getMemberList(con);
 			System.out.println("=== 내 정보 수정을 시작합니다 ===");

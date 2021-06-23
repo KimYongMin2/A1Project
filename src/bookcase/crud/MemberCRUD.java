@@ -15,7 +15,7 @@ public class MemberCRUD {
 	}
 	
 	// 1. SELECT
-	public ArrayList<Member> getMemberList(Connection con) {
+	public static ArrayList<Member> getMemberList(Connection con) {
 		
 		ArrayList<Member> list = new ArrayList<Member>();
 		

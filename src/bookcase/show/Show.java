@@ -32,4 +32,12 @@ public interface Show {
         System.out.println("2. 종료");
         System.out.println("--------------------------------------------");
     }
+    
+    default void showEditMyInfoMenu() {
+    	 System.out.println("--------------------------------------------");
+         System.out.println("1. 내 정보 수정하기 ");
+         System.out.println("2. 회원 탈퇴");
+         System.out.println("3. 종료");
+         System.out.println("--------------------------------------------");
+    }
 }
