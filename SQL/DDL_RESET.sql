@@ -38,7 +38,7 @@ BPublisher varchar2(50) constraint BOOK_BPublisher_nn not null,
 BGenre varchar2(50) constraint BOOK_BGenre_nn not null,
 BPrice integer constraint BOOK_BPrice_nn not null,
 BUsing Varchar2(50),
-UAgeUsing Varchar2(50)
+BAgeUsing Varchar2(50)
 );
 
 Create Table Rental (
