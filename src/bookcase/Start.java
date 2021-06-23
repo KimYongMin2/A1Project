@@ -24,11 +24,13 @@ public class Start {
             switch (menuButton){
                 case 1 :
                     //로그인
-                    member = mh.login();
+                	if(mh.login() != null) {
+                		member = mh.login();
+                		new MemberPage(member).memberPageStart();
+                	}
+                	break;
                     // 완료시 멤버페이지 or 관리자페이지
                     // 일단 멤버페이지로 넘어감
-                    new MemberPage(member).memberPageStart();
-                    break;
                 case 2 :
                     //로그인
                     member = mh.login();
