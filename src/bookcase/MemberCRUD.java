@@ -49,7 +49,7 @@ public class MemberCRUD {
 		return list;
 	}
 
-	// 2. INSERT 메소드 : 반환타입: 반영 횟수
+	// 2. INSERT 메소드
 	Member insertMember(Connection con, Member member){
 		
 		int result = 0;
@@ -83,7 +83,7 @@ public class MemberCRUD {
 		return member;
 	}
 
-	// 3. UPDATE 메소드: 반환타입: 반영횟수
+	// 3. UPDATE 메소드
 	void updateMember(Connection con, Member member) {
 		
 		int result = 0;
@@ -116,7 +116,7 @@ public class MemberCRUD {
 		}
 	}
 	
-	// 4. DELETE 메소드: 반환타입: 반영횟수
+	// 4. DELETE 메소드
 	void deleteMember(Connection con, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
