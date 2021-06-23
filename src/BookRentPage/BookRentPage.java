@@ -51,9 +51,6 @@ public class BookRentPage implements Show {
                 case 1:
                     // 대여
                 	findBook();
-                	if (chk) {
-                		addUsingBook();
-                	}
                     break;
                 case 2:
                     // 종료
@@ -71,7 +68,6 @@ public class BookRentPage implements Show {
         // 책확인
     	chk = false;
         bookList = bookCrud.getBookList(con);
-    	while(!chk) {
 			System.out.println("============= 대여 페이지 입니다 ============");
 			System.out.println("대여하려는 책 이름을 작성해주세요 : ");
         	String bName = scanner.nextLine();
@@ -80,23 +76,22 @@ public class BookRentPage implements Show {
 	            if(bName.equals(bookList.get(i).getbName())) {
 	                temp = i;
 	                chk = true;
-	            }
-	            
-	        }		 
+                    book = bookList.get(temp);
+                }
+	        }
+
         	if(!chk) {
         		System.out.println("원하시는 책을 찾지 못했습니다.");
-        		break;
         	}
         	else { // chk = true
         		if(bookList.get(temp).getbUsing().equals("false")) {
-        			book = bookList.get(temp);
+        		    addUsingBook();
         		}
         		else { // bUsing = true
         			System.out.println("이미 대여중인 책입니다.");
         		}
         		
         	}
-    	}
     }
 
     public void addUsingBook() {
