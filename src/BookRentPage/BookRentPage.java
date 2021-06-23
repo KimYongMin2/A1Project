@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookRentPage implements Show {
+	
+	private boolean chk = false;
     private static Connection con = JDBCconnecting.connecting();
     private static BookCRUD bookCrud = BookCRUD.getInstance();
     private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
@@ -49,7 +51,9 @@ public class BookRentPage implements Show {
                 case 1:
                     // 대여
                 	findBook();
-                    addUsingBook();
+                	if (chk) {
+                		addUsingBook();
+                	}
                     break;
                 case 2:
                     // 종료
@@ -65,7 +69,7 @@ public class BookRentPage implements Show {
 
     public void findBook(){
         // 책확인
-    	boolean chk = false;
+    	chk = false;
         bookList = bookCrud.getBookList(con);
     	while(!chk) {
 			System.out.println("============= 대여 페이지 입니다 ============");
