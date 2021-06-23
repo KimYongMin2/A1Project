@@ -1,26 +1,23 @@
 package bookcase;
 
-import bookcase.crud.BookCRUD;
-import bookcase.crud.RentalCRUD;
-import bookcase.object.Book;
-import bookcase.object.Member;
-import bookcase.object.Using;
-import bookcase.show.Show;
-import bookcase.util.CommonFunction;
-import bookcase.util.JDBCconnecting;
-import bookcase.util.ScannerUtil;
-
 import java.sql.*;
 import java.util.*;
+
+import bookcase.crud.*;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
 
 public class ShowBookListPage implements Show {
 
 	private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud  = BookCRUD.getInstance();
 	private static RentalCRUD rentalCrud  = RentalCRUD.getInstance();
+	private static ReturnCRUD returnCrud = ReturnCRUD.getInstance();
 	
 	private static ArrayList<Book> books = new ArrayList<Book>();
 	private static ArrayList<Using> usings = new ArrayList<Using>();
+	private static ArrayList<Return> returns = new ArrayList<Return>();
 	private int menuButton = 0;
 	private Member member;
 
@@ -36,7 +33,7 @@ public class ShowBookListPage implements Show {
 				switch (menuButton) {
 					case 1:
 						// 내가 대여중인 도서 보기 (반납기한도)
-						showMyUsingBook();
+						showMyUsingBook(member);
 						break;
 					case 2:
 						// 별점랭킹 추천 조회
@@ -60,14 +57,14 @@ public class ShowBookListPage implements Show {
 		}
 	}
 
-	public void showMyUsingBook(){
-		books = rentalCrud.getMyRentalList(con, member);
-		if (books.isEmpty()) { // 수정 : 리스트 비어있는지 확인
+	public void showMyUsingBook(Member member){ //내가 대여한 도서 목록, 반납기한 보기
+		returns = returnCrud.getReturnList(con, member);
+		if (returns.isEmpty()) { // 수정 : 리스트 비어있는지 확인
 			System.out.println("아직 대여하신 도서가 한 권도 없습니다");
 		} else {
 			System.out.println("내가 대여중인 도서입니다");
-			for(Book book:books) {
-				System.out.println(book);
+			for(Return returnit : returns) {
+				System.out.println(returnit);
 			}
 		}
 	}
