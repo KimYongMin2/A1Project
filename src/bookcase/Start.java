@@ -28,9 +28,11 @@ public class Start implements Show {
                     case 2:
                         //로그인
                         member = mh.login();
+                        if (member != null) {
+                            new ManagerPage().bookManagerStart();
+                        }
                         // 완료시 멤버페이지 or 관리자페이지
                         // 일단 멤버페이지로 넘어감
-                        new ManagerPage().bookManagerStart();
                         break;
                     case 3:
                         //회원가입
