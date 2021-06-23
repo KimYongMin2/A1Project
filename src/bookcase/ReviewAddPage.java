@@ -84,41 +84,8 @@ public class ReviewAddPage implements Show {
 
 	public void setReviewComment() {// 리뷰입력
 		reviews = reviewCrud.getReviewList(con);
-		System.out.println("=====한줄평을 입력해주세요.=====");
-		rComment = ScannerUtil.getInputString();
-
-		boolean chk = true;
-		if (rComment.length() > 40) {
-			while (chk) {
-				System.out.println("[!]한줄평은 40자까지 입력 가능합니다.");
-				System.out.println("=====한줄평을 입력해주세요.=====");
-				rComment = ScannerUtil.getInputString();
-				if (rComment.length() <= 40) {
-					chk = false;
-					break;
-				}
-			}
-		}
-		System.out.println("한줄평이 입력되었습니다.");
-
-		System.out.println("=====별점을 입력해주세요.=====");
-		System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
-		rScore = ScannerUtil.getInputDouble();
-
-		boolean chk1 = true;
-		if (rScore > 5 || rScore < 0) {
-			while (chk1) {
-				System.out.println("[!]입력할 수 없는 별점입니다.");
-				System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
-				rScore = ScannerUtil.getInputDouble();
-				if (rScore <= 5) {
-					chk1 = false;
-					break;
-				}
-			}
-		}
-		System.out.println("별점이 입력되었습니다.");
-
+		setComment();
+		setScore();
 		/**
 		 * 리뷰 DB에 넣게 처리
 		 */
@@ -128,6 +95,48 @@ public class ReviewAddPage implements Show {
 						rScore, rComment));
 		System.out.println("작성 완료되었습니다!"); 
 
+	}
+
+	private void setScore() {
+		showScoreMenu();
+		rScore = ScannerUtil.getInputDouble();
+		checkScore();
+		System.out.println("별점이 입력되었습니다.");
+	}
+
+	private void checkScore() {
+		boolean chk1 = true;
+		if (rScore > 5 || rScore < 0) {
+			while (chk1) {
+				showScoreError();
+				rScore = ScannerUtil.getInputDouble();
+				if (rScore <= 5) {
+					chk1 = false;
+					break;
+				}
+			}
+		}
+	}
+
+	private void setComment() {
+		showCommentMenu();
+		rComment = ScannerUtil.getInputString();
+		checkComment();
+		System.out.println("한줄평이 입력되었습니다.");
+	}
+
+	private void checkComment() {
+		boolean chk = true;
+		if (rComment.length() > 40) {
+			while (chk) {
+				showCommentError();
+				rComment = ScannerUtil.getInputString();
+				if (rComment.length() <= 40) {
+					chk = false;
+					break;
+				}
+			}
+		}
 	}
 
 	public void findBook() {// 책확인
