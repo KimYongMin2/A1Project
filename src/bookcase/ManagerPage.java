@@ -27,7 +27,7 @@ public class ManagerPage implements Show {
         while (menuButton != 6) {
             try {
                 showBookManagerMenu();
-                CommonFunction.setMenuButton("메뉴를 선택해주세요 : ", menuButton);
+                menuButton = CommonFunction.setMenuButton("메뉴를 선택해주세요 : ", menuButton);
                 bookList = bookCrud.getBookList(con);
 
                 switch (menuButton) {
