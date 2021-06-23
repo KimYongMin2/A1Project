@@ -107,7 +107,7 @@ public class RentalCRUD {
 		try {
 			stmt = con.createStatement();
 			String sql = "SELECT * FROM BOOK B "
-					+ "WHERE NOT EXISTS (SELECT * FROM RENTAL R WHERE B.BOOKCODE = R.BOOKCODE);";
+					+ "WHERE NOT EXISTS (SELECT * FROM RENTAL R WHERE B.BOOKCODE = R.BOOKCODE)";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

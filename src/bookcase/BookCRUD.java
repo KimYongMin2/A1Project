@@ -66,9 +66,10 @@ public class BookCRUD {
 
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT * FROM BOOK B, "
-					+ "(SELECT * FROM REVIEW ORDER BY RSCORE) R "
-					+ "WHERE B.BOOKCODE = R.BOOKCODE AND ROWNUM <= 5;";
+			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, "
+					+ "B.BGENRE, B.BPRICE, B.BUSING, B.BAGEUSING "
+					+ "FROM BOOK B, (SELECT * FROM REVIEW ORDER BY RSCORE) R "
+					+ "WHERE B.BOOKCODE = R.BOOKCODE AND ROWNUM <= 5";
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()){
