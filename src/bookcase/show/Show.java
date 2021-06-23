@@ -25,4 +25,11 @@ public interface Show {
         System.out.println("2. 종료");
         System.out.println("--------------------------------------------");
     }
+
+    default void showBookReturnMenu() {
+        System.out.println("--------------------------------------------");
+        System.out.println("1. 도서 반납하기 ");
+        System.out.println("2. 종료");
+        System.out.println("--------------------------------------------");
+    }
 }
