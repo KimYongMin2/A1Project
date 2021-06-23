@@ -43,22 +43,26 @@ public class ReturnBookPage implements Show {
 
     public void BookReturnStart() {
         while (menuButton != 2) {
-            showBookReturnMenu();
+            try {
+                showBookReturnMenu();
 
-            System.out.print(" 메뉴를 선택해주세요 : ");
-            menuButton = Integer.parseInt(scanner.nextLine());
+                System.out.print(" 메뉴를 선택해주세요 : ");
+                menuButton = Integer.parseInt(scanner.nextLine());
 
-            switch (menuButton) {
-                case 1:
-                    // 반납
-                    findBook();
-                    break;
-                case 2:
-                    // 종료
-                    break;
-                default:
-                    System.out.println("잘못 입력하셨습니다");
-                    break;
+                switch (menuButton) {
+                    case 1:
+                        // 반납
+                        findBook();
+                        break;
+                    case 2:
+                        // 종료
+                        break;
+                    default:
+                        System.out.println("잘못 입력하셨습니다");
+                        break;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("숫자로 입력해주세요");
             }
         }
 

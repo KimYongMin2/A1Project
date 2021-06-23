@@ -20,25 +20,29 @@ public class MyInfoPage implements Show {
 	
 	void MyInfoEditStrat() {
 		while (menuButton != 4) {
-			showEditMyInfoMenu();
-            setMenuButton("메뉴를 선택해주세요");
+		    try {
+                showEditMyInfoMenu();
+                setMenuButton("메뉴를 선택해주세요");
 
-            switch (menuButton) {
-                case 1: //회원 정보 수정
-                    mh.updateMember(member);
-                    break;
-                case 2: //회원 탈퇴
-                	mh.leaveMember(member);
-                	System.out.println("안녕히가세요~");
-                    System.exit(0);
-                case 3: // 내 정보 확인하기
-                	mh.showMyInfo(member);
-                case 4:
-                    System.out.println("종료합니다");
-                    break;
-                default:
-                    System.out.println("잘못 입력하셨습니다");
-                    break;
+                switch (menuButton) {
+                    case 1: //회원 정보 수정
+                        mh.updateMember(member);
+                        break;
+                    case 2: //회원 탈퇴
+                        mh.leaveMember(member);
+                        System.out.println("안녕히가세요~");
+                        System.exit(0);
+                    case 3: // 내 정보 확인하기
+                        mh.showMyInfo(member);
+                    case 4:
+                        System.out.println("종료합니다");
+                        break;
+                    default:
+                        System.out.println("잘못 입력하셨습니다");
+                        break;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("숫자로 입력해주세요");
             }
         }
 	}

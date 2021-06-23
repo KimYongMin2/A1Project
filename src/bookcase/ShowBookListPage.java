@@ -28,36 +28,40 @@ public class ShowBookListPage {
 	}
 	public void showBookListStart() {
 		while (menuButton != 4) {
-			System.out.println("------------------------");
-			System.out.println("1. 내가 대여중인 도서 보기");
-			System.out.println("2. 별점랭킹 추천 조회");
-			System.out.println("3. 대여가능한 도서 보기");
-			System.out.println("4. 종료");
-			System.out.println("------------------------");
+			try {
+				System.out.println("------------------------");
+				System.out.println("1. 내가 대여중인 도서 보기");
+				System.out.println("2. 별점랭킹 추천 조회");
+				System.out.println("3. 대여가능한 도서 보기");
+				System.out.println("4. 종료");
+				System.out.println("------------------------");
 
-			System.out.print("해당하는 메뉴를 선택해주세요 : ");
-			menuButton = Integer.parseInt(scanner.nextLine());
+				System.out.print("해당하는 메뉴를 선택해주세요 : ");
+				menuButton = Integer.parseInt(scanner.nextLine());
 
-			switch (menuButton) {
-			case 1:
-				// 내가 대여중인 도서 보기 (반납기한도)
-				showMyUsingBook();
-				break;
-			case 2:
-				// 별점랭킹 추천 조회
-				showStarBook();
-				break;
-			case 3:
-				// 대여가능한 도서 조회
-				showCanUsingBook();
-				break;
-			case 4:
-				// 종료
-				System.out.println("종료합니다");
-				break;
-			default:
-				System.out.println("잘못입력하셨습니다");
-				break;
+				switch (menuButton) {
+					case 1:
+						// 내가 대여중인 도서 보기 (반납기한도)
+						showMyUsingBook();
+						break;
+					case 2:
+						// 별점랭킹 추천 조회
+						showStarBook();
+						break;
+					case 3:
+						// 대여가능한 도서 조회
+						showCanUsingBook();
+						break;
+					case 4:
+						// 종료
+						System.out.println("종료합니다");
+						break;
+					default:
+						System.out.println("잘못입력하셨습니다");
+						break;
+				}
+			}catch (NumberFormatException e){
+				System.out.println("숫자로 입력해주세요");
 			}
 		}
 	}

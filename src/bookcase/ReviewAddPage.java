@@ -76,7 +76,7 @@ public class ReviewAddPage {
 				}
 
 			}catch (NumberFormatException e){
-				System.out.println("숫자");
+				System.out.println("숫자로 입력해주세요");
 			}
 		}
 	}

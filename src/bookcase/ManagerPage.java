@@ -24,37 +24,41 @@ public class ManagerPage implements Show {
 
     public void bookManagerStart(){
         while (menuButton != 6) {
-            showBookManagerMenu();
-            setMenuButton("메뉴를 선택해주세요");
-            bookList = bookCrud.getBookList(con);
+            try {
+                showBookManagerMenu();
+                setMenuButton("메뉴를 선택해주세요");
+                bookList = bookCrud.getBookList(con);
 
-            switch (menuButton) {
-                case 1:
-                    // 추가
-                    addBook();
-                    break;
-                case 2:
-                    // 삭제
-                    deleteBook(bookList);
-                    break;
-                case 3:
-                    // 수정
-                    reBook(bookList);
-                    break;
-                case 4:
-                    // 전체 첵 리스트 조회
-                    showAllBookList(bookList);
-                    break;
-                case 5:
-                    // 대여중인 책 리스트 조회
-                    showUsingBookList();
-                    break;
-                case 6:
-                    System.out.println("종료합니다");
-                    break;
-                default:
-                    System.out.println("잘못 입력하셨습니다");
-                    break;
+                switch (menuButton) {
+                    case 1:
+                        // 추가
+                        addBook();
+                        break;
+                    case 2:
+                        // 삭제
+                        deleteBook(bookList);
+                        break;
+                    case 3:
+                        // 수정
+                        reBook(bookList);
+                        break;
+                    case 4:
+                        // 전체 첵 리스트 조회
+                        showAllBookList(bookList);
+                        break;
+                    case 5:
+                        // 대여중인 책 리스트 조회
+                        showUsingBookList();
+                        break;
+                    case 6:
+                        System.out.println("종료합니다");
+                        break;
+                    default:
+                        System.out.println("잘못 입력하셨습니다");
+                        break;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("숫자로 입력해주세요");
             }
         }
     }

@@ -46,22 +46,26 @@ public class BookRentPage implements Show {
 
     public void BookUsingStart() {
     	while (menuButton != 2) {
-            showBookUsingMenu();
+    	    try {
+                showBookUsingMenu();
 
-            System.out.print(" 메뉴를 선택해주세요 : ");
-            menuButton = Integer.parseInt(scanner.nextLine());
+                System.out.print(" 메뉴를 선택해주세요 : ");
+                menuButton = Integer.parseInt(scanner.nextLine());
 
-            switch (menuButton) {
-                case 1:
-                    // 대여
-                	findBook();
-                    break;
-                case 2:
-                    // 종료
-                    break;
-                default:
-                    System.out.println("잘못 입력하셨습니다");
-                    break;
+                switch (menuButton) {
+                    case 1:
+                        // 대여
+                        findBook();
+                        break;
+                    case 2:
+                        // 종료
+                        break;
+                    default:
+                        System.out.println("잘못 입력하셨습니다");
+                        break;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("숫자로 입력해주세요");
             }
         }
         
