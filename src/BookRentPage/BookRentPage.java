@@ -89,7 +89,6 @@ public class BookRentPage implements Show {
         		}
         		else { // bUsing = true
         			System.out.println("이미 대여중인 책입니다.");
-        			break;
         		}
         		
         	}
