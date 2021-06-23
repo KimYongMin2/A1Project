@@ -64,7 +64,7 @@ public class ReturnBook implements Show {
     public void findBook(){
         // 책확인
         chk = false;
-        bookList = rentalCrud.getRentalList(con);
+        bookList = bookCrud.getBookList(con);
         System.out.println("============= 대여 페이지 입니다 ============");
         System.out.println("반납하려는 책 이름을 작성해주세요 : ");
         String bName = scanner.nextLine();

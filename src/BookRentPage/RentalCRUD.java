@@ -168,7 +168,7 @@ public class RentalCRUD {
 		PreparedStatement pstmt = null;
 
 		try {
-			String deleteSql = "DELETE FROM RENTAL WHERE RENTALCODE = ?";
+			String deleteSql = "DELETE FROM RENTAL WHERE BOOKCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
 			pstmt.setInt(1, bCode);
 			result = pstmt.executeUpdate();
