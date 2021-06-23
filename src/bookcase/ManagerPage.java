@@ -134,7 +134,7 @@ public class ManagerPage implements Show {
         if (findCheck){
             showReBookMenu();
             setMenuButton("수정할 목록을 설정해주세요 : ");
-
+            
             switch (menuButton) {
                 case 1:
                     System.out.print("책 이름을 입력하세요 : ");
@@ -161,10 +161,17 @@ public class ManagerPage implements Show {
                     bPrice = ScannerUtil.getInputInteger();
                     bookList.get(temp).setbPrice(bPrice);
                     break;
-                case 6:
-                    System.out.print("연령제한 여부를 입력하세요 : ");
-                    bAgeUsing =ScannerUtil.getInputString();
-                    bookList.get(temp).setbAgeUsing(bAgeUsing);
+                case 6: 
+                    System.out.println("연령제한 여부를 입력하세요");
+                    System.out.println("(1) true (2) false : ");
+                    int chks = ScannerUtil.getInputInteger();
+
+                    if(chks == 1) {
+                    	bAgeUsing = "true";
+                    } else if(chks == 2) {
+                    	bAgeUsing = "false";
+                    }
+                    menuButton = 0;
                     break;
                 default:
                     System.out.print("잘못입력하셨습니다");
