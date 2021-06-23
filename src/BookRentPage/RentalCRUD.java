@@ -26,7 +26,7 @@ public class RentalCRUD {
 		return rentalCRUD;
 	}
 
-	// 1. SELECT
+	// 1. SELECT // 대여중인 모든 도서 가져오기: 관리자가 사용
 	public ArrayList<Book> getRentalList(Connection con) {
 
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -61,6 +61,73 @@ public class RentalCRUD {
 		return list;
 	}
 
+	// 1-2. SELECT // 내가 대여중인 모든 도서 가져오기
+	public ArrayList<Book> getMyRentalList(Connection con) {
+
+		ArrayList<Book> list = new ArrayList<Book>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT * FROM BOOK WHERE BOOKCODE = "
+					+ "(SELECT BOOKCODE FROM RENTAL WHERE MEMBERCODE = ?)";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery(sql);
+
+			while (rs.next()) {
+				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	// 1-3. 대여가능한 도서 목록 가져오기
+	public ArrayList<Book> getPossibleList(Connection con) {
+
+		ArrayList<Book> list = new ArrayList<Book>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT * FROM BOOK B "
+					+ "WHERE NOT EXISTS (SELECT * FROM RENTAL R WHERE B.BOOKCODE = R.BOOKCODE);";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery(sql);
+
+			while (rs.next()) {
+				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
 	// 2. INSERT 메소드
 	public Using insertRental(Connection con, Using using){

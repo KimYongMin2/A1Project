@@ -11,7 +11,7 @@ public class ReviewCRUD {
 	public static ReviewCRUD getInstance() {
 		return reviewCrud;
 	}
-	// 1. SELECT
+	// 1. SELECT //모든 리뷰 가져오기
 	ArrayList<Review> getReviewList(Connection con) {
 				
 		ArrayList<Review> list = new ArrayList<Review>();
@@ -46,7 +46,6 @@ public class ReviewCRUD {
 				
 		return list;
 	}
-	
 	
 	// 2. INSERT 메소드 : 반환타입: 반영 횟수
 		Review insertReview(Connection con, Review review){

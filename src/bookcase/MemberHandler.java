@@ -24,7 +24,6 @@ public class MemberHandler {
 	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
 	private static ArrayList<Member> members = new ArrayList<Member>();
 
-
 	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
 		while(true) {
 			if(string.equals("")) {
