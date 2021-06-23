@@ -81,7 +81,7 @@ public class ShowBookListPage {
 	public void showStarBook(){
 		books = bookCrud.getBestBookList(con);
 		System.out.println("별점랭킹입니다");
-		if(books == null) {
+		if(books.isEmpty()) {
 			System.out.println("아직 남겨진 별점이 하나도 없습니다");
 		} else {
 			System.out.println("별점 랭킹 상위 5가지 책입니다");
@@ -93,11 +93,12 @@ public class ShowBookListPage {
 
 	public void showCanUsingBook(){
 		books = rentalCrud.getPossibleList(con);
-		System.out.println("대여가능한 도서 목록을 출력합니다.");
-		if(books == null) {
+		
+		if(books.isEmpty()) {
 			System.out.println("대여가능한 도서가 하나도 없습니다");
 		} else {
 			for(Book book:books) {
+				System.out.println("대여가능한 도서 목록을 출력합니다.");
 				System.out.println(book);
 			}
 		}
