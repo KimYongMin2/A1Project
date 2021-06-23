@@ -47,7 +47,7 @@ public class Review {
 	public double getrScore() {
 		return rScore;
 	}
-	public void setrScore(double rScore) {
+	public void setrScore(int rScore) {
 		this.rScore = rScore;
 	}
 	public String getrComment() {
