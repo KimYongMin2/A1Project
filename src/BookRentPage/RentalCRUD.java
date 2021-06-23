@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import bookcase.Book;
+import bookcase.Member;
 import bookcase.Review;
 import bookcase.Using;
 
@@ -91,5 +92,31 @@ Using insertRental(Connection con, Using using){
 	return using;
 }
 
+
+//4. DELETE 메소드: 
+	void deleteRental(Connection con, Using using) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+			String deleteSql = "DELETE FROM RENTAL WHERE RENTALCODE = ?";
+			pstmt = con.prepareStatement(deleteSql);
+			pstmt.setInt(1, using.getRentalCode());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
+
+
 

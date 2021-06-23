@@ -85,6 +85,7 @@ public class BookRentPage implements Show {
         	}
         	else { // chk = true
         		if(bookList.get(temp).getbUsing().equals("false")) {
+        			System.out.println("대여완료.");
         		    addUsingBook();
         		}
         		else { // bUsing = true

@@ -23,9 +23,8 @@ public class ReturnBook {
         this.member = member;
     }
 
-    public void returnBookStart(){
-        // 책찾기
-
+    public void returnBookStart(){ // 책 찾기
+    	findBook();
     }
 
     public void findBook(){
@@ -42,8 +41,9 @@ public class ReturnBook {
                     check = true;
                 }
             }
+            
             if (!check) {
-                System.out.println("찾지못하였습니다.");
+                System.out.println("찾지 못하였습니다.");
             } else {
                 book = books.get(temp);
             }
