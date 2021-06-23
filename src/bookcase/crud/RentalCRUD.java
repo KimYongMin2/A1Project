@@ -1,12 +1,11 @@
-package BookRentPage;
+package bookcase.crud;
+
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Using;
 
 import java.sql.*;
 import java.util.*;
-
-import bookcase.Book;
-import bookcase.Member;
-import bookcase.Review;
-import bookcase.Using;
 
 /***
  * 

@@ -1,12 +1,16 @@
-package bookcase.memberpage;
+package bookcase;
+
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Using;
+import bookcase.util.JDBCconnecting;
 
 import java.sql.*;
 import java.util.*;
 
-import BookRentPage.*;
-import bookcase.*;
-
-public class ShowBookList {
+public class ShowBookListPage {
 
 	private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud  = BookCRUD.getInstance();
@@ -19,7 +23,7 @@ public class ShowBookList {
 	private int menuButton = 0;
 	private Member member;
 
-	public ShowBookList(Member member){
+	public ShowBookListPage(Member member){
 		this.member = member;
 	}
 	public void showBookListStart() {

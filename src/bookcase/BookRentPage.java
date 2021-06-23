@@ -1,8 +1,12 @@
-package BookRentPage;
+package bookcase;
 
-import bookcase.*;
-import bookcase.manager.BookManager;
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Using;
 import bookcase.show.Show;
+import bookcase.util.JDBCconnecting;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;

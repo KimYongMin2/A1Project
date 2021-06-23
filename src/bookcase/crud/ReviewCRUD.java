@@ -1,4 +1,6 @@
-package bookcase;
+package bookcase.crud;
+
+import bookcase.object.Review;
 
 import java.sql.*;
 import java.util.*;
@@ -12,7 +14,7 @@ public class ReviewCRUD {
 		return reviewCrud;
 	}
 	// 1. SELECT //모든 리뷰 가져오기
-	ArrayList<Review> getReviewList(Connection con) {
+	public ArrayList<Review> getReviewList(Connection con) {
 				
 		ArrayList<Review> list = new ArrayList<Review>();
 				
@@ -48,7 +50,7 @@ public class ReviewCRUD {
 	}
 	
 	// 2. INSERT 메소드 : 반환타입: 반영 횟수
-		Review insertReview(Connection con, Review review){
+	public Review insertReview(Connection con, Review review){
 			
 			int result = 0;
 			PreparedStatement pstmt = null;

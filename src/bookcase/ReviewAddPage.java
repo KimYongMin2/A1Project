@@ -1,9 +1,16 @@
 package bookcase;
 
+import bookcase.crud.BookCRUD;
+import bookcase.crud.ReviewCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Review;
+import bookcase.util.JDBCconnecting;
+
 import java.sql.*;
 import java.util.*;
 
-public class ReviewAdd {
+public class ReviewAddPage {
 	
 	//
 	private static Connection con = JDBCconnecting.connecting();
@@ -30,7 +37,7 @@ public class ReviewAdd {
 		this.reviews = reviewList;
 	}
 
-	public ReviewAdd(Member member) {
+	public ReviewAddPage(Member member) {
 		this.member = member;
 		menuButton = 0;
 	}

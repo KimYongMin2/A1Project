@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.object;
 
 public class Book {
     private int bookCode;

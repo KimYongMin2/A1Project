@@ -1,4 +1,6 @@
-package bookcase;
+package bookcase.crud;
+
+import bookcase.object.Book;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

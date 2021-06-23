@@ -1,4 +1,6 @@
-package bookcase;
+package bookcase.crud;
+
+import bookcase.object.Member;
 
 import java.sql.*;
 import java.util.*;
@@ -13,7 +15,7 @@ public class MemberCRUD {
 	}
 	
 	// 1. SELECT
-	ArrayList<Member> getMemberList(Connection con) {
+	public ArrayList<Member> getMemberList(Connection con) {
 		
 		ArrayList<Member> list = new ArrayList<Member>();
 		
@@ -49,7 +51,7 @@ public class MemberCRUD {
 	}
 
 	// 2. INSERT 메소드
-	Member insertMember(Connection con, Member member){
+	public Member insertMember(Connection con, Member member){
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -83,7 +85,7 @@ public class MemberCRUD {
 	}
 
 	// 3. UPDATE 메소드
-	void updateMember(Connection con, Member member) {
+	public void updateMember(Connection con, Member member) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -116,7 +118,7 @@ public class MemberCRUD {
 	}
 	
 	// 4. DELETE 메소드
-	void deleteMember(Connection con, Member member) {
+	public void deleteMember(Connection con, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 

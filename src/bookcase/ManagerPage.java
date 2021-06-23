@@ -1,13 +1,15 @@
-package bookcase.manager;
+package bookcase;
 
 import java.sql.*;
 import java.util.*;
 
-import bookcase.*;
+import bookcase.crud.BookCRUD;
+import bookcase.object.Book;
 import bookcase.show.Show;
+import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
-public class BookManager implements Show {
+public class ManagerPage implements Show {
 	
     private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud = BookCRUD.getInstance();

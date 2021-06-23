@@ -1,13 +1,17 @@
-package bookcase.memberpage;
+package bookcase;
 
 import java.sql.*;
 import java.util.*;
 
-import BookRentPage.*;
-import bookcase.*;
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Using;
 import bookcase.show.*;
+import bookcase.util.JDBCconnecting;
 
-public class ReturnBook implements Show {
+public class ReturnBookPage implements Show {
     private boolean chk = false;
     
     private static BookCRUD bookCrud = BookCRUD.getInstance();
@@ -33,7 +37,7 @@ public class ReturnBook implements Show {
         usingBooks = usingBooks;
     }
 
-    public ReturnBook(Member member){
+    public ReturnBookPage(Member member){
         this.member = member;
     }
 

@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.object;
 
 public class Member {
     private int memberCode;

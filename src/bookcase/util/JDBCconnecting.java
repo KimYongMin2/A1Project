@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.util;
 
 import java.sql.*;
 

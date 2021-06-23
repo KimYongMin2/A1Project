@@ -1,5 +1,10 @@
 package bookcase;
 
+import bookcase.crud.MemberCRUD;
+import bookcase.object.Member;
+import bookcase.util.JDBCconnecting;
+import bookcase.util.MyMadeException;
+
 import java.sql.*;
 import java.util.*;
 import java.util.regex.*;

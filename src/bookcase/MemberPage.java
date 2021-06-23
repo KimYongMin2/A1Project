@@ -1,8 +1,6 @@
-package bookcase.memberpage;
+package bookcase;
 
-import BookRentPage.BookRentPage;
-import bookcase.Member;
-import bookcase.ReviewAdd;
+import bookcase.object.Member;
 
 import java.util.Scanner;
 
@@ -31,7 +29,7 @@ public class MemberPage {
             switch (menuButton) {
                 case 1:
                     // 도서목록 검색
-                    new ShowBookList(member).showBookListStart();
+                    new ShowBookListPage(member).showBookListStart();
                     break;
                 case 2:
                     // 도서 대여
@@ -39,11 +37,11 @@ public class MemberPage {
                     break;
                 case 3:
                     // 도서 반납
-                    new ReturnBook(member).BookReturnStart();
+                    new ReturnBookPage(member).BookReturnStart();
                     break;
                 case 4:
                     // 리뷰작성
-                    new ReviewAdd(member).reviewAddStart();
+                    new ReviewAddPage(member).reviewAddStart();
                     break;
                 case 5:
                     // 내정보
