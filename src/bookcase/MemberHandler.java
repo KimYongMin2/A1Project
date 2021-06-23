@@ -1,6 +1,6 @@
 package bookcase;
 
-import bookcase.crud.MemberCRUD;
+import bookcase.crud.*;
 import bookcase.object.Member;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.MyMadeException;
@@ -27,6 +27,7 @@ public class MemberHandler {
 	
     private static Connection con = JDBCconnecting.connecting();
 	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
+	private static ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
 	private static ArrayList<Member> members = new ArrayList<Member>();
 
 	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
@@ -240,6 +241,7 @@ public class MemberHandler {
 	}
 
 	public void leaveMember(Member member) { //회원 탈퇴 method
+		//탈퇴 할 때 리뷰 테이블도 전부 삭제해 줘야 함
 		System.out.println("=== 안녕하세요 책꽂이입니다 ===");
 		System.out.println("=== 회원 탈퇴 도우미를 시작합니다 ===");
 		
@@ -251,22 +253,17 @@ public class MemberHandler {
 		 */
 		
 		try {
-			members = memberCrud.getMemberList(con);
-			for(int i = 0 ; i < members.size() ; i++) {
-				if(members.get(i).getMemberCode() == member.getMemberCode()) {
-					System.out.println("[정말 탈퇴하시겠습니까?]");
+			System.out.println("[정말 탈퇴하시겠습니까?]");
 					System.out.println("[1] yes");
 					System.out.println("[2] no");
 					int choose = Integer.parseInt(kb.next());
 					if(choose == 1) {
+						reviewCrud.deleteReview(con, member);
 						memberCrud.deleteMember(con, member);
 						System.out.println("[!] 탈퇴 되었습니다");
 					} else {
 						System.out.println("[!] 탈퇴를 취소했습니다");
 					}
-	
-				}
-			}
 		}  catch (NumberFormatException e) {
 			System.out.println("[경고] 잘못된 입력입니다.");
 		} catch (InputMismatchException e) {
@@ -379,6 +376,9 @@ public class MemberHandler {
 		}
 	}
 	
+	public void showMyInfo(Member member) { // 내 정보를 확인시켜주는 method
+		System.out.println(member);
+	}
 
 	
 }

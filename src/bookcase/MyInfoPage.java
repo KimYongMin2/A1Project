@@ -19,7 +19,7 @@ public class MyInfoPage implements Show {
     private int menuButton = 0;
 	
 	void MyInfoEditStrat() {
-		while (menuButton != 3) {
+		while (menuButton != 4) {
 			showEditMyInfoMenu();
             setMenuButton("메뉴를 선택해주세요");
 
@@ -29,8 +29,11 @@ public class MyInfoPage implements Show {
                     break;
                 case 2: //회원 탈퇴
                 	mh.leaveMember(member);
-                    break;
-                case 3:
+                	System.out.println("안녕히가세요~");
+                    System.exit(0);
+                case 3: // 내 정보 확인하기
+                	mh.showMyInfo(member);
+                case 4:
                     System.out.println("종료합니다");
                     break;
                 default:

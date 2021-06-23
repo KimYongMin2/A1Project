@@ -24,8 +24,8 @@ public class Start {
             switch (menuButton){
                 case 1 :
                     //로그인
-                	if(mh.login() != null) {
-                		member = mh.login();
+                	member = mh.login();
+                	if(member != null) {
                 		new MemberPage(member).memberPageStart();
                 	}
                 	break;
