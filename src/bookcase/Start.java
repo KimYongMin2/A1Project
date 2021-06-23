@@ -13,7 +13,7 @@ public class Start implements Show {
         while (menuButton != 5) {
             try {
                 showStartMenu();
-                CommonFunction.setMenuButton("해당사항을 입력해주세요 : ",menuButton);
+                menuButton = CommonFunction.setMenuButton("해당사항을 입력해주세요 : ",menuButton);
 
                 switch (menuButton) {
                     case 1:

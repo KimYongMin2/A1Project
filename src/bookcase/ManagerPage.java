@@ -134,7 +134,7 @@ public class ManagerPage implements Show {
         findBook(bookList, bName);
         if (findCheck){
             showReBookMenu();
-            CommonFunction.setMenuButton("수정할 목록을 설정해주세요 : ", menuButton);
+            menuButton = CommonFunction.setMenuButton("수정할 목록을 설정해주세요 : ", menuButton);
 
             switch (menuButton) {
                 case 1:

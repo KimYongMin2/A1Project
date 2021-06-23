@@ -15,7 +15,7 @@ public class MemberPage implements Show {
         while (menuButton != 6) {
             try {
                 showMemberPageMenu();
-                CommonFunction.setMenuButton("해당 메뉴를 선택해주세요 : ", menuButton);
+                menuButton = CommonFunction.setMenuButton("해당 메뉴를 선택해주세요 : ", menuButton);
 
                 switch (menuButton) {
                     case 1:

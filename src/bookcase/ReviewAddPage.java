@@ -48,7 +48,7 @@ public class ReviewAddPage implements Show {
 				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
 				showReviewAddMenu();
-				CommonFunction.setMenuButton("해당 메뉴를 선택해주세요", menuButton);
+				menuButton = CommonFunction.setMenuButton("해당 메뉴를 선택해주세요", menuButton);
 
 				switch (menuButton) {
 				case 1:
