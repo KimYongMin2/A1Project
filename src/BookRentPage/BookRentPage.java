@@ -79,7 +79,6 @@ public class BookRentPage implements Show {
                     book = bookList.get(temp);
                 }
 	        }
-
         	if(!chk) {
         		System.out.println("원하시는 책을 찾지 못했습니다.");
         	}

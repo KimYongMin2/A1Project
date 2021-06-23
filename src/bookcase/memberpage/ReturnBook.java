@@ -1,28 +1,31 @@
 package bookcase.memberpage;
 
-import BookRentPage.RentalCRUD;
-import bookcase.*;
-import bookcase.show.Show;
-
-import java.sql.Connection;
+import java.sql.*;
 import java.util.*;
+
+import BookRentPage.*;
+import bookcase.*;
+import bookcase.show.*;
 
 public class ReturnBook implements Show {
     private boolean chk = false;
+    
     private static BookCRUD bookCrud = BookCRUD.getInstance();
     private static Connection con = JDBCconnecting.connecting();
     private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
-    private static ArrayList<Book> bookList = new ArrayList<Book>();
-
-    static Scanner scanner = new Scanner(System.in);
+    
+    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private ArrayList<Using> usingBooks = new ArrayList<>();
+   
     private int menuButton = 0;
     private Member member;
     private Book book;
     private int temp = 0;
     private int bookcode=0;
-    private ArrayList<Using> usingBooks = new ArrayList<>();
 
-    public List<Using> getUsingBooks() {
+    static Scanner scanner = new Scanner(System.in);
+
+    public ArrayList<Using> getUsingBooks() {
         return usingBooks;
     }
 
@@ -70,7 +73,6 @@ public class ReturnBook implements Show {
             if(bName.equals(bookList.get(i).getbName())) {
                 temp = i;
                 chk = true;
-
             }
         }
         if(!chk) {
