@@ -379,6 +379,5 @@ public class MemberHandler {
 	public void showMyInfo(Member member) { // 내 정보를 확인시켜주는 method
 		System.out.println(member);
 	}
-
 	
 }
