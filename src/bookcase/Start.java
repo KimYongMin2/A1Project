@@ -4,8 +4,6 @@ import bookcase.object.Member;
 import bookcase.show.Show;
 import bookcase.util.CommonFunction;
 
-import java.util.Scanner;
-
 public class Start implements Show {
     public void startStart(){
         MemberHandler mh = new MemberHandler();
