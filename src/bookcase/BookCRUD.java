@@ -56,7 +56,7 @@ public class BookCRUD {
 			return list;
 		}
 
-		// 2. INSERT 메소드 : 반환타입: 반영 횟수
+		// 2. INSERT 메소드
 		public Book insertBook(Connection con, Book book){
 			
 			int result = 0;
@@ -126,7 +126,7 @@ public class BookCRUD {
 			}
 		}
 		
-		// 4. DELETE 메소드: 반환타입: 반영횟수
+		// 4. DELETE 메소드
 		public void deleteBook(Connection con, Book book) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -137,7 +137,7 @@ public class BookCRUD {
 				pstmt.setInt(1, book.getBookCode());
 				result = pstmt.executeUpdate();
 
-			} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
+			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				if(pstmt != null) {
