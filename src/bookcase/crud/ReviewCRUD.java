@@ -1,9 +1,9 @@
 package bookcase.crud;
 
-import bookcase.object.Review;
-
 import java.sql.*;
 import java.util.*;
+
+import bookcase.object.*;
 
 public class ReviewCRUD {
 	
@@ -49,7 +49,7 @@ public class ReviewCRUD {
 		return list;
 	}
 	
-	// 2. INSERT 메소드 : 반환타입: 반영 횟수
+	// 2. INSERT 메소드
 	public Review insertReview(Connection con, Review review){
 			
 			int result = 0;
@@ -80,6 +80,27 @@ public class ReviewCRUD {
 			}
 			return review;
 		}
-
+	// 3. DELETE // 탈퇴 할 때 작성자가 적은 모든 리뷰 날리기
+	public void deleteReview(Connection con, Member member) {
+		PreparedStatement pstmt = null;
+		try {
+			String deleteSql = "delete from review where membercode = ?";
+			pstmt = con.prepareStatement(deleteSql);
+			
+			pstmt.setInt(1,member.getMemberCode());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
 

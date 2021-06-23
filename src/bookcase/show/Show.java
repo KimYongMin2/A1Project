@@ -37,7 +37,8 @@ public interface Show {
     	 System.out.println("--------------------------------------------");
          System.out.println("1. 내 정보 수정하기 ");
          System.out.println("2. 회원 탈퇴");
-         System.out.println("3. 종료");
+         System.out.println("3. 내 정보 보기");
+         System.out.println("4. 종료");
          System.out.println("--------------------------------------------");
     }
 }
