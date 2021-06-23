@@ -23,8 +23,8 @@ public class ReviewAddPage implements Show {
 	private ArrayList<Book> books = new ArrayList<>();
 	//
 	
-	private String rComment; // 한줄평
 	private double rScore; // 별점
+	private String rComment; // 한줄평
 	private Member member;
 	private Book book;
 	private int temp;
@@ -48,62 +48,62 @@ public class ReviewAddPage implements Show {
 				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
 				showReviewAddMenu();
-				menuButton = CommonFunction.setMenuButton("해당 메뉴를 선택해주세요", menuButton);
+				menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
 
 				switch (menuButton) {
 				case 1:
 					findBook();
 					setReviewComment();
-					System.out.println("리뷰 작성이 완료되었습니다");
+					System.out.println("▶ 리뷰 작성이 완료되었습니다!"); 
+					System.out.println("=========================="); 
+					System.out.println();
 					break;
 				case 2:
-					System.out.println("리뷰 목록을 출력합니다");
+					System.out.println("▶ 작성된 리뷰 목록을 출력합니다");
 					for (int i = 0; i < reviews.size(); i++) {
 						System.out.println(reviews.get(i));
+						System.out.println();
+					} if (reviews != null) { // 작성된 리뷰가 존재하지 않을시 안내문 출력 추가 - 지원
+						System.out.println("[!] 작성된 리뷰가 존재하지 않습니다.");
 					}
 					break;
 				case 3:
-					System.out.println("전체 책 목록을 출력합니다");
+					System.out.println(">> 전체 도서 목록을 출력합니다");
+					System.out.println();
 					for (Book book : books) {
 						System.out.println(book);
 					}
 					break;
 				case 4:
-					System.out.println("종료합니다");
+					System.out.println("[!] 종료합니다");
 					break;
 				default:
-					System.out.println("잘못 입력하셨습니다");
+					System.out.println("error : 잘못된 입력입니다.");
 					break;
 				}
 
 			}catch (NumberFormatException e){
-				System.out.println("숫자로 입력해주세요");
+				System.out.println("error : 숫자로 입력해주세요.");
 			}
 		}
 	}
 
-	public void setReviewComment() {// 리뷰입력
+	public void setReviewComment() { // 리뷰입력
 		reviews = reviewCrud.getReviewList(con);
-		setComment();
 		setScore();
+		setComment();
+
 		/**
 		 * 리뷰 DB에 넣게 처리
 		 */
+	
 		reviewCrud.insertReview(con, new Review
 				(0, member.getMemberCode(), 
 						book.getBookCode(), 
 						rScore, rComment));
-		System.out.println("작성 완료되었습니다!"); 
 
 	}
 
-	private void setComment() {
-		showCommentMenu();
-		setStringToVariable("한줄평 : ", rComment);
-		checkComment();
-
-		System.out.println("한줄평이 입력되었습니다.");
-	}
 
 	private void setStringToVariable(String s, String v) {
 		System.out.print(s);
@@ -112,10 +112,10 @@ public class ReviewAddPage implements Show {
 
 	private void setScore() {
 		showScoreMenu();
-		System.out.print("평점 : ");
+		System.out.print("▶ 평점 : ");
 		rScore = ScannerUtil.getInputDouble();
 		checkScore();
-		System.out.println("별점이 입력되었습니다.");
+		System.out.println("[평점 입력 완료]");
 	}
 
 	private void checkScore() {
@@ -131,7 +131,19 @@ public class ReviewAddPage implements Show {
 			}
 		}
 	}
+	
+	
+	private void setComment() {
+		showCommentMenu();
+		System.out.print("▶ 한줄평 : ");
+		rComment = ScannerUtil.getInputString(); 
+// 		오류떠서 일단..스캐너유틸로 입력값 받는걸로 교체했어요 - 지원
+//		setStringToVariable("▶ 한줄평 : ", rComment); 
+		checkComment();
 
+		System.out.println("[한줄평 입력 완료]");
+	}
+	
 	private void checkComment() {
 		boolean chk = true;
 		if (rComment.length() > 40) {
@@ -154,7 +166,8 @@ public class ReviewAddPage implements Show {
 			for (Book book : books) {
 				System.out.println(book);
 			}
-			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
+			System.out.println("================================");
+			System.out.print(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
 			String bName = ScannerUtil.getInputString();
 			
 
@@ -165,7 +178,7 @@ public class ReviewAddPage implements Show {
 				}
 			}
 			if (!check) {
-				System.out.println("찾지못하였습니다.");
+				System.out.println("[!] 해당 도서를 찾을 수 없습니다.");
 			} else {
 				book = books.get(temp);
 			}

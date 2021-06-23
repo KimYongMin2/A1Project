@@ -15,11 +15,12 @@ public class MemberPage implements Show {
         while (menuButton != 6) {
             try {
                 showMemberPageMenu();
-                menuButton = CommonFunction.setMenuButton("해당 메뉴를 선택해주세요 : ", menuButton);
-
+                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
+                System.out.println();
+                
                 switch (menuButton) {
                     case 1:
-                        // 도서목록 검색
+                        // 도서 목록 검색
                         new ShowBookListPage(member).showBookListStart();
                         break;
                     case 2:
@@ -35,19 +36,19 @@ public class MemberPage implements Show {
                         new ReviewAddPage(member).reviewAddStart();
                         break;
                     case 5:
-                        // 내정보
+                        // 내 정보
                         new MyInfoPage(member).MyInfoEditStrat();
                         break;
                     case 6:
                         // 종료
-                        System.out.println("종료합니다");
+                    	System.out.println("[!] 종료합니다.");
                         break;
                     default:
-                        System.out.println("잘못입력하셨습니다");
+                    	System.out.println("error : 잘못된 입력입니다.");
                         break;
                 }
             }catch (NumberFormatException e){
-                System.out.println("숫자로 입력해주세요");
+            	System.out.println("error : 숫자로 입력해주세요.");
             }
         }
     }

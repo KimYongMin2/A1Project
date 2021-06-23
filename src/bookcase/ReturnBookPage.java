@@ -47,7 +47,7 @@ public class ReturnBookPage implements Show {
         while (menuButton != 2) {
             try {
                 showBookReturnMenu();
-                menuButton = CommonFunction.setMenuButton("해당사항을 선택해주세요", menuButton);
+                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택해주세요 : ", menuButton);
 
                 switch (menuButton) {
                     case 1:
@@ -58,11 +58,11 @@ public class ReturnBookPage implements Show {
                         // 종료
                         break;
                     default:
-                        System.out.println("잘못 입력하셨습니다");
+                        System.out.println("error : 잘못된 입력입니다.");
                         break;
                 }
             }catch (NumberFormatException e){
-                System.out.println("숫자로 입력해주세요");
+                System.out.println("error : 숫자로 입력해주세요.");
             }
         }
 
@@ -75,21 +75,21 @@ public class ReturnBookPage implements Show {
         bookList = rentalCrud.getMyRentalList(con, member);
         showReturnBookPage();
 
-        System.out.println("반납하려는 책 이름을 작성해주세요 : ");
+        System.out.print(">> 반납하실 도서명을 입력하세요 : ");
         bName = ScannerUtil.getInputString();
 
         findBook();
 
         if(!chk) {
-            System.out.println("원하시는 책을 찾지 못했습니다.");
+        	System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
         }
         else { // chk = true
             book = bookList.get(temp);
             if(book.getbUsing().equals("true")) {
                 deleteUsingBook();
-                System.out.println("반납이 완료되었습니다.");
+                System.out.println("▶ 반납이 완료되었습니다.\n");
             }else{
-                System.out.println("반납 불가능한 책입니다");
+                System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
             }
         }
     }

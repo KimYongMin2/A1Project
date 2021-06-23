@@ -63,4 +63,4 @@ public class Review {
 //회원코드 memberCode -member
 //도서코드 BookCode -Book
 //평점 RScore - reviewadd
-//한줄평 RCommet - reviewadd  
+//한줄평 RComment - reviewadd  

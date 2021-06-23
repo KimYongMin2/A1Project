@@ -13,26 +13,24 @@ public class Start implements Show {
         while (menuButton != 5) {
             try {
                 showStartMenu();
-                menuButton = CommonFunction.setMenuButton("해당사항을 입력해주세요 : ",menuButton);
+                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ",menuButton);
 
                 switch (menuButton) {
                     case 1:
-                        //로그인
+                        //회원 로그인
                         member = mh.login();
                         if (member != null) {
                             new MemberPage(member).memberPageStart();
                         }
                         break;
-                    // 완료시 멤버페이지 or 관리자페이지
-                    // 일단 멤버페이지로 넘어감
+                        // 완료시 멤버페이지
                     case 2:
-                        //로그인
-                        member = mh.login();
-                        if (member != null) {
-                            new ManagerPage().bookManagerStart();
+                        //관리자 로그인
+                        member = mh.managerlogin();
+                        if (mh.chk7 = true) {
+                        	new ManagerPage().bookManagerStart();
                         }
-                        // 완료시 멤버페이지 or 관리자페이지
-                        // 일단 멤버페이지로 넘어감
+                        // ID : admin / PW : admin 일 경우에만 관리자페이지 입장
                         break;
                     case 3:
                         //회원가입
@@ -44,11 +42,11 @@ public class Start implements Show {
                         break;
                     case 5:
                         //종료
-                        System.out.println("종료합니다");
+                        System.out.println("[!] 책꽂이 서비스를 종료합니다");
                         break;
                 }
             }catch (NumberFormatException e){
-                System.out.println("숫자로 입력해주세요");
+                System.out.println("error : 숫자로 입력해주세요");
             }
         }
     }

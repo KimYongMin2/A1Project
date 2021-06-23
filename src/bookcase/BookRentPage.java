@@ -48,7 +48,7 @@ public class BookRentPage implements Show {
     	    try {
                 showBookUsingMenu();
 
-                System.out.print(" 메뉴를 선택해주세요 : ");
+                System.out.print(">> 원하시는 메뉴를 선택하세요. : ");
                 menuButton = ScannerUtil.getInputInteger();
 
                 switch (menuButton) {
@@ -58,13 +58,14 @@ public class BookRentPage implements Show {
                         break;
                     case 2:
                         // 종료
+                    	System.out.println("[!] 전 단계로 돌아갑니다.");
                         break;
                     default:
-                        System.out.println("잘못 입력하셨습니다");
+                    	System.out.println("error : 잘못된 입력입니다.");
                         break;
                 }
             }catch (NumberFormatException e){
-                System.out.println("숫자로 입력해주세요");
+                System.out.println("error : 숫자로 입력해주세요");
             }
         }
         
@@ -78,7 +79,7 @@ public class BookRentPage implements Show {
 
         showRentalBookPage();
 
-        System.out.println("대여하려는 책 이름을 작성해주세요 : ");
+        System.out.println(">> 대여할 도서명을 입력해주세요 : ");
         bName = ScannerUtil.getInputString();
         	
         for(int i = 0; i < bookList.size(); i++) {
@@ -89,15 +90,15 @@ public class BookRentPage implements Show {
             }
         }
         if(!chk) {
-        	System.out.println("원하시는 책을 찾지 못했습니다.");
+        	System.out.println("[!] 해당 도서를 찾지 못하였습니다.");
         }
         else { // chk = true
         	if(bookList.get(temp).getbUsing().equals("false")) {
-        		System.out.println("대여가 완료되었습니다.");
+        		System.out.println("[!] 대여가 완료되었습니다.");
         	    addUsingBook();
         	}
         	else { // bUsing = true
-        		System.out.println("이미 대여중인 책입니다.");
+        		System.out.println("[!] 이미 대여중인 책입니다.");
         	}
 
         }

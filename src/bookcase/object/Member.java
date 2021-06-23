@@ -65,8 +65,13 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "Member [memberCode=" + memberCode + ", id=" + id + ", passWord=" + passWord + ", mName=" + mName
-				+ ", age=" + age + ", phoneNum=" + phoneNum + ", email=" + email + "]";
+		return "■■■■■■■■ 회원 정보 ■■■■■■■■" +
+				"\n▶ I    D : " + id +
+				"\n▶ P    W : " + passWord +
+				"\n▶ 이    름 : " + mName +
+				"\n▶ 나    이 : " + age +
+				"\n▶ 연 락 처 : " + phoneNum +
+				"\n▶ 이 메 일 : " + email;
 	}
 
 

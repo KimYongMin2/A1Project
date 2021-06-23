@@ -70,7 +70,7 @@ public class BookCRUD {
 			stmt = con.createStatement();
 			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, "
 					+ "B.BGENRE, B.BPRICE, B.BUSING, B.BAGEUSING "
-					+ "FROM BOOK B, (SELECT * FROM REVIEW ORDER BY RSCORE) R "
+					+ "FROM BOOK B, (SELECT * FROM REVIEW ORDER BY RSCORE DESC) R " // TOP5 랭킹 (order by) desc 추가 - 지원
 					+ "WHERE B.BOOKCODE = R.BOOKCODE AND ROWNUM <= 5";
 			rs = stmt.executeQuery(sql);
 
