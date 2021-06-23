@@ -99,13 +99,20 @@ public class ReviewAddPage implements Show {
 
 	private void setComment() {
 		showCommentMenu();
-		rComment = ScannerUtil.getInputString();
+		setStringToVariable("한줄평 : ", rComment);
 		checkComment();
+
 		System.out.println("한줄평이 입력되었습니다.");
+	}
+
+	private void setStringToVariable(String s, String v) {
+		System.out.print(s);
+		v = ScannerUtil.getInputString();
 	}
 
 	private void setScore() {
 		showScoreMenu();
+		System.out.print("평점 : ");
 		rScore = ScannerUtil.getInputDouble();
 		checkScore();
 		System.out.println("별점이 입력되었습니다.");
