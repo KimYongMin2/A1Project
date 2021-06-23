@@ -1,11 +1,10 @@
 package BookRentPage;
 
-import bookcase.Book;
-import bookcase.Member;
-import bookcase.Using;
+import bookcase.*;
 import bookcase.manager.BookManager;
 import bookcase.show.Show;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,11 +13,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookRentPage implements Show {
+    private static Connection con = JDBCconnecting.connecting();
+    private static BookCRUD bookCrud = BookCRUD.getInstance();
+    private static ArrayList<Book> bookList = new ArrayList<Book>();
+
     static Scanner scanner = new Scanner(System.in);
     private int menuButton = 0;
     private Member member;
     private Book book;
-    private List<Book> books = new ArrayList<>();
     private int temp = 0;
     private int bookcode=0;
     private List<Using> usingBooks = new ArrayList<>();
@@ -63,14 +65,14 @@ public class BookRentPage implements Show {
     public void findBook(){
         // 책확인
     	boolean chk = false;
-    	books = new BookManager().getBookList();
+        bookList = bookCrud.getBookList(con);
     	while(!chk) {
 			System.out.println("============= 대여 페이지 입니다 ============");
 			System.out.println("대여하려는 책 이름을 작성해주세요 : ");
         	String bName = scanner.nextLine();
         	
-        	for(int i = 0; i < books.size(); i++) {
-	            if(bName.equals(books.get(i).getbName())) {
+        	for(int i = 0; i < bookList.size(); i++) {
+	            if(bName.equals(bookList.get(i).getbName())) {
 	                temp = i;
 	                chk = true;
 	            }
@@ -81,8 +83,8 @@ public class BookRentPage implements Show {
         		break;
         	}
         	else {
-        		if(books.get(temp).getbUsing().equals("true")) {
-        			book = books.get(temp);
+        		if(bookList.get(temp).getbUsing().equals("true")) {
+        			book = bookList.get(temp);
         		}
         		else {
         			System.out.println("이미 대여중인 책입니다.");
@@ -91,7 +93,7 @@ public class BookRentPage implements Show {
         	}
     	}
     }
-    
+
     public void addUsingBook() {
     	// 대여리스트에 책 리스트 추가
     	// 대여 날짜 오늘로 설정

@@ -1,49 +1,39 @@
 package bookcase.util;
 
-import java.io.FilterInputStream;
-import java.io.FilterOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CloseUtil {
-    public static void close(ServerSocket ss){
-        if (ss != null){
+    public static void close(Statement statement){
+        if (statement != null){
             try {
-                ss.close();
-            } catch (IOException e) {
+                statement.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void close(Socket socket){
-        if (socket != null){
+    public static void close(ResultSet resultSet){
+        if (resultSet != null){
             try {
-                socket.close();
-            } catch (IOException e) {
+                resultSet.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void close(FilterInputStream filterInputStream){
-        if (filterInputStream != null){
+    public static void close(PreparedStatement preparedStatement){
+        if (preparedStatement != null){
             try {
-                filterInputStream.close();
-            } catch (IOException e) {
+                preparedStatement.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void close(FilterOutputStream filteroutputStream){
-        if (filteroutputStream != null){
-            try {
-                filteroutputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
