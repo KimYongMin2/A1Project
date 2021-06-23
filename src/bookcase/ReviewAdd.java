@@ -130,11 +130,12 @@ public class ReviewAdd {
 		books = bookCrud.getBookList(con);
 		boolean check = false;
 		while (!check) {
-			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
-			String bName = sc.nextLine();
 			for (Book book : books) {
 				System.out.println(book);
 			}
+			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
+			String bName = sc.nextLine();
+			
 
 			for (int i = 0; i < books.size(); i++) {
 				if (bName.equals(books.get(i).getbName())) {
