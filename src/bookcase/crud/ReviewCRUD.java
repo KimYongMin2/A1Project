@@ -28,7 +28,7 @@ public class ReviewCRUD {
 			
 			while(rs.next()){
 				list.add(new Review(rs.getInt(1), rs.getInt(2), rs.getInt(3),
-						rs.getDouble(4), rs.getString(5)));
+						rs.getInt(4), rs.getString(5)));
 			}
 					
 		} catch (SQLException e) {

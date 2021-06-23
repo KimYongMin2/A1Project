@@ -6,6 +6,7 @@ import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Review;
 import bookcase.util.JDBCconnecting;
+import bookcase.util.ScannerUtil;
 
 import java.sql.*;
 import java.util.*;
@@ -21,14 +22,11 @@ public class ReviewAddPage {
 	//
 	
 	private String rComment; // 한줄평
-	private double rScore; // 별점
+	private int rScore; // 별점
 	private Member member;
 	private Book book;
 	private int temp;
 	private int menuButton;
-	
-	private Scanner sc = new Scanner(System.in);
-
 	public List<Review> getReviewList() {
 		return reviews;
 	}
@@ -49,8 +47,7 @@ public class ReviewAddPage {
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
 				System.out.println("1. 리뷰입력    2. 리스트보기     3. 책목록    4. 종료");
 				System.out.print("해당 메뉴를 선택해주세요 : ");
-				String inputString = sc.nextLine();
-				menuButton = Integer.parseInt(inputString);
+				menuButton = ScannerUtil.getInputInteger();
 
 				switch (menuButton) {
 				case 1:
@@ -87,14 +84,14 @@ public class ReviewAddPage {
 	public void setReviewComment() {// 리뷰입력
 		reviews = reviewCrud.getReviewList(con);
 		System.out.println("=====한줄평을 입력해주세요.=====");
-		rComment = sc.nextLine();
+		rComment = ScannerUtil.getInputString();
 
 		boolean chk = true;
 		if (rComment.length() > 40) {
 			while (chk) {
 				System.out.println("[!]한줄평은 40자까지 입력 가능합니다.");
 				System.out.println("=====한줄평을 입력해주세요.=====");
-				rComment = sc.nextLine();
+				rComment = ScannerUtil.getInputString();
 				if (rComment.length() <= 40) {
 					chk = false;
 					break;
@@ -104,15 +101,15 @@ public class ReviewAddPage {
 		System.out.println("한줄평이 입력되었습니다.");
 
 		System.out.println("=====별점을 입력해주세요.=====");
-		System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
-		rScore = sc.nextDouble();
+		System.out.println("별점은 0 ~ 5 점 사이로 정수값 입력 가능합니다.");
+		rScore = ScannerUtil.getInputInteger();
 
 		boolean chk1 = true;
 		if (rScore > 5 || rScore < 0) {
 			while (chk1) {
 				System.out.println("[!]입력할 수 없는 별점입니다.");
-				System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
-				rScore = sc.nextDouble();
+				System.out.println("별점은 0 ~ 5 점으로 정수 값 입력 가능합니다.");
+				rScore = ScannerUtil.getInputInteger();
 				if (rScore <= 5) {
 					chk1 = false;
 					break;
@@ -141,7 +138,7 @@ public class ReviewAddPage {
 				System.out.println(book);
 			}
 			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
-			String bName = sc.nextLine();
+			String bName = ScannerUtil.getInputString();
 			
 
 			for (int i = 0; i < books.size(); i++) {
