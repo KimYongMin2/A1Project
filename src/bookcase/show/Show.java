@@ -41,4 +41,29 @@ public interface Show {
          System.out.println("4. 종료");
          System.out.println("--------------------------------------------");
     }
+
+    default void showStartMenu() {
+        System.out.println("--------------------------------------------");
+        System.out.println("1. 회원 로그인");
+        System.out.println("2. 관리자 로그인");
+        System.out.println("3. 회원가입");
+        System.out.println("4. 아이디찾기");
+        System.out.println("5. 종료");
+        System.out.println("--------------------------------------------");
+    }
+
+    default void showBookListPageMenu() {
+        System.out.println("--------------------------------------------");
+        System.out.println("1. 내가 대여중인 도서 보기");
+        System.out.println("2. 별점랭킹 추천 조회");
+        System.out.println("3. 대여가능한 도서 보기");
+        System.out.println("4. 종료");
+        System.out.println("--------------------------------------------");
+    }
+
+    default void showReviewAddMenu() {
+        System.out.println("--------------------------------------------");
+        System.out.println("1. 리뷰입력    2. 리스트보기     3. 책목록    4. 종료");
+        System.out.println("--------------------------------------------");
+    }
 }

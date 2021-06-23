@@ -1,10 +1,11 @@
 package bookcase;
 
 import bookcase.object.Member;
+import bookcase.show.Show;
 
 import java.util.Scanner;
 
-public class Start {
+public class Start implements Show {
     public void startStart(){
         MemberHandler mh = new MemberHandler();
         int menuButton = 0;
@@ -14,13 +15,7 @@ public class Start {
 
         while (menuButton != 5) {
             try {
-                System.out.println("----------------------------------------");
-                System.out.println("1. 회원 로그인");
-                System.out.println("2. 관리자 로그인");
-                System.out.println("3. 회원가입");
-                System.out.println("4. 아이디찾기");
-                System.out.println("5. 종료");
-                System.out.println("----------------------------------------");
+                showStartMenu();
                 System.out.print("해당 사항을 입력해주세요 : ");
                 menuButton = Integer.parseInt(scanner.nextLine());
 

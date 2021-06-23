@@ -4,6 +4,7 @@ import bookcase.crud.*;
 import bookcase.object.Member;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.MyMadeException;
+import bookcase.util.ScannerUtil;
 
 import java.sql.*;
 import java.util.*;
@@ -23,8 +24,6 @@ public class MemberHandler {
 	 * @author 민주
 	 */
 
-	Scanner kb = new Scanner(System.in);
-	
     private static Connection con = JDBCconnecting.connecting();
 	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
 	private static ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
@@ -34,7 +33,7 @@ public class MemberHandler {
 		while(true) {
 			if(string.equals("")) {
 				System.out.println("[!] 공란입니다. 다시 입력해주세요.");
-				string = kb.nextLine();
+				string = ScannerUtil.getInputString();
 				continue;
 			} else {
 				break;
@@ -52,7 +51,7 @@ public class MemberHandler {
 			// (1) ID 입력
 			System.out.println("[ID를 입력해주세요]");
 			System.out.println("[안내] ID는 영어, 숫자로만 입력해주세요");
-			/*입력*/String ID = kb.nextLine();
+			/*입력*/String ID = ScannerUtil.getInputString();
 			isEmpty(ID);
 			boolean chkId = Pattern.matches("^[a-zA-Z0-9]*$", ID);
 			if(!chkId) {
@@ -67,7 +66,7 @@ public class MemberHandler {
 						if(members.get(i).getId().equals(ID)) {
 							System.out.println("[!] 이미 존재하는 ID입니다.");
 							System.out.println("확인 후 다시 입력해주세요.");
-							/*입력*/ID = kb.nextLine();
+							/*입력*/ID = ScannerUtil.getInputString();
 							isEmpty(ID);
 						} else {
 							chk = false;
@@ -82,10 +81,10 @@ public class MemberHandler {
 			String password = null;
 			while(chk1) {
 				System.out.println("[비밀번호를 입력해주세요]");
-				/*입력*/password = kb.nextLine();
+				/*입력*/password = ScannerUtil.getInputString();
 				isEmpty(password);
 				System.out.println("[비밀 번호를 다시 한 번 입력해주세요]");
-				/*입력*/String rePassword = kb.nextLine();
+				/*입력*/String rePassword = ScannerUtil.getInputString();
 				isEmpty(rePassword);
 				if(!password.equals(rePassword)) {
 					System.out.println("[!] 비밀번호가 일치하지 않습니다");
@@ -97,7 +96,7 @@ public class MemberHandler {
 			
 			// (3) 이름 입력(정규식으로, 영어와 한글만 가능하게 처리)
 			System.out.println("[이름을 입력해주세요]");
-			/*입력*/String name = kb.nextLine();
+			/*입력*/String name = ScannerUtil.getInputString();
 			isEmpty(name);
 			boolean chk2 = Pattern.matches("^[a-zA-Z가-힣]*$", name);
 			if(!chk2) {
@@ -106,7 +105,7 @@ public class MemberHandler {
 			
 			// (4) 나이 입력
 			System.out.println("[나이를 입력해주세요]");
-			/*입력*/String ageString = kb.nextLine();
+			/*입력*/String ageString = ScannerUtil.getInputString();
 			isEmpty(ageString);
 			int age = Integer.parseInt(ageString);
 
@@ -114,7 +113,7 @@ public class MemberHandler {
 			// (5) 전화번호 입력(정규식으로, 형식을 맞춰 입력하게 처리)
 			System.out.println("[전화번호를 다음의 형식에 따라 입력해주세요]");
 			System.out.println("[형식] 010-9999-9999 [주의] - 까지 입력해주세요");
-			/*입력*/String phoneNum = kb.nextLine();
+			/*입력*/String phoneNum = ScannerUtil.getInputString();
 			isEmpty(phoneNum);
 			boolean chk4 = Pattern.matches("^([0-9]{3})(\\-)([0-9]{3,4})(\\-)([0-9]{3,4})$", phoneNum);
 			if(!chk4) {
@@ -126,7 +125,7 @@ public class MemberHandler {
 			System.out.println("[입력을 원치 않으시면 그냥 엔터를 눌러주세요]");
 			String email = null;
 			
-			/*입력*/String inputemail = kb.nextLine(); //이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
+			/*입력*/String inputemail = ScannerUtil.getInputString();//이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
 			if(inputemail.equals("")) { //공란은 입력하면, email에는 null
 			} else {
 				boolean chk5 = true;
@@ -137,7 +136,7 @@ public class MemberHandler {
 						chk5 = false;}
 					else {
 						System.out.println("[!] 이메일 형식에 부합하지 않습니다.");
-						/*입력*/inputemail = kb.nextLine();
+						/*입력*/inputemail = ScannerUtil.getInputString();
 					}	
 				}
 			}
@@ -165,14 +164,14 @@ public class MemberHandler {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
 				System.out.println("[ID를 입력해주세요]");
-				/*입력*/String ID = kb.nextLine();
+				/*입력*/String ID = ScannerUtil.getInputString();
 				isEmpty(ID);
 				boolean chk = true;
 				for(int i = 0 ; i < members.size() ; i++ ) {
 					while(chk) {
 						if(members.get(i) != null && ID.equals(members.get(i).getId())) { //일치하는 ID가 있으면 비밀번호를 받는다
 							System.out.println("[비밀번호를 입력해주세요]");
-							/*입력*/String password = kb.nextLine();
+							/*입력*/String password = ScannerUtil.getInputString();
 							isEmpty(password);
 							if(members.get(i).getPassWord().equals(password)) { //해당 ID와 비밀번호가 일치하는 지 확인
 								System.out.println("[!] 로그인 되었습니다.");
@@ -213,10 +212,10 @@ public class MemberHandler {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
 				System.out.println("=== 찾으시려는 계정의 계정주 명을 입력해주세요 ===");
-				/*입력*/String name = kb.nextLine();
+				/*입력*/String name = ScannerUtil.getInputString();
 				isEmpty(name);
 				System.out.println("=== 찾으시려는 계정의 계정주 전화번호를 입력해주세요 ===");
-				/*입력*/String phoneNum = kb.nextLine();
+				/*입력*/String phoneNum = ScannerUtil.getInputString();
 				isEmpty(phoneNum);
 				for(int i = 0 ; i < members.size() ; i++) {
 					if(members.get(i).getmName().equals(name) && 
@@ -256,7 +255,7 @@ public class MemberHandler {
 			System.out.println("[정말 탈퇴하시겠습니까?]");
 					System.out.println("[1] yes");
 					System.out.println("[2] no");
-					int choose = Integer.parseInt(kb.next());
+					int choose = ScannerUtil.getInputInteger();
 					if(choose == 1) {
 						reviewCrud.deleteReview(con, member);
 						memberCrud.deleteMember(con, member);
@@ -280,13 +279,13 @@ public class MemberHandler {
 			System.out.println("4. 나이       5. 전화번호      6. 이메일");
 			System.out.println("--------------------------------------------");
 			System.out.println("수정할 메뉴를 입력해주세요 : ");
-			int menuButton = Integer.parseInt(kb.nextLine());
+			int menuButton = ScannerUtil.getInputInteger();
 
 			switch (menuButton) {
 			case 1:
 				System.out.print("새로운 ID를 입력해주세요. : ");
 				System.out.println("[안내] ID는 영어, 숫자로만 입력해주세요");
-				String newID = kb.nextLine();
+				String newID = ScannerUtil.getInputString();
 				isEmpty(newID);
 				boolean chkId = Pattern.matches("^[a-zA-Z0-9]*$", newID);
 				if(!chkId) {
@@ -299,7 +298,7 @@ public class MemberHandler {
 							if(members.get(i).getId().equals(newID)) {
 								System.out.println("[!] 이미 존재하는 ID입니다.");
 								System.out.println("확인 후 다시 입력해주세요.");
-								newID = kb.nextLine();
+								newID = ScannerUtil.getInputString();
 								isEmpty(newID);
 							} else {
 								chk = false;
@@ -315,10 +314,10 @@ public class MemberHandler {
 				String newPassword = null;
 				while(chk1) {
 					System.out.print("새로운 비밀번호를 입력하세요 : ");
-					newPassword = kb.nextLine();
+					newPassword = ScannerUtil.getInputString();
 					isEmpty(newPassword);
 					System.out.println("비밀 번호 확인을 위해 한번 더 입력해주세요 : ");
-					String rePassword = kb.nextLine();
+					String rePassword = ScannerUtil.getInputString();
 					isEmpty(rePassword);
 					if(!newPassword.equals(rePassword)) {
 						System.out.println("[!] 비밀번호가 일치하지 않습니다");
@@ -331,7 +330,7 @@ public class MemberHandler {
 				break;
 			case 3:
 				System.out.print("새로운 이름을 입력하세요 : ");
-				String newMName = kb.nextLine();
+				String newMName = ScannerUtil.getInputString();
 				isEmpty(newMName);
 				boolean chk2 = Pattern.matches("^[a-zA-Z가-힣]*$", newMName);
 				if(!chk2) {
@@ -341,13 +340,13 @@ public class MemberHandler {
 				break;
 			case 4:
 				System.out.print("새로운 나이를 입력하세요 : ");
-				int newAge = Integer.parseInt(kb.nextLine());
+				int newAge = ScannerUtil.getInputInteger();
 				member.setAge(newAge);
 				break;
 			case 5:
 				System.out.print("새로운 전화번호를 입력하세요 : ");
 				System.out.println("[형식] 010-9999-9999 [주의] - 까지 입력해주세요");
-				String newPhoneNum = kb.nextLine();
+				String newPhoneNum = ScannerUtil.getInputString();
 				isEmpty(newPhoneNum);
 				boolean chk4 = Pattern.matches("^([0-9]{3})(\\-)([0-9]{3,4})(\\-)([0-9]{3,4})$", newPhoneNum);
 				if(!chk4) {
@@ -357,7 +356,7 @@ public class MemberHandler {
 				break;
 			case 6:
 				System.out.print("새로운 이메일을 입력하세요 : ");
-				String newEmail = kb.nextLine();
+				String newEmail = ScannerUtil.getInputString();
 				boolean chk5 = Pattern.matches("^([a-zA-Z0-9\\_\\+\\.\\-]+)(\\@)([a-z]*)(\\.?)([a-z]*)(\\.?)([a-z]*)$", newEmail);
 				if(!chk5) {
 					throw new MyMadeException("[!] 이메일 형식에 부합하지 않습니다");

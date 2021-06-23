@@ -5,12 +5,14 @@ import bookcase.crud.RentalCRUD;
 import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Using;
+import bookcase.show.Show;
 import bookcase.util.JDBCconnecting;
+import bookcase.util.ScannerUtil;
 
 import java.sql.*;
 import java.util.*;
 
-public class ShowBookListPage {
+public class ShowBookListPage implements Show {
 
 	private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud  = BookCRUD.getInstance();
@@ -18,8 +20,6 @@ public class ShowBookListPage {
 	
 	private static ArrayList<Book> books = new ArrayList<Book>();
 	private static ArrayList<Using> usings = new ArrayList<Using>();
-
-	static Scanner scanner = new Scanner(System.in);
 	private int menuButton = 0;
 	private Member member;
 
@@ -29,15 +29,10 @@ public class ShowBookListPage {
 	public void showBookListStart() {
 		while (menuButton != 4) {
 			try {
-				System.out.println("------------------------");
-				System.out.println("1. 내가 대여중인 도서 보기");
-				System.out.println("2. 별점랭킹 추천 조회");
-				System.out.println("3. 대여가능한 도서 보기");
-				System.out.println("4. 종료");
-				System.out.println("------------------------");
+				showBookListPageMenu();
 
-				System.out.print("해당하는 메뉴를 선택해주세요 : ");
-				menuButton = Integer.parseInt(scanner.nextLine());
+				System.out.print("해당사항을 선택해주세요 : ");
+				menuButton = ScannerUtil.getInputInteger();
 
 				switch (menuButton) {
 					case 1:

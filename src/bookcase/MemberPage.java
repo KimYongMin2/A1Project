@@ -1,11 +1,10 @@
 package bookcase;
 
 import bookcase.object.Member;
+import bookcase.util.ScannerUtil;
 
-import java.util.Scanner;
 
 public class MemberPage {
-    static Scanner scanner = new Scanner(System.in);
     private int menuButton = 0;
     private Member member;
     public MemberPage(Member member){
@@ -25,7 +24,7 @@ public class MemberPage {
                 System.out.println("--------------------------------------");
 
                 System.out.print("해당 메뉴를 선택해주세요 : ");
-                menuButton = Integer.parseInt(scanner.nextLine());
+                menuButton = ScannerUtil.getInputInteger();
 
                 switch (menuButton) {
                     case 1:

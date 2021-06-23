@@ -7,6 +7,7 @@ import bookcase.object.Member;
 import bookcase.object.Using;
 import bookcase.show.Show;
 import bookcase.util.JDBCconnecting;
+import bookcase.util.ScannerUtil;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class BookRentPage implements Show {
 	
@@ -23,8 +23,6 @@ public class BookRentPage implements Show {
     private static BookCRUD bookCrud = BookCRUD.getInstance();
     private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
     private static ArrayList<Book> bookList = new ArrayList<Book>();
-
-    static Scanner scanner = new Scanner(System.in);
     private int menuButton = 0;
     private Member member;
     private Book book;
@@ -50,7 +48,7 @@ public class BookRentPage implements Show {
                 showBookUsingMenu();
 
                 System.out.print(" 메뉴를 선택해주세요 : ");
-                menuButton = Integer.parseInt(scanner.nextLine());
+                menuButton = ScannerUtil.getInputInteger();
 
                 switch (menuButton) {
                     case 1:
@@ -78,7 +76,7 @@ public class BookRentPage implements Show {
         bookList = bookCrud.getBookList(con);
 			System.out.println("============= 대여 페이지 입니다 ============");
 			System.out.println("대여하려는 책 이름을 작성해주세요 : ");
-        	String bName = scanner.nextLine();
+        	String bName = ScannerUtil.getInputString();
         	
         	for(int i = 0; i < bookList.size(); i++) {
 	            if(bName.equals(bookList.get(i).getbName())) {

@@ -10,6 +10,7 @@ import bookcase.object.Member;
 import bookcase.object.Using;
 import bookcase.show.*;
 import bookcase.util.JDBCconnecting;
+import bookcase.util.ScannerUtil;
 
 public class ReturnBookPage implements Show {
     private boolean chk = false;
@@ -26,8 +27,6 @@ public class ReturnBookPage implements Show {
     private Book book;
     private int temp = 0;
     private int bookcode=0;
-
-    static Scanner scanner = new Scanner(System.in);
 
     public ArrayList<Using> getUsingBooks() {
         return usingBooks;
@@ -46,8 +45,8 @@ public class ReturnBookPage implements Show {
             try {
                 showBookReturnMenu();
 
-                System.out.print(" 메뉴를 선택해주세요 : ");
-                menuButton = Integer.parseInt(scanner.nextLine());
+                System.out.print(" 해당사항을 선택해주세요 : ");
+                menuButton = ScannerUtil.getInputInteger();
 
                 switch (menuButton) {
                     case 1:
@@ -75,7 +74,7 @@ public class ReturnBookPage implements Show {
         bookList = bookCrud.getBookList(con);
         System.out.println("============= 반납 페이지 입니다 ============");
         System.out.println("반납하려는 책 이름을 작성해주세요 : ");
-        String bName = scanner.nextLine();
+        String bName = ScannerUtil.getInputString();
 
         for(int i = 0; i < bookList.size(); i++) {
             if(bName.equals(bookList.get(i).getbName())) {

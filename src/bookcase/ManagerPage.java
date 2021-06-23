@@ -82,7 +82,7 @@ public class ManagerPage implements Show {
         String bUsing = "false";
 
         System.out.println("연령제한이 있습니까?");
-        System.out.print("(1) 네 (2) 아니오");
+        System.out.print("(1) 네 (2) 아니오 : ");
         int chks = ScannerUtil.getInputInteger();
 
         if(chks == 1) {

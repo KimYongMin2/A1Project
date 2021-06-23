@@ -5,13 +5,14 @@ import bookcase.crud.ReviewCRUD;
 import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Review;
+import bookcase.show.Show;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
 import java.sql.*;
 import java.util.*;
 
-public class ReviewAddPage {
+public class ReviewAddPage implements Show {
 	
 	//
 	private static Connection con = JDBCconnecting.connecting();
@@ -45,7 +46,7 @@ public class ReviewAddPage {
 			try {
 				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
-				System.out.println("1. 리뷰입력    2. 리스트보기     3. 책목록    4. 종료");
+				showReviewAddMenu();
 				System.out.print("해당 메뉴를 선택해주세요 : ");
 				menuButton = ScannerUtil.getInputInteger();
 
