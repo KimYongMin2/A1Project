@@ -4,7 +4,7 @@ public class Review {
 	private int reviewCode;
 	private int memberCode;
 	private int bookCode;
-	private int rScore;
+	private double rScore;
 	private String rComment;
 
 	@Override
@@ -18,7 +18,7 @@ public class Review {
 				'}';
 	}
 
-	public Review(int reviewCode, int memberCode, int bookCode, int rScore, String rComment) {
+	public Review(int reviewCode, int memberCode, int bookCode, double rScore, String rComment) {
 		this.reviewCode = reviewCode;
 		this.memberCode = memberCode;
 		this.bookCode = bookCode;

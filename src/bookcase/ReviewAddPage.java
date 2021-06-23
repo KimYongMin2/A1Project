@@ -22,7 +22,7 @@ public class ReviewAddPage {
 	//
 	
 	private String rComment; // 한줄평
-	private int rScore; // 별점
+	private double rScore; // 별점
 	private Member member;
 	private Book book;
 	private int temp;
@@ -101,15 +101,15 @@ public class ReviewAddPage {
 		System.out.println("한줄평이 입력되었습니다.");
 
 		System.out.println("=====별점을 입력해주세요.=====");
-		System.out.println("별점은 0 ~ 5 점 사이로 정수값 입력 가능합니다.");
-		rScore = ScannerUtil.getInputInteger();
+		System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
+		rScore = ScannerUtil.getInputDouble();
 
 		boolean chk1 = true;
 		if (rScore > 5 || rScore < 0) {
 			while (chk1) {
 				System.out.println("[!]입력할 수 없는 별점입니다.");
-				System.out.println("별점은 0 ~ 5 점으로 정수 값 입력 가능합니다.");
-				rScore = ScannerUtil.getInputInteger();
+				System.out.println("별점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
+				rScore = ScannerUtil.getInputDouble();
 				if (rScore <= 5) {
 					chk1 = false;
 					break;
