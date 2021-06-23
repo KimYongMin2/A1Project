@@ -57,11 +57,6 @@ public class BookManager implements Show {
         }
     }
 
-
-
-
-
-
     public void addBook(){
         System.out.print("책 이름을 입력해주세요 : ");
         bName = ScannerUtil.getInputString();
@@ -213,9 +208,10 @@ public class BookManager implements Show {
             }
         }
     }
-    public ArrayList<Book> getBookList() {
-        return bookList;
-    }
+    
+//    public ArrayList<Book> getBookList() {
+//        return bookList;
+//    }
 
     private void setMenuButton(String s) {
         System.out.print(s);

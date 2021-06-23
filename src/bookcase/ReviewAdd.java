@@ -3,25 +3,24 @@ package bookcase;
 import java.sql.*;
 import java.util.*;
 
-import bookcase.manager.*;
-
 public class ReviewAdd {
 	
 	//
 	private static Connection con = JDBCconnecting.connecting();
 	private static ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
-	private static ArrayList<Review> reviews = new ArrayList<Review>();
+	private static BookCRUD bookCrud = BookCRUD.getInstance();
+	private ArrayList<Review> reviews = new ArrayList<Review>();
+	private ArrayList<Book> books = new ArrayList<>();
 	//
 	
 	private String rComment; // 한줄평
 	private double rScore; // 별점
 	private Member member;
 	private Book book;
-	private List<Book> books = new ArrayList<>();
 	private int temp;
-	private Review review;
-	private Scanner sc = new Scanner(System.in);
 	private int menuButton;
+	
+	private Scanner sc = new Scanner(System.in);
 
 	public List<Review> getReviewList() {
 		return reviews;
@@ -36,43 +35,40 @@ public class ReviewAdd {
 		menuButton = 0;
 	}
 
-	// ArrayList<String> reviewList = new ArrayList ;
-	// ArrayList<>(Arrays.asList(Member.getmemberCode, Book.getbookCode, RComment,
-
-
 	public void reviewAddStart() {
 		while (menuButton != 4) {
 			try {
-				reviews = reviewCrud.getReviewList(con);
+				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
+				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
 				System.out.println("1. 리뷰입력    2. 리스트보기     3. 책목록    4. 종료");
 				System.out.print("해당 메뉴를 선택해주세요 : ");
 				String inputString = sc.nextLine();
 				menuButton = Integer.parseInt(inputString);
 
 				switch (menuButton) {
-					case 1:
-						findBook();
-						setReviewComent();
-						
-						System.out.println("리뷰생성");
-						break;
-					case 2:
-						for (int i = 0; i < reviewList.size(); i++) {
-							System.out.println(reviewList.get(i));
-						}
-						break;
-					case 3:
-						books = new BookManager().getBookList();
-						for (Book book1 : books) {
-							System.out.println(book1);
-						}
-						break;
-					case 4:
-						System.out.println("종료합니다");
-						break;
-					default:
-						System.out.println("잘못 입력하셨습니다");
-						break;
+				case 1:
+					findBook();
+					setReviewComment();
+					System.out.println("리뷰 작성이 완료되었습니다");
+					break;
+				case 2:
+					System.out.println("리뷰 목록을 출력합니다");
+					for (int i = 0; i < reviews.size(); i++) {
+						System.out.println(reviews.get(i));
+					}
+					break;
+				case 3:
+					System.out.println("전체 책 목록을 출력합니다");
+					for (Book book : books) {
+						System.out.println(book);
+					}
+					break;
+				case 4:
+					System.out.println("종료합니다");
+					break;
+				default:
+					System.out.println("잘못 입력하셨습니다");
+					break;
 				}
 
 			}catch (NumberFormatException e){
@@ -81,7 +77,7 @@ public class ReviewAdd {
 		}
 	}
 
-	public void setReviewComent(Member member, Book book) {// 리뷰입력
+	public void setReviewComment() {// 리뷰입력
 		reviews = reviewCrud.getReviewList(con);
 		System.out.println("=====한줄평을 입력해주세요.=====");
 		rComment = sc.nextLine();
@@ -117,25 +113,28 @@ public class ReviewAdd {
 			}
 		}
 		System.out.println("별점이 입력되었습니다.");
-		
+
 		/**
 		 * 리뷰 DB에 넣게 처리
 		 */
 		reviewCrud.insertReview(con, new Review
 				(0, member.getMemberCode(), 
-					book.getBookCode(), 
-					rScore, rComment));
-		System.out.println("작성 완료되었습니다!");
-		
+						book.getBookCode(), 
+						rScore, rComment));
+		System.out.println("작성 완료되었습니다!"); 
+
 	}
 
 	public void findBook() {// 책확인
 		reviews = reviewCrud.getReviewList(con);
+		books = bookCrud.getBookList(con);
 		boolean check = false;
 		while (!check) {
 			System.out.print("리뷰하려는 책 이름을 작성해주세요 : ");
 			String bName = sc.nextLine();
-			books = new BookManager().getBookList();
+			for (Book book : books) {
+				System.out.println(book);
+			}
 
 			for (int i = 0; i < books.size(); i++) {
 				if (bName.equals(books.get(i).getbName())) {
