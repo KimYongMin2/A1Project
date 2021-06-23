@@ -62,7 +62,7 @@ public class RentalCRUD {
 	}
 
 	// 1-2. SELECT // 내가 대여중인 모든 도서 가져오기
-	public ArrayList<Book> getMyRentalList(Connection con) {
+	public ArrayList<Book> getMyRentalList(Connection con, Member member) {
 
 		ArrayList<Book> list = new ArrayList<Book>();
 
@@ -73,6 +73,7 @@ public class RentalCRUD {
 			String sql = "SELECT * FROM BOOK WHERE BOOKCODE = "
 					+ "(SELECT BOOKCODE FROM RENTAL WHERE MEMBERCODE = ?)";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, member.getMemberCode());
 			rs = pstmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -100,14 +101,14 @@ public class RentalCRUD {
 
 		ArrayList<Book> list = new ArrayList<Book>();
 
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
+			stmt = con.createStatement();
 			String sql = "SELECT * FROM BOOK B "
 					+ "WHERE NOT EXISTS (SELECT * FROM RENTAL R WHERE B.BOOKCODE = R.BOOKCODE);";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
@@ -116,8 +117,8 @@ public class RentalCRUD {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null) {
-					pstmt.close();
+				if (stmt != null) {
+					stmt.close();
 				}
 				if (rs != null) {
 					rs.close();
