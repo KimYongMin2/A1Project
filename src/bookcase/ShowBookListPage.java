@@ -68,7 +68,7 @@ public class ShowBookListPage {
 
 	public void showMyUsingBook(){
 		books = rentalCrud.getMyRentalList(con, member);
-		if (books == null) {
+		if (books.isEmpty()) { // 수정 : 리스트 비어있는지 확인
 			System.out.println("아직 대여하신 도서가 한 권도 없습니다");
 		} else {
 			System.out.println("내가 대여중인 도서입니다");
