@@ -89,8 +89,15 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [bookCode=" + bookCode + ", bName=" + bName + ", bWriter=" + bWriter + ", bPublisher=" + bPublisher
-				+ ", bGenre=" + bGenre + ", bPrice=" + bPrice + ", bUsing=" + bUsing + ", bAgeUsing=" + bAgeUsing + "]";
+		return "■■■■■■■■ 도서 정보 ■■■■■■■■" +
+				"\n▶ 도서 코드 : " + bookCode + 
+				"\n▶ 도서 이름 : " + bName +
+				"\n▶ 저   자 : " + bWriter +
+				"\n▶ 출 판 사 : " + bPublisher +
+				"\n▶ 장   르 : " + bGenre +
+				"\n▶ 판매 가격 : " + bPrice +
+				"\n▶ 대여 여부 : " + bUsing +
+				"\n▶ 연령 제한 : " + bAgeUsing;
 	}
     
 }
