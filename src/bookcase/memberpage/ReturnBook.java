@@ -81,6 +81,7 @@ public class ReturnBook implements Show {
         else { // chk = true
             book = bookList.get(temp);
             deleteUsingBook();
+            System.out.println("반납이 완료되었습니다.");
         }
     }
 
