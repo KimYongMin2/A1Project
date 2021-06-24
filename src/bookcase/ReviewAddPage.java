@@ -130,9 +130,7 @@ public class ReviewAddPage implements Show {
 	
 	private void setComment() {
 		showCommentMenu();
-		System.out.print("▶ 한줄평 : ");
-		rComment = ScannerUtil.getInputString(); 
-// 		오류떠서 일단..스캐너유틸로 입력값 받는걸로 교체했어요 - 지원
+		rComment = ScannerUtil.getInputStringS("▶ 한줄평 : ");
 		checkComment();
 
 		System.out.println("[한줄평 입력 완료]");
