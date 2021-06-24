@@ -141,6 +141,40 @@ public class RentalCRUD {
 		}
 		return list;
 	}
+	
+	// 1-4. SELECT: USING Array로 렌탈 테이블 가져오기
+	public ArrayList<Using> getRentalTable(Connection con) {
+
+		ArrayList<Using> list = new ArrayList<Using>();
+
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM RENTAL";
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				list.add(new Using(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getInt(4), rs.getInt(5)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
 	// 2. INSERT 메소드
 	public Using insertRental(Connection con, Using using){
@@ -203,14 +237,14 @@ public class RentalCRUD {
 	 * 내가 대여중인 책을, 렌탈리스트에서 삭제하기
 	 * @author 민주
 	 */
-	public void ReturnMyBook(Connection con, Member member) {
+	public void ReturnMyBook(Connection con, Using use) {
 
 		PreparedStatement pstmt = null;
 
 		try {
-			String deleteSql = "DELETE FROM RENTAL WHERE MEMBERCODE = ?";
+			String deleteSql = "DELETE FROM RENTAL WHERE BOOKCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
-			pstmt.setInt(1, member.getMemberCode());
+			pstmt.setInt(1, use.getBookCode());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {

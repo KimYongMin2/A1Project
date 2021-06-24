@@ -15,6 +15,7 @@ import bookcase.util.ScannerUtil;
 
 public class ReturnBookPage implements Show {
     private boolean chk = false;
+    private boolean chk2 = false;
     
     private static BookCRUD bookCrud = BookCRUD.getInstance();
     private static Connection con = JDBCconnecting.connecting();
@@ -26,7 +27,9 @@ public class ReturnBookPage implements Show {
     private int menuButton = 0;
     private Member member;
     private Book book;
+    private Using use;
     private int temp = 0;
+    private int temp2 = 0;
     private int bookcode=0;
 
     private String bName;
@@ -73,18 +76,21 @@ public class ReturnBookPage implements Show {
         // 책확인
         chk = false;
         bookList = rentalCrud.getMyRentalList(con, member);
+        usingBooks = rentalCrud.getRentalTable(con);
         showReturnBookPage();
 
         System.out.print(">> 반납하실 도서명을 입력하세요 : ");
         bName = ScannerUtil.getInputString();
 
         findBook();
+        findBookCode();
 
         if(!chk) {
         	System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
         }
         else { // chk = true
             book = bookList.get(temp);
+            use = usingBooks.get(temp2);
             if(book.getbUsing().equals("true")) {
                 deleteUsingBook();
                 System.out.println("▶ 반납이 완료되었습니다.\n");
@@ -102,10 +108,19 @@ public class ReturnBookPage implements Show {
             }
         }
     }
+    
+    private void findBookCode() {
+    	for(int i = 0; i < usingBooks.size() ; i ++) {
+    		if(bookcode == usingBooks.get(i).getBookCode()) {
+    			temp2 =i;
+    			chk2 = true;
+    		}
+    	}
+    }
 
     public void deleteUsingBook() {
         book.setbUsing("false");
-        rentalCrud.ReturnMyBook(con, member);
+        rentalCrud.ReturnMyBook(con, use);
         bookCrud.updateBook(con, book);
     }
 }
