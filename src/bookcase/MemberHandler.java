@@ -187,7 +187,7 @@ public class MemberHandler {
 				isEmpty(ID);
 				while(chkID) { //관리자 아이디로 가입못하게 막음
 					for(int i = 0 ; i < members.size() ; i++) {
-						if(members.get(i).getId().equals("admin")) {
+						if(ID.equals("admin")) {
 							System.out.println("[!] 해당 ID로는 로그인할 수 없습니다.");
 							System.out.println("확인 후 다시 입력해주세요.");
 							/*입력*/ID = ScannerUtil.getInputString();
