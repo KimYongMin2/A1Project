@@ -33,7 +33,11 @@ public class MemberHandler {
 
 	String ID;
 	String passWord;
-	public boolean chk7 = false;
+	static private boolean chk7 = false;
+
+	public static boolean isChk7() {
+		return chk7;
+	}
 
 	private static Connection con = JDBCconnecting.connecting();
 	private MemberCRUD memberCrud = MemberCRUD.getInstance();
