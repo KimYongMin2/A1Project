@@ -21,7 +21,7 @@ public interface Show {
         System.out.println("3. 도서 반납");
         System.out.println("4. 도서 리뷰");
         System.out.println("5. 내 정 보");
-        System.out.println("6. 종	료");
+        System.out.println("6. 로그아웃");
         System.out.println("================================");
     }
     
@@ -41,21 +41,21 @@ public interface Show {
         System.out.println("3. 도서 수정 ");
         System.out.println("4. 전체 도서 리스트 조회 ");
         System.out.println("5. 대여중인 도서 리스트 조회 ");
-        System.out.println("6. 종료");
+        System.out.println("6. 로그아웃");
         System.out.println("================================");
     }
 
     default void showBookUsingMenu() {
         System.out.println("■■■■■■■■■■■ 대   여 ■■■■■■■■■■■");
         System.out.println("1. 도서 대여하기 ");
-        System.out.println("2. 종료");
+        System.out.println("2. 이전으로");
         System.out.println("================================");
     }
 
     default void showBookReturnMenu() {
         System.out.println("■■■■■■■■■■■ 반   납 ■■■■■■■■■■■");
         System.out.println("1. 도서 반납하기 ");
-        System.out.println("2. 종료");
+        System.out.println("2. 이전으로");
         System.out.println("================================");
     }
     
@@ -80,7 +80,7 @@ public interface Show {
     default void showReviewAddMenu() {
         System.out.println("■■■■■■■■■■■ 리 뷰 작 성 ■■■■■■■■■■■");
         System.out.println("1. 리뷰 작성       2. 리뷰 조회");
-        System.out.println("3. 도서 목록    	4. 종료");
+        System.out.println("3. 도서 목록    	4. 이전으로");
         System.out.println("================================");
     }
 
