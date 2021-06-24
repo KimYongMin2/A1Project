@@ -265,6 +265,7 @@ public class MemberHandler {
 								idCheck = true;
 								System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
 								System.out.println("==============================");
+								return null;
 							}
 						}
 					}
