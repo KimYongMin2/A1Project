@@ -1,20 +1,15 @@
 package bookcase;
 
-import bookcase.crud.BookCRUD;
-import bookcase.crud.RentalCRUD;
-import bookcase.object.Book;
-import bookcase.object.Member;
-import bookcase.object.Using;
-import bookcase.show.Show;
-import bookcase.util.JDBCconnecting;
-import bookcase.util.ScannerUtil;
-
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
+
+import bookcase.crud.*;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
+
 
 public class BookRentPage implements Show {
 
@@ -30,14 +25,6 @@ public class BookRentPage implements Show {
 	private int bookcode=0;
 	private List<Using> usingBooks = new ArrayList<>();
 	private String bName;
-
-	public List<Using> getUsingBooks() {
-		return usingBooks;
-	}
-
-	public void setUsingBooks(List<Using> usingBooks) {
-		usingBooks = usingBooks;
-	}
 
 	public BookRentPage(Member member){
 		this.member = member;
