@@ -104,12 +104,6 @@ public class ReviewAddPage implements Show {
 
 	}
 
-
-	private void setStringToVariable(String s, String v) {
-		System.out.print(s);
-		v = ScannerUtil.getInputString();
-	}
-
 	private void setScore() {
 		showScoreMenu();
 		System.out.print("▶ 평점 : ");
@@ -138,7 +132,6 @@ public class ReviewAddPage implements Show {
 		System.out.print("▶ 한줄평 : ");
 		rComment = ScannerUtil.getInputString(); 
 // 		오류떠서 일단..스캐너유틸로 입력값 받는걸로 교체했어요 - 지원
-//		setStringToVariable("▶ 한줄평 : ", rComment); 
 		checkComment();
 
 		System.out.println("[한줄평 입력 완료]");
