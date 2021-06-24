@@ -343,13 +343,13 @@ public class MemberHandler {
 			System.out.println("[2] no");
 			int choose = ScannerUtil.getInputInteger();
 			if(choose == 1) {
-				reviewCrud.deleteReview(con, member);
-				memberCrud.deleteMember(con, member);
 				rentalBooks = rentalCrud.getMyRentalList(con, member);
 				if(rentalBooks.size() > 0) {
 					System.out.println("error : 대여하신 책을 먼저 반납하고 탈퇴해주세요.");
 					return;
 				}
+				reviewCrud.deleteReview(con, member);
+				memberCrud.deleteMember(con, member);
 				System.out.println("▶ 탈퇴 되었습니다.");
 			} else {
 				System.out.println("▶ 탈퇴를 취소하였습니다.");
