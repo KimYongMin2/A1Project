@@ -33,7 +33,11 @@ public class MemberHandler {
 
 	String ID;
 	String passWord;
-	static private boolean chk7 = false;
+	static private boolean chk7;
+
+	static {
+		chk7 = false;
+	}
 
 	public static boolean isChk7() {
 		return chk7;
@@ -246,7 +250,7 @@ public class MemberHandler {
 			System.out.println("■■■■■■■■■■■ 관리자 로그인 ■■■■■■■■■■■");
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
-				boolean chk7 = true;
+				chk7 = true;
 				while (chk7) {
 					System.out.print("▶ ID : ");
 					/*입력*/String ID = ScannerUtil.getInputString();
