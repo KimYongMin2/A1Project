@@ -15,12 +15,12 @@ import bookcase.util.ScannerUtil;
 public class ReturnBookPage implements Show {
     private boolean chk = false;
     private boolean chk2 = false;
-    
+
     private static BookCRUD bookCrud = BookCRUD.getInstance();
     private static Connection con = JDBCconnecting.connecting();
     private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
     
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private ArrayList<Book> bookList = new ArrayList<>();
     private ArrayList<Using> usingBooks = new ArrayList<>();
    
     private int menuButton = 0;
@@ -32,10 +32,6 @@ public class ReturnBookPage implements Show {
     private int bookcode=0;
 
     private String bName;
-
-    public ArrayList<Using> getUsingBooks() {
-        return usingBooks;
-    }
 
     public ReturnBookPage(Member member){
         this.member = member;
@@ -81,16 +77,16 @@ public class ReturnBookPage implements Show {
         findBookCode();
 
         if(!chk) {
-        	System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
+        	System.out.println("[!] 반납실패. 다시 확인해주세요.");
         }
         else { // chk = true
             book = bookList.get(temp);
             use = usingBooks.get(temp2);
             if(book.getbUsing().equals("true")) {
                 deleteUsingBook();
-                System.out.println("▶ 반납이 완료되었습니다.\n");
+                System.out.println("▶ 반납이 완료되었습니다.");
             }else{
-                System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
+                System.out.println("[!] 반납실패. 다시 확인해주세요.");
             }
         }
     }

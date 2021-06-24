@@ -48,9 +48,5 @@ public class MyInfoPage implements Show {
             }
         }
 	}
-	
-    private void setMenuButton(String s) {
-        System.out.print(s);
-        menuButton = ScannerUtil.getInputInteger();
-    }
+
 }

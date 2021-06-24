@@ -15,9 +15,9 @@ public class ShowBookListPage implements Show {
 	private static RentalCRUD rentalCrud  = RentalCRUD.getInstance();
 	private static ReturnCRUD returnCrud = ReturnCRUD.getInstance();
 	
-	private static ArrayList<Book> books = new ArrayList<Book>();
-	private static ArrayList<Using> usings = new ArrayList<Using>();
-	private static ArrayList<Return> returns = new ArrayList<Return>();
+	private static ArrayList<Book> books = new ArrayList<>();
+	private static ArrayList<Using> usings = new ArrayList<>();
+	private static ArrayList<Return> returns = new ArrayList<>();
 	private int menuButton = 0;
 	private Member member;
 

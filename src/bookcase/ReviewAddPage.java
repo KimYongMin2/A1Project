@@ -15,9 +15,9 @@ public class ReviewAddPage implements Show {
 	private ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
 	private BookCRUD bookCrud = BookCRUD.getInstance();
 	private ViewReviewCRUD viewReviewCrud = ViewReviewCRUD.getInstance();
-	private ArrayList<Review> reviews = new ArrayList<Review>();
+	private ArrayList<Review> reviews = new ArrayList<>();
 	private ArrayList<Book> books = new ArrayList<>();
-	private ArrayList<ViewReview> viewReviews = new ArrayList<ViewReview>();
+	private ArrayList<ViewReview> viewReviews = new ArrayList<>();
 	//
 	
 	private double rScore; // 별점
@@ -27,6 +27,7 @@ public class ReviewAddPage implements Show {
 	private int temp;
 	private int menuButton;
 	private boolean chkFindBook;
+	private String bName;
 
 	public ReviewAddPage(Member member) {
 		this.member = member;
@@ -44,6 +45,8 @@ public class ReviewAddPage implements Show {
 
 				switch (menuButton) {
 				case 1:
+					reviews = reviewCrud.getReviewList(con);
+					books = bookCrud.getBookList(con);
 					findBook();
 					if (chkFindBook) {
 						setReviewComment();
@@ -104,8 +107,7 @@ public class ReviewAddPage implements Show {
 
 	private void setScore() {
 		showScoreMenu();
-		System.out.print("▶ 평점 : ");
-		rScore = ScannerUtil.getInputDouble();
+		rScore = ScannerUtil.getInputDoubleS("▶ 평점 : ");
 		checkScore();
 		System.out.println("[평점 입력 완료]");
 	}
@@ -115,8 +117,7 @@ public class ReviewAddPage implements Show {
 		if (rScore > 5 || rScore < 0) {
 			while (chk1) {
 				showScoreError();
-				System.out.print("▶ 평점 : ");
-				rScore = ScannerUtil.getInputDouble();
+				rScore = ScannerUtil.getInputDoubleS("▶ 평점 : ");
 				if (rScore <= 5) {
 					chk1 = false;
 					break;
@@ -139,8 +140,7 @@ public class ReviewAddPage implements Show {
 		if (rComment.length() > 40) {
 			while (chk) {
 				showCommentError();
-				System.out.print("▶ 한줄평 : ");
-				rComment = ScannerUtil.getInputString();
+				rComment = ScannerUtil.getInputStringS("▶ 한줄평 : ");
 				if (rComment.length() <= 40) {
 					chk = false;
 					break;
@@ -150,14 +150,10 @@ public class ReviewAddPage implements Show {
 	}
 
 	public void findBook() {// 책확인
-		reviews = reviewCrud.getReviewList(con);
-		books = bookCrud.getBookList(con);
 		chkFindBook = false;
 		while (!chkFindBook) {
 			System.out.println("================================");
-			System.out.print(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
-			String bName = ScannerUtil.getInputString();
-			
+			bName = ScannerUtil.getInputStringS(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
 
 			for (int i = 0; i < books.size(); i++) {
 				if (bName.equals(books.get(i).getbName())) {
