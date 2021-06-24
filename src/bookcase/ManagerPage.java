@@ -145,8 +145,14 @@ public class ManagerPage implements Show {
 
             switch (menuButton) {
                 case 1:
-                	System.out.print("▶ 도서명 : ");
+                	System.out.print("▶ 도서명 : "); // 도서명 중복 금지
                     bName = ScannerUtil.getInputString();
+                    for (int i = 0; i < bookList.size(); i++) {
+                        if (bName.equals(bookList.get(i).getbName())){
+                            System.out.println("이미 존재하는 도서의 이름입니다");
+                            break;
+                        }
+                    }
                     bookList.get(temp).setbName(bName);
                     break;
                 case 2:
