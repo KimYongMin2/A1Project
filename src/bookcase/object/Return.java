@@ -72,14 +72,13 @@ public class Return {
 
 	@Override
 	public String toString() {
-		return "== 대여한 책 목록 ==\n"
-				+"책이름: " + bName 
-				+"\n저자:" + bWriter 
-				+"\n출판사: " + bPublisher 
-				+"\n장르: " + bGenre
-				+"\n대출일자: " + rentalDate 
-				+"\n반납예정일자: " + returnDate 
-				+"\n===============";
+		return "■■■■■■■■■■ 대여 도서 목록 ■■■■■■■■■■" +
+		"\n▶ 도서 이름 : " + bName +
+		"\n▶ 저   자 : " + bWriter +
+		"\n▶ 출 판 사 : " + bPublisher +
+		"\n▶ 장   르 : " + bGenre +
+		"\n▶ 대여 일자 : " + rentalDate +
+		"\n▶ 반납예정일 : " + returnDate;
 	}
 	
 	
