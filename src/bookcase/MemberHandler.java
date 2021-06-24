@@ -81,6 +81,7 @@ public class MemberHandler {
 						if(members.get(i).getId().equals(ID)) {
 							System.out.println("[!] 이미 존재하는 ID입니다.");
 							System.out.println("확인 후 다시 입력해주세요.");
+							System.out.print("▶ ID : ");
 							/*입력*/ID = ScannerUtil.getInputString();
 							isEmpty(ID);
 							continue;
@@ -102,6 +103,7 @@ public class MemberHandler {
 				if(!password.equals(rePassword)) {
 					System.out.println("[!] 비밀번호가 일치하지 않습니다");
 					System.out.println("[!] 다시 입력해주세요.");
+					System.out.print("▶ PW : ");
 				} else {
 					chk1 = false;
 				}
@@ -190,6 +192,7 @@ public class MemberHandler {
 						if(ID.equals("admin")) {
 							System.out.println("[!] 해당 ID로는 로그인할 수 없습니다.");
 							System.out.println("확인 후 다시 입력해주세요.");
+							System.out.print("▶ ID : ");
 							/*입력*/ID = ScannerUtil.getInputString();
 							isEmpty(ID);
 							continue;
@@ -210,7 +213,7 @@ public class MemberHandler {
 								return members.get(i); // 로그인이 완료되면 해당 member객체를 반환한다.
 							} else {
 								System.out.println("[!] 비밀번호가 일치하지 않습니다");
-								System.out.println("[!] 확인 후 다시 입력해주세요.");
+								return null;
 							}
 						}
 					}
@@ -260,14 +263,12 @@ public class MemberHandler {
 								return members.get(i);
 							} else {
 								System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
-								System.out.println("[!] 다시 입력해주세요.");
 								System.out.println("==============================");
 							}
 						}
 					}
-					if (!idCheck){
+					if (idCheck){
 						System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
-						System.out.println("[!] 다시 입력해주세요.");
 						System.out.println("==============================");
 						return null;
 					}
