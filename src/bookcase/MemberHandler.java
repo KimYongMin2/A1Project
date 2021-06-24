@@ -241,6 +241,7 @@ public class MemberHandler {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
 				chk7 = true;
+				boolean idCheck = false;
 				while (chk7) {
 					System.out.print("▶ ID : ");
 					/*입력*/String ID = ScannerUtil.getInputString();
@@ -251,6 +252,7 @@ public class MemberHandler {
 							/*입력*/String password = ScannerUtil.getInputString();
 							isEmpty(password);
 							if (members.get(i).getPassWord().equals(password)) {
+								idCheck = true;
 								System.out.println("==============================");
 								System.out.println("▶ 관리자 로그인이 완료되었습니다!");
 								System.out.println("관리자 페이지로 이동합니다.");
@@ -263,9 +265,12 @@ public class MemberHandler {
 							}
 						}
 					}
-					System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
-					System.out.println("[!] 다시 입력해주세요.");
-					System.out.println("==============================");
+					if (!idCheck){
+						System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
+						System.out.println("[!] 다시 입력해주세요.");
+						System.out.println("==============================");
+						return null;
+					}
 				}
 			} else {
 				System.out.println("[!] 현재 관리자가 존재하지 않습니다.");
