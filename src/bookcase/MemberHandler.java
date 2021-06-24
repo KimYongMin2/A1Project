@@ -317,10 +317,9 @@ public class MemberHandler {
 						System.out.println("▶ ID : " + members.get(i).getId());
 						System.out.println("▶ PW : " + members.get(i).getPassWord());
 						System.out.println("==============================");
-					} else {
-						System.out.println("[!] 일치하는 계정 정보가 없습니다");	
 					}
 				}
+				System.out.println("[!] 일치하는 계정 정보가 없습니다");	
 			} else {
 				System.out.println("[!] 현재 책꽂이 회원이 존재하지 않습니다.");
 				System.out.println();
