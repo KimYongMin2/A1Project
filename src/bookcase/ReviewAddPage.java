@@ -117,6 +117,7 @@ public class ReviewAddPage implements Show {
 		if (rScore > 5 || rScore < 0) {
 			while (chk1) {
 				showScoreError();
+				System.out.print("▶ 평점 : ");
 				rScore = ScannerUtil.getInputDouble();
 				if (rScore <= 5) {
 					chk1 = false;
@@ -142,6 +143,7 @@ public class ReviewAddPage implements Show {
 		if (rComment.length() > 40) {
 			while (chk) {
 				showCommentError();
+				System.out.print("▶ 한줄평 : ");
 				rComment = ScannerUtil.getInputString();
 				if (rComment.length() <= 40) {
 					chk = false;
