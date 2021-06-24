@@ -61,10 +61,12 @@ public class ReviewAddPage implements Show {
 					break;
 				case 2:
 					System.out.println("▶ 작성된 리뷰 목록을 출력합니다");
-					for (int i = 0; i < viewReviews.size(); i++) {
-						System.out.println(viewReviews.get(i));
-						System.out.println();
-					} if (viewReviews != null) { // 작성된 리뷰가 존재하지 않을시 안내문 출력 추가 - 지원
+					if(viewReviews.size() > 0) {
+						for (int i = 0; i < viewReviews.size(); i++) {
+							System.out.println(viewReviews.get(i));
+							System.out.println();
+						} 
+					} else {
 						System.out.println("[!] 작성된 리뷰가 존재하지 않습니다.");
 					}
 					break;
