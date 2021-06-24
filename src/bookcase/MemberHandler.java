@@ -197,27 +197,24 @@ public class MemberHandler {
 				
 				while(chk) {
 					for(int i = 0 ; i < members.size() ; i++) {
-						
-					if(members.get(i) != null && ID.equals(members.get(i).getId())) { //일치하는 ID가 있으면 비밀번호를 받는다
-						System.out.print("▶ PW : ");
-						/*입력*/String password = ScannerUtil.getInputString();
-						isEmpty(password);
-						if(members.get(i).getPassWord().equals(password)) { //해당 ID와 비밀번호가 일치하는 지 확인
-							System.out.println("==============================");
-							System.out.println("▶ 로그인이 완료되었습니다!");
-							System.out.println();
-							return members.get(i); // 로그인이 완료되면 해당 member객체를 반환한다.
-						} else {
-							System.out.println("[!] 비밀번호가 일치하지 않습니다");
-							System.out.println("[!] 확인 후 다시 입력해주세요.");
+						if(members.get(i) != null && ID.equals(members.get(i).getId())) { //일치하는 ID가 있으면 비밀번호를 받는다
+							System.out.print("▶ PW : ");
+							/*입력*/String password = ScannerUtil.getInputString();
+							isEmpty(password);
+							if(members.get(i).getPassWord().equals(password)) { //해당 ID와 비밀번호가 일치하는 지 확인
+								System.out.println("==============================");
+								System.out.println("▶ 로그인이 완료되었습니다!");
+								System.out.println();
+								return members.get(i); // 로그인이 완료되면 해당 member객체를 반환한다.
+							} else {
+								System.out.println("[!] 비밀번호가 일치하지 않습니다");
+								System.out.println("[!] 확인 후 다시 입력해주세요.");
+							}
 						}
-					} else {
-						System.out.println("[!] 입력하신 ID와 일치하는 가입정보가 없습니다.");
-						// 왜 두번씩 출력되는지......해결해야함
-						break;
 					}
+					System.out.println("[!] 일치하는 계정 정보가 없습니다.");
+					break;
 				}
-			}
 		} else {
 			System.out.println("[!] 현재 책꽂이 회원이 존재하지 않습니다.");
 			System.out.println();
