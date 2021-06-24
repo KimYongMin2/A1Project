@@ -1,6 +1,7 @@
 package bookcase.crud;
 
 import bookcase.object.Book;
+import bookcase.util.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,16 +44,8 @@ public class BookCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(stmt != null) {
-					stmt.close();
-				} 
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 
 		return list;
@@ -84,16 +77,8 @@ public class BookCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(stmt != null) {
-					stmt.close();
-				} 
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 
 		return list;
@@ -123,13 +108,7 @@ public class BookCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 		return book;
 	}
@@ -159,13 +138,7 @@ public class BookCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 
@@ -183,13 +156,7 @@ public class BookCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 }

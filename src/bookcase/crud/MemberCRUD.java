@@ -1,6 +1,7 @@
 package bookcase.crud;
 
 import bookcase.object.Member;
+import bookcase.util.*;
 
 import java.sql.*;
 import java.util.*;
@@ -35,16 +36,8 @@ public class MemberCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(stmt != null) {
-					stmt.close();
-				} 
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 		
 		return list;
@@ -73,13 +66,7 @@ public class MemberCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 		return member;
 	}
@@ -107,13 +94,7 @@ public class MemberCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 	
@@ -131,13 +112,7 @@ public class MemberCRUD {
 		} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 }

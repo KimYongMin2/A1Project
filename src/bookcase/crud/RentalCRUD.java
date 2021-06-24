@@ -3,6 +3,7 @@ package bookcase.crud;
 import bookcase.object.Book;
 import bookcase.object.Member;
 import bookcase.object.Using;
+import bookcase.util.*;
 
 import java.sql.*;
 import java.util.*;
@@ -47,16 +48,8 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 		return list;
 	}
@@ -89,16 +82,8 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(pstmt);
+			CloseUtil.close(rs);
 		}
 		return list;
 	}
@@ -128,16 +113,8 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 		return list;
 	}
@@ -162,16 +139,8 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}
 		return list;
 	}
@@ -197,13 +166,7 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 		return using;
 	}
@@ -222,13 +185,7 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 	
@@ -250,13 +207,7 @@ public class RentalCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			CloseUtil.close(pstmt);
 		}
 	}
 }

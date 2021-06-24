@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import bookcase.object.*;
+import bookcase.util.*;
 
 /***
  * @author 민주
@@ -42,16 +43,8 @@ public class ReturnCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				} 
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(pstmt);
+			CloseUtil.close(rs);
 		}
 
 		return list;

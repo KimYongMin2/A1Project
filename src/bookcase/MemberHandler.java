@@ -290,7 +290,7 @@ public class MemberHandler {
 
 
 	public void findingId() { // ID/PW 찾기 method
-		boolean idPhoneNum = false;
+		boolean isIt = false;
 		System.out.println();
 		System.out.println("■■■■■■■■■■■ ID / PW 찾기 ■■■■■■■■■■■");
 
@@ -298,7 +298,6 @@ public class MemberHandler {
 		 *  이름과 전화번호를 두 가지 다 입력받고 
 		 *  두개가 동시에 일치하면 아이디와 비밀번호를 찾을 수 있게 처리
 		 */
-
 		try {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
@@ -311,7 +310,7 @@ public class MemberHandler {
 				for(int i = 0 ; i < members.size() ; i++) {
 					if(members.get(i).getmName().equals(name) && 
 							members.get(i).getPhoneNum().equals(phoneNum)) {
-						idPhoneNum = true;
+						isIt = true;
 						System.out.println("▶ 해당하는 계정 정보는 다음과 같습니다.");
 						System.out.println("==============================");
 						System.out.println("▶ ID : " + members.get(i).getId());
@@ -319,7 +318,7 @@ public class MemberHandler {
 						System.out.println("==============================");
 					}
 				}
-				if (!idPhoneNum){
+				if(!isIt) {
 					System.out.println("[!] 일치하는 계정 정보가 없습니다");
 				}
 			} else {

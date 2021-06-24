@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import bookcase.object.*;
+import bookcase.util.*;
 
 public class ViewReviewCRUD {
 	/*싱글톤 처리*/
@@ -35,16 +36,8 @@ public class ViewReviewCRUD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(stmt != null) {
-					stmt.close();
-				} 
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			CloseUtil.close(stmt);
+			CloseUtil.close(rs);
 		}			
 		return list;
 	}
