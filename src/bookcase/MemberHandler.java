@@ -31,8 +31,6 @@ public class MemberHandler {
 	 *  @author 지원
 	 */
 
-	String ID;
-	String passWord;
 	private boolean chk7;
 
 	private static Connection con = JDBCconnecting.connecting();
@@ -292,6 +290,7 @@ public class MemberHandler {
 
 
 	public void findingId() { // ID/PW 찾기 method
+		boolean idPhoneNum = false;
 		System.out.println();
 		System.out.println("■■■■■■■■■■■ ID / PW 찾기 ■■■■■■■■■■■");
 
@@ -312,6 +311,7 @@ public class MemberHandler {
 				for(int i = 0 ; i < members.size() ; i++) {
 					if(members.get(i).getmName().equals(name) && 
 							members.get(i).getPhoneNum().equals(phoneNum)) {
+						idPhoneNum = true;
 						System.out.println("▶ 해당하는 계정 정보는 다음과 같습니다.");
 						System.out.println("==============================");
 						System.out.println("▶ ID : " + members.get(i).getId());
@@ -319,7 +319,9 @@ public class MemberHandler {
 						System.out.println("==============================");
 					}
 				}
-				System.out.println("[!] 일치하는 계정 정보가 없습니다");	
+				if (!idPhoneNum){
+					System.out.println("[!] 일치하는 계정 정보가 없습니다");
+				}
 			} else {
 				System.out.println("[!] 현재 책꽂이 회원이 존재하지 않습니다.");
 				System.out.println();

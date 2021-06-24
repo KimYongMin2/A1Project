@@ -2,7 +2,7 @@ package bookcase;
 
 import bookcase.object.Member;
 import bookcase.show.Show;
-import bookcase.util.CommonFunction;
+import bookcase.util.ScannerUtil;
 
 public class MemberPage implements Show {
     private int menuButton = 0;
@@ -15,7 +15,7 @@ public class MemberPage implements Show {
         while (menuButton != 6) {
             try {
                 showMemberPageMenu();
-                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
+                menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
                 System.out.println();
                 
                 switch (menuButton) {
