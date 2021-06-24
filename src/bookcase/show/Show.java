@@ -48,14 +48,14 @@ public interface Show {
     default void showBookUsingMenu() {
         System.out.println("■■■■■■■■■■■ 대   여 ■■■■■■■■■■■");
         System.out.println("1. 도서 대여하기 ");
-        System.out.println("2. 종료");
+        System.out.println("2. 이전으로");
         System.out.println("================================");
     }
 
     default void showBookReturnMenu() {
         System.out.println("■■■■■■■■■■■ 반   납 ■■■■■■■■■■■");
         System.out.println("1. 도서 반납하기 ");
-        System.out.println("2. 종료");
+        System.out.println("2. 이전으로");
         System.out.println("================================");
     }
     
@@ -80,7 +80,7 @@ public interface Show {
     default void showReviewAddMenu() {
         System.out.println("■■■■■■■■■■■ 리 뷰 작 성 ■■■■■■■■■■■");
         System.out.println("1. 리뷰 작성       2. 리뷰 조회");
-        System.out.println("3. 도서 목록    	4. 종료");
+        System.out.println("3. 도서 목록    	4. 이전으로");
         System.out.println("================================");
     }
 
