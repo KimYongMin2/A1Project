@@ -6,7 +6,6 @@ import java.util.*;
 import bookcase.crud.BookCRUD;
 import bookcase.object.Book;
 import bookcase.show.Show;
-import bookcase.util.CommonFunction;
 import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
@@ -27,7 +26,7 @@ public class ManagerPage implements Show {
         while (menuButton != 6) {
             try {
                 showBookManagerMenu();
-                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
+                menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
                 bookList = bookCrud.getBookList(con);
 
                 switch (menuButton) {
@@ -141,7 +140,7 @@ public class ManagerPage implements Show {
         findBook(bookList, bName);
         if (findCheck){
             showReBookMenu();
-            menuButton = CommonFunction.setMenuButton(">> 수정하실 데이터를 선택하세요 : ", menuButton);
+            menuButton = ScannerUtil.getInputIntegerS(">> 수정하실 데이터를 선택하세요 : ");
 
             switch (menuButton) {
                 case 1:

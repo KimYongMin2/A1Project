@@ -22,7 +22,7 @@ public class MyInfoPage implements Show {
 		while (menuButton != 4) {
 		    try {
                 showEditMyInfoMenu();
-                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
+                menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
                 switch (menuButton) {
                 	case 1: // 내 정보 확인하기
                 		mh.showMyInfo(member);

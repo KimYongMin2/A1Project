@@ -48,8 +48,7 @@ public class BookRentPage implements Show {
     	    try {
                 showBookUsingMenu();
 
-                System.out.print(">> 원하시는 메뉴를 선택하세요. : ");
-                menuButton = ScannerUtil.getInputInteger();
+                menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요. : ");
 
                 switch (menuButton) {
                     case 1:

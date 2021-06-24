@@ -13,7 +13,7 @@ public class Start implements Show {
         while (menuButton != 5) {
             try {
                 showStartMenu();
-                menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ",menuButton);
+                menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
 
                 switch (menuButton) {
                     case 1:
