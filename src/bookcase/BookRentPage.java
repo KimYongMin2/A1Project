@@ -35,8 +35,7 @@ public class BookRentPage implements Show {
 			try {
 				showBookUsingMenu();
 
-				System.out.print(">> 원하시는 메뉴를 선택하세요. : ");
-				menuButton = ScannerUtil.getInputInteger();
+				menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요. : ");
 
 				switch (menuButton) {
 				case 1:
@@ -66,8 +65,7 @@ public class BookRentPage implements Show {
 
 		showRentalBookPage();
 
-		System.out.println(">> 대여할 도서명을 입력해주세요 : ");
-		bName = ScannerUtil.getInputString();
+		bName = ScannerUtil.getInputStringS(">> 대여할 도서명을 입력해주세요 : ");
 
 		findBook();
 		

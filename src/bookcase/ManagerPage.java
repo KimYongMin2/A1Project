@@ -21,6 +21,7 @@ public class ManagerPage implements Show {
     private int temp;
     private int menuButton = 0;
     private boolean findCheck = false;
+    private int chkAge;
 
     public void bookManagerStart(){
         while (menuButton != 6) {
@@ -64,60 +65,52 @@ public class ManagerPage implements Show {
     }
 
     public void addBook(){
-        System.out.print("▶ 도서명 : ");
-        bName = ScannerUtil.getInputString();
+        bName = ScannerUtil.getInputStringS("▶ 도서명 : ");
+        if (checkSameBookName()) return;
+
+        bWriter = ScannerUtil.getInputStringS("▶ 저 자 : ");
+        bPublisher = ScannerUtil.getInputStringS("▶ 출판사 : ");
+        bGenre = ScannerUtil.getInputStringS("▶ 장 르 : ");
+        bPrice = ScannerUtil.getInputIntegerS("▶ 가 격 : ");
+        String bUsing = "false";
+        System.out.println("▶ 연령제한 여부 : ");
+        chkAge = ScannerUtil.getInputIntegerS("(1) 네 (2) 아니오 : ");
+        setAgeUsing();
+
+		bookCrud.insertBook(con, new Book(0, bName, bWriter, bPublisher,
+                bGenre, bPrice, bUsing, bAgeUsing));
+
+        showAddBookSuccess();
+
+    }
+
+    private boolean checkSameBookName() {
         for (int i = 0; i < bookList.size(); i++) {
             if (bName.equals(bookList.get(i).getbName())){
                 System.out.println("이미 존재하는 도서입니다");
-                return;
+                return true;
             }
         }
+        return false;
+    }
 
-        System.out.print("▶ 저 자 : ");
-        bWriter = ScannerUtil.getInputString();
-
-        System.out.print("▶ 출판사 : ");
-        bPublisher = ScannerUtil.getInputString();
-
-        System.out.print("▶ 장 르 : ");
-        bGenre = ScannerUtil.getInputString();
-
-        System.out.print("▶ 가 격 : ");
-        bPrice = ScannerUtil.getInputInteger();
-
-        String bUsing = "false";
-
-        System.out.println("▶ 연령제한 여부 : ");
-        System.out.print("(1) 네 (2) 아니오 : ");
-        int chks = ScannerUtil.getInputInteger();
-
-        if(chks == 1) {
+    private void setAgeUsing() {
+        if(chkAge == 1) {
         	bAgeUsing = "true";
-        } else if(chks == 2) {
+        } else if(chkAge == 2) {
         	bAgeUsing = "false";
         } else {
         	System.out.println("error : 잘못된 입력입니다.");
         }
-
-        /***
-         * 북테이블 DB와 연결!, 북 테이블에 INSERT시키기
-         * @author 민주
-         */
-		bookCrud.insertBook(con, new Book(0, bName, bWriter, bPublisher,
-                bGenre, bPrice, bUsing, bAgeUsing));
-		System.out.println("================================");
-		System.out.println("▶ 새로운 도서를 추가하였습니다.\n");
-
     }
 
     public void deleteBook(ArrayList<Book> bookList) {	
         findCheck = false;
-        
-        System.out.print(">> 삭제할 도서명을 입력해주세요 : ");
-        String bookName = ScannerUtil.getInputString();
+
+        bName = ScannerUtil.getInputStringS(">> 삭제할 도서명을 입력해주세요 : ");
         
         if(bookList != null) {
-            findBook(bookList, bookName);
+            findBook();
             if(findCheck){
                 bookCrud.deleteBook(con, bookList.get(temp));
                 System.out.println("▶ 도서가 삭제되었습니다.\n");
@@ -134,67 +127,47 @@ public class ManagerPage implements Show {
 
         findCheck = false;
         
-        System.out.println(">> 수정하실 도서명을 입력하세요. : ");
-        String bName = ScannerUtil.getInputString();
+        bName = ScannerUtil.getInputStringS(">> 수정하실 도서명을 입력하세요. : ");
+        findBook();
 
-        findBook(bookList, bName);
         if (findCheck){
             showReBookMenu();
             menuButton = ScannerUtil.getInputIntegerS(">> 수정하실 데이터를 선택하세요 : ");
 
             switch (menuButton) {
                 case 1:
-                	System.out.print("▶ 도서명 : "); // 도서명 중복 금지
-                    bName = ScannerUtil.getInputString();
-                    for (int i = 0; i < bookList.size(); i++) {
-                        if (bName.equals(bookList.get(i).getbName())){
-                            System.out.println("이미 존재하는 도서의 이름입니다");
-                            return;
-                        }
-                    }
+                    bName = ScannerUtil.getInputStringS("▶ 도서명 : ");
+                    if (checkSameBookName()) return;
                     bookList.get(temp).setbName(bName);
                     break;
                 case 2:
-                	System.out.print("▶ 저 자 : ");
-                    bWriter = ScannerUtil.getInputString();
+                    bWriter = ScannerUtil.getInputStringS("▶ 저 자 : ");
                     bookList.get(temp).setbWriter(bWriter);
                     break;
                 case 3:
-                	System.out.print("▶ 출판사 : ");
-                    bPublisher = ScannerUtil.getInputString();
+                    bPublisher = ScannerUtil.getInputStringS("▶ 출판사 : ");
                     bookList.get(temp).setbPublisher(bPublisher);
                     break;
                 case 4:
-                	System.out.print("▶ 장 르 : ");
-                    bGenre = ScannerUtil.getInputString();
+                    bGenre = ScannerUtil.getInputStringS("▶ 장 르 : ");
                     bookList.get(temp).setbGenre(bGenre);
                     break;
                 case 5:
-                	System.out.print("▶ 가 격 : ");
-                    bPrice = ScannerUtil.getInputInteger();
+                    bPrice = ScannerUtil.getInputIntegerS("▶ 가 격 : ");
                     bookList.get(temp).setbPrice(bPrice);
                     break;
-                case 6: 
-                	System.out.println("▶ 연령제한 여부");
-                    System.out.println("(1) true (2) false : ");
-                    int chks = ScannerUtil.getInputInteger();
-
-                    if(chks == 1) {
-                    	bAgeUsing = "true";
-                    } else if(chks == 2) {
-                    	bAgeUsing = "false";
-                    }
+                case 6:
                     menuButton = 0;
+                	System.out.println("▶ 연령제한 여부");
+                    chkAge = ScannerUtil.getInputIntegerS("(1) 네 (2) 아니오 : ");
+                    setAgeUsing();
+                    bookList.get(temp).setbAgeUsing(bAgeUsing);
                     break;
                 default:
                 	System.out.println("error : 잘못된 입력입니다.");
                     break;
             }
             
-            /**
-             * DB랑 연결
-             * @author 민주
-             */
             bookCrud.updateBook(con, bookList.get(temp)); /*오류*/
 //            System.out.println("▶ 수정이 완료되었습니다.\n");
             
@@ -205,9 +178,9 @@ public class ManagerPage implements Show {
 
 
 
-    private void findBook(ArrayList<Book> bookList, String bookName) {
+    private void findBook() {
         for (int i = 0; i < bookList.size(); i++) {
-            if (bookName.equals(bookList.get(i).getbName())) {
+            if (bName.equals(bookList.get(i).getbName())) {
                 temp = i;
                 findCheck = true;
             }

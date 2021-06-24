@@ -123,4 +123,9 @@ public interface Show {
         System.out.println("================================");
     }
 
+    default void showAddBookSuccess() {
+        System.out.println("================================");
+        System.out.println("▶ 새로운 도서를 추가하였습니다");
+    }
+
 }
