@@ -1,26 +1,23 @@
 package bookcase;
 
-import bookcase.crud.BookCRUD;
-import bookcase.crud.ReviewCRUD;
-import bookcase.object.Book;
-import bookcase.object.Member;
-import bookcase.object.Review;
-import bookcase.show.Show;
-import bookcase.util.CommonFunction;
-import bookcase.util.JDBCconnecting;
-import bookcase.util.ScannerUtil;
-
 import java.sql.*;
 import java.util.*;
+
+import bookcase.crud.*;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
 
 public class ReviewAddPage implements Show {
 	
 	//
 	private static Connection con = JDBCconnecting.connecting();
-	private static ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
-	private static BookCRUD bookCrud = BookCRUD.getInstance();
+	private ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
+	private BookCRUD bookCrud = BookCRUD.getInstance();
+	private ViewReviewCRUD viewReviewCrud = ViewReviewCRUD.getInstance();
 	private ArrayList<Review> reviews = new ArrayList<Review>();
 	private ArrayList<Book> books = new ArrayList<>();
+	private ArrayList<ViewReview> viewReviews = new ArrayList<ViewReview>();
 	//
 	
 	private double rScore; // 별점
@@ -47,6 +44,7 @@ public class ReviewAddPage implements Show {
 			try {
 				reviews = reviewCrud.getReviewList(con); //오라클에서 리뷰 테이블 전체 받음
 				books = bookCrud.getBookList(con); //오라클에서 북 테이블 전체 받음
+				viewReviews = viewReviewCrud.getReviewList(con);
 				showReviewAddMenu();
 				menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
 
@@ -60,10 +58,10 @@ public class ReviewAddPage implements Show {
 					break;
 				case 2:
 					System.out.println("▶ 작성된 리뷰 목록을 출력합니다");
-					for (int i = 0; i < reviews.size(); i++) {
-						System.out.println(reviews.get(i));
+					for (int i = 0; i < viewReviews.size(); i++) {
+						System.out.println(viewReviews.get(i));
 						System.out.println();
-					} if (reviews != null) { // 작성된 리뷰가 존재하지 않을시 안내문 출력 추가 - 지원
+					} if (viewReviews != null) { // 작성된 리뷰가 존재하지 않을시 안내문 출력 추가 - 지원
 						System.out.println("[!] 작성된 리뷰가 존재하지 않습니다.");
 					}
 					break;
