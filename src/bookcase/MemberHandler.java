@@ -235,6 +235,7 @@ public class MemberHandler {
 	public Member managerlogin() { // 관리자 로그인 처리 method
 
 		// return 문이 없어요
+		chk7 = false;
 
 		try {
 			System.out.println();
