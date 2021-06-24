@@ -28,7 +28,7 @@ public class ShowBookListPage implements Show {
 		while (menuButton != 4) {
 			try {
 				showBookListPageMenu();
-				menuButton = CommonFunction.setMenuButton(">> 원하시는 메뉴를 선택하세요 : ", menuButton);
+				menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
 				
 				switch (menuButton) {
 					case 1:
