@@ -6,21 +6,15 @@ public class Review {
 	private int bookCode;
 	private double rScore;
 	private String rComment;
-	private String bName;
-	private String bWriter;
-
-
 	
-	public Review(int reviewCode, int memberCode, int bookCode, double rScore, String rComment, String bName,
-			String bWriter) {
+	public Review(int reviewCode, int memberCode, int bookCode, double rScore, String rComment) {
 		super();
 		this.reviewCode = reviewCode;
 		this.memberCode = memberCode;
 		this.bookCode = bookCode;
 		this.rScore = rScore;
 		this.rComment = rComment;
-		this.bName = bName;
-		this.bWriter = bWriter;
+
 	}
 
 	public int getReviewCode() {
@@ -61,35 +55,7 @@ public class Review {
 
 	public void setrComment(String rComment) {
 		this.rComment = rComment;
-	}
-
-	public String getbName() {
-		return bName;
-	}
-
-	public void setbName(String bName) {
-		this.bName = bName;
-	}
-
-	public String getbWriter() {
-		return bWriter;
-	}
-
-	public void setbWriter(String bWriter) {
-		this.bWriter = bWriter;
-	}
-
-
-	@Override
-	public String toString() {
-		return "■■■■■■■■■■■ 리뷰 목록 ■■■■■■■■■■■" +
-				"\n▶ 도서 이름 : " + bName +
-				"\n▶ 저   자 : " + bWriter +
-				"\n▶ 평   점 : " + rScore +
-				"\n▶ 한 줄 평 : " + rComment ;
-	}
-
-	
+	}	
 	
 }
 
