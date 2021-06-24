@@ -1,17 +1,15 @@
 package bookcase;
 
-import bookcase.crud.*;
-import bookcase.object.Member;
-import bookcase.util.JDBCconnecting;
-import bookcase.util.MyMadeException;
-import bookcase.util.ScannerUtil;
-
 import java.sql.*;
 import java.util.*;
 import java.util.regex.*;
 
+import bookcase.crud.*;
+import bookcase.object.*;
+import bookcase.util.*;
+
 public class MemberHandler {
-	
+
 	/**
 	 * MemberHandler클래스
 	 * 
@@ -23,8 +21,8 @@ public class MemberHandler {
 	 * 
 	 * @author 민주
 	 */
-	
-	
+
+
 	/**
 	 * ++ 0624 추가
 	 * 매니저 로그인 메소드 추가
@@ -36,11 +34,11 @@ public class MemberHandler {
 	String ID;
 	String passWord;
 	public boolean chk7;
-	
-    private static Connection con = JDBCconnecting.connecting();
-	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
-	private static ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
-	private static ArrayList<Member> members = new ArrayList<Member>();
+
+	private static Connection con = JDBCconnecting.connecting();
+	private  MemberCRUD memberCrud = MemberCRUD.getInstance();
+	private  ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
+	private ArrayList<Member> members = new ArrayList<Member>();
 
 	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
 		while(true) {
@@ -57,13 +55,13 @@ public class MemberHandler {
 	public void joinMember() { //회원가입 method
 		//진행중: 회원코드와 포인트는 알아서 들어가게 추후 DB에서 가져오고 연결할 것 고민해보기
 		try {
-			members = memberCrud.getMemberList(con);
+			members = MemberCRUD.getMemberList(con);
 			System.out.println();
 			System.out.println("■■■■■■■■■■■ 회원가입 ■■■■■■■■■■■");
 			System.out.println("안녕하세요. 도서대여 서비스 <책꽂이> 입니다.");
 			System.out.println("회원 가입을 시작합니다.");
 			System.out.println("==============================");
-			
+
 			// (1) ID 입력
 			System.out.println("[안내] ID는 영어, 숫자로만 입력해주세요");
 			System.out.print("▶ ID : ");
@@ -73,7 +71,6 @@ public class MemberHandler {
 			if(!chkId) {
 				throw new MyMadeException("error : 잘못된 입력입니다.");
 			}
-			
 			// (1-1) 이미 가입된 ID들과 같은지 확인 
 			boolean chk = true;
 			if(members.size() > 0) {
@@ -84,14 +81,12 @@ public class MemberHandler {
 							System.out.println("확인 후 다시 입력해주세요.");
 							/*입력*/ID = ScannerUtil.getInputString();
 							isEmpty(ID);
-						} else {
-							chk = false;
-							break;
-						}
-					}
+							continue;
+						} else {}
+					} chk = false;
 				}
 			}
-			
+
 			// (2) 비밀번호 입력(두번 입력받아서 확인함)
 			boolean chk1 = true;
 			String password = null;
@@ -109,7 +104,7 @@ public class MemberHandler {
 					chk1 = false;
 				}
 			}
-			
+
 			// (3) 이름 입력(정규식으로, 영어와 한글만 가능하게 처리)
 			System.out.print("▶ 이름 : ");
 			/*입력*/String name = ScannerUtil.getInputString();
@@ -118,14 +113,14 @@ public class MemberHandler {
 			if(!chk2) {
 				throw new MyMadeException("[!] 이름은 영어와 한글로만 입력해주세요");
 			}
-			
+
 			// (4) 나이 입력
 			System.out.print("▶ 나이 : ");
 			/*입력*/String ageString = ScannerUtil.getInputString();
 			isEmpty(ageString);
 			int age = Integer.parseInt(ageString);
 
-			
+
 			// (5) 전화번호 입력(정규식으로, 형식을 맞춰 입력하게 처리)
 			System.out.println("핸드폰 번호는 다음의 형식에 따라 입력해주세요]");
 			System.out.println("[안내] 010-9999-9999 [주의] - 까지 입력해주세요");
@@ -136,12 +131,12 @@ public class MemberHandler {
 			if(!chk4) {
 				throw new MyMadeException("[!] 전화번호 형식에 부합하지 않습니다"); // 추후 사용자 정의 exception으로 변경
 			}
-			
+
 			// (6) 이메일 입력(선택사항, 입력할 시에는 형식을 맞춰 입력하게 처리)
 			System.out.println("[안내] 입력을 원치 않으시면 엔터를 눌러주세요.");
 			System.out.print("▶ 이메일(선택사항) : ");
 			String email = null;
-			
+
 			/*입력*/String inputemail = ScannerUtil.getInputString();//이메일은 null값이 가능하기 때문에 isEmpty처리 하지 않음
 			if(inputemail.equals("")) { //공란은 입력하면, email에는 null
 			} else {
@@ -157,14 +152,14 @@ public class MemberHandler {
 					}	
 				}
 			}
-			
+
 			// (7) 입력 값을 넣어서, 객체 생성 후 ArrayList에 넣고, DB에도 INSERT
 			memberCrud.insertMember(con, new Member(0, ID, password, name, age, phoneNum, email));
 			System.out.println();
 			System.out.println("▶ 회원가입이 완료되었습니다 ◀");
 			System.out.println("도서대여 서비스 <책꽂이>에 오신 것을 환영합니다!");
 			System.out.println();
-			
+
 		} catch(MyMadeException e) {
 			System.out.println(e.getMessage());
 		} catch(NumberFormatException e) {
@@ -172,13 +167,16 @@ public class MemberHandler {
 		} catch(InputMismatchException e) {
 			System.out.println("error : 잘못된 입력입니다.");
 		}
-		
+
 	}
-	
+
 	public Member login() { // 회원 로그인 처리 method
+
+		//관리자 아이디인 admin으로 가입못하게 막아야함
+
 		System.out.println();
 		System.out.println("■■■■■■■■■■■ 회원 로그인 ■■■■■■■■■■■");
-		
+
 		try {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
@@ -221,19 +219,25 @@ public class MemberHandler {
 			return null;
 		}
 	}
-	
 
-	
+
+
 	public Member managerlogin() { // 관리자 로그인 처리 method
+
+		// return 문이 없어요
+
 		System.out.println();
 		System.out.println("■■■■■■■■■■■ 관리자 로그인 ■■■■■■■■■■■");
+
 		boolean chk7 = true;
 		while (chk7) {
-		System.out.print("▶ ID : ");
+			System.out.print("▶ ID : ");
 			/*입력*/String ID = ScannerUtil.getInputString();
+			isEmpty(ID);;
 			if(ID.equals("admin")) {
 				System.out.print("▶ PW : ");
 				/*입력*/String password = ScannerUtil.getInputString();
+				isEmpty(password);
 				if (password.equals("admin")) {
 					System.out.println("==============================");
 					System.out.println("▶ 관리자 로그인이 완료되었습니다!");
@@ -241,31 +245,31 @@ public class MemberHandler {
 					System.out.println();
 					chk7 = true;
 					break;
-					} else {
-						System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
-						System.out.println("[!] 다시 입력해주세요.");
-						System.out.println("==============================");
-					}
 				} else {
-					System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
+					System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
 					System.out.println("[!] 다시 입력해주세요.");
 					System.out.println("==============================");
 				}
+			} else {
+				System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
+				System.out.println("[!] 다시 입력해주세요.");
+				System.out.println("==============================");
 			}
-			return null;
+		}
+		return null;
 	}			
-	
-	
-	
+
+
+
 	public void findingId() { // ID/PW 찾기 method
 		System.out.println();
 		System.out.println("■■■■■■■■■■■ ID / PW 찾기 ■■■■■■■■■■■");
-		
+
 		/**
 		 *  이름과 전화번호를 두 가지 다 입력받고 
 		 *  두개가 동시에 일치하면 아이디와 비밀번호를 찾을 수 있게 처리
 		 */
-		
+
 		try {
 			members = memberCrud.getMemberList(con);
 			if(members.size() > 0) {
@@ -307,26 +311,26 @@ public class MemberHandler {
 		 *  탈퇴를 처리하도록 구현
 		 *  나중에 변경해야함
 		 */
-		
+
 		try {
 			System.out.println("[!] 정말 탈퇴하시겠습니까 ?");
-					System.out.println("[1] yes");
-					System.out.println("[2] no");
-					int choose = ScannerUtil.getInputInteger();
-					if(choose == 1) {
-						reviewCrud.deleteReview(con, member);
-						memberCrud.deleteMember(con, member);
-						System.out.println("▶ 탈퇴 되었습니다.");
-					} else {
-						System.out.println("▶ 탈퇴를 취소하였습니다.");
-					}
+			System.out.println("[1] yes");
+			System.out.println("[2] no");
+			int choose = ScannerUtil.getInputInteger();
+			if(choose == 1) {
+				reviewCrud.deleteReview(con, member);
+				memberCrud.deleteMember(con, member);
+				System.out.println("▶ 탈퇴 되었습니다.");
+			} else {
+				System.out.println("▶ 탈퇴를 취소하였습니다.");
+			}
 		}  catch (NumberFormatException e) {
 			System.out.println("error : 잘못된 입력입니다.");
 		} catch (InputMismatchException e) {
 			System.out.println("error : 잘못된 입력입니다.");
 		}
 	}
-	
+
 	public void updateMember(Member member) { //회원 정보 수정
 		try {
 			members = memberCrud.getMemberList(con);
@@ -431,9 +435,9 @@ public class MemberHandler {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void showMyInfo(Member member) { // 내 정보를 확인시켜주는 method
 		System.out.println(member);
 	}
-	
+
 }
