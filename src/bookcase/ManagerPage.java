@@ -234,7 +234,7 @@ public class ManagerPage implements Show {
               System.out.println(book);
               System.out.println();
               // System.out.println(book.getBookCode() + book.getbName());
-              return;
+
             }
         }
     }
