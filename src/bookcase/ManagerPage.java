@@ -12,7 +12,9 @@ public class ManagerPage implements Show {
 	
     private static Connection con = JDBCconnecting.connecting();
 	private static BookCRUD bookCrud = BookCRUD.getInstance();
-	private static ArrayList<Book> bookList = new ArrayList<Book>();
+	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
+	private ArrayList<Book> bookList = new ArrayList<Book>();
+	private ArrayList<Member> memberList = new ArrayList<Member>();
 	
     private String bName, bWriter, bPublisher, bGenre;
     private int bPrice;
@@ -28,6 +30,7 @@ public class ManagerPage implements Show {
                 showBookManagerMenu();
                 menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
                 bookList = bookCrud.getBookList(con);
+                memberList = memberCrud.getMemberList(con);
 
                 switch (menuButton) {
                     case 1:
@@ -51,6 +54,10 @@ public class ManagerPage implements Show {
                         showUsingBookList();
                         break;
                     case 6:
+                    	// 회원리스트 조회 
+                    	showAllMember(memberList);
+                    	break;
+                    case 7:
                     	System.out.println("[!] 전 단계로 돌아갑니다.");
                         break;
                     default:
@@ -209,8 +216,14 @@ public class ManagerPage implements Show {
             }
         }
     }
+    
+    public void showAllMember(ArrayList<Member> members) {
+    	System.out.println(">>전체 회원 리스트를 출력합니다.");
+    	for(Member member: members) {
+    		System.out.println(member);
+    		System.out.println();
+    	}
+    }
 }
 
-//    public ArrayList<Book> getBookList() {
-//        return bookList;
-//    }
+

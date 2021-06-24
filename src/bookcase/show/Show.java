@@ -41,7 +41,8 @@ public interface Show {
         System.out.println("3. 도서 수정 ");
         System.out.println("4. 전체 도서 리스트 조회 ");
         System.out.println("5. 대여중인 도서 리스트 조회 ");
-        System.out.println("6. 로그아웃");
+        System.out.println("6. 회원 리스트 조회");
+        System.out.println("7. 로그아웃");
         System.out.println("================================");
     }
 
