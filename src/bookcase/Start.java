@@ -27,7 +27,7 @@ public class Start implements Show {
                     case 2:
                         //관리자 로그인
                         member = mh.managerlogin();
-                        if (mh.chk7 == true) {
+                        if (mh.chk7 = true) {
                         	new ManagerPage().bookManagerStart();
                         }
                         // ID : admin / PW : admin 일 경우에만 관리자페이지 입장
