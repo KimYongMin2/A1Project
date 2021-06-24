@@ -27,8 +27,8 @@ public class Start implements Show {
                     case 2:
                         //관리자 로그인
                         member = mh.managerlogin();
-                        if (MemberHandler.isChk7()) {
-                        	new ManagerPage().bookManagerStart();
+                        if (member != null) {
+                            new ManagerPage().bookManagerStart();
                         }
                         // ID : admin / PW : admin 일 경우에만 관리자페이지 입장
                         break;

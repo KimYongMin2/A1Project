@@ -33,15 +33,7 @@ public class MemberHandler {
 
 	String ID;
 	String passWord;
-	static private boolean chk7;
-
-	static {
-		chk7 = false;
-	}
-
-	public static boolean isChk7() {
-		return chk7;
-	}
+	private boolean chk7;
 
 	private static Connection con = JDBCconnecting.connecting();
 	private MemberCRUD memberCrud = MemberCRUD.getInstance();
@@ -243,8 +235,6 @@ public class MemberHandler {
 	public Member managerlogin() { // 관리자 로그인 처리 method
 
 		// return 문이 없어요
-		chk7 = false;
-
 		try {
 			System.out.println();
 			System.out.println("■■■■■■■■■■■ 관리자 로그인 ■■■■■■■■■■■");
@@ -255,25 +245,24 @@ public class MemberHandler {
 					System.out.print("▶ ID : ");
 					/*입력*/String ID = ScannerUtil.getInputString();
 					isEmpty(ID);
-					for(int i = 0 ; i < members.size() ; i++) {;
-					if(members.get(i).getId().equals("admin")) {
-						System.out.print("▶ PW : ");
-						/*입력*/String password = ScannerUtil.getInputString();
-						isEmpty(password);
-						if (members.get(i).getPassWord().equals("admin")) {
-							chk7 = true;
-							System.out.println("==============================");
-							System.out.println("▶ 관리자 로그인이 완료되었습니다!");
-							System.out.println("관리자 페이지로 이동합니다.");
-							System.out.println();
-							return members.get(i);
-						} else {
-							System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
-							System.out.println("[!] 다시 입력해주세요.");
-							System.out.println("==============================");
+					for(int i = 0 ; i < members.size() ; i++) {
+						if(ID.equals("admin") && members.get(i).getId().equals("admin")) {
+							System.out.print("▶ PW : ");
+							/*입력*/String password = ScannerUtil.getInputString();
+							isEmpty(password);
+							if (members.get(i).getPassWord().equals(password)) {
+								System.out.println("==============================");
+								System.out.println("▶ 관리자 로그인이 완료되었습니다!");
+								System.out.println("관리자 페이지로 이동합니다.");
+								System.out.println();
+								return members.get(i);
+							} else {
+								System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
+								System.out.println("[!] 다시 입력해주세요.");
+								System.out.println("==============================");
+							}
 						}
-					} 
-					} 
+					}
 					System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
 					System.out.println("[!] 다시 입력해주세요.");
 					System.out.println("==============================");
