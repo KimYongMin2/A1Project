@@ -253,6 +253,7 @@ public class MemberHandler {
 						/*입력*/String password = ScannerUtil.getInputString();
 						isEmpty(password);
 						if (members.get(i).getPassWord().equals("admin")) {
+							chk7 = true;
 							System.out.println("==============================");
 							System.out.println("▶ 관리자 로그인이 완료되었습니다!");
 							System.out.println("관리자 페이지로 이동합니다.");
