@@ -38,10 +38,10 @@ public class ViewReview {
 	}
 	@Override
 	public String toString() {
-		return "▶ 도서 이름 : " + bName
+		return "▶ 도 서 명 : " + bName
 				+"\n▶ 저   자 : " + bWriter
-				+"\n▶ 한줄평 : " + rComment
-				+"\n▶ 평점 : " + rScore +
+				+"\n▶ 한 줄 평 : " + rComment
+				+"\n▶ 평   점 : " + rScore +
 				"\n================================";
 	}
 	
