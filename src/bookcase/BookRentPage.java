@@ -70,12 +70,9 @@ public class BookRentPage implements Show {
 		bName = ScannerUtil.getInputString();
 
 		findBook();
-		if(!chk) {
-			System.out.println("[!] 해당 도서를 찾지 못하였습니다.");
-		} else { // chk = true
-			book = bookList.get(temp);
+		
+		if(chk){
 			if(bookList.get(temp).getbUsing().equals("false")) {
-				System.out.println("[!] 대여가 완료되었습니다.");
 				addUsingBook();
 			} else { // bUsing = true
 				System.out.println("[!] 이미 대여중인 책입니다.");
@@ -90,6 +87,11 @@ public class BookRentPage implements Show {
 				temp = i;
 				chk = true;
 			}
+		}
+		if(!chk) {
+			System.out.println("[!] 해당 도서를 찾지 못하였습니다.");
+		} else { // chk = true
+			book = bookList.get(temp);
 		}
 	}
 
@@ -112,5 +114,6 @@ public class BookRentPage implements Show {
 
 		rentalCrud.insertRental(con, usingBook);
 		bookCrud.updateBook(con, book);
+		System.out.println("[!] 대여가 완료되었습니다.");
 	}
 }
