@@ -41,7 +41,8 @@ public class RentalCRUD {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
+				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,14 +74,17 @@ public class RentalCRUD {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT * FROM BOOK WHERE BOOKCODE = "
-					+ "(SELECT BOOKCODE FROM RENTAL WHERE MEMBERCODE = ?)";
+			String sql = "SELECT BOOKCODE, BNAME, BWRITER, BPUBLISHER, BGENRE, BPRICE, "
+					+ "BUSING, BAGEUSING "
+					+ "FROM BOOK NATURAL JOIN RENTAL "
+					+ "WHERE MEMBERCODE = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, member.getMemberCode());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
+				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,7 +122,8 @@ public class RentalCRUD {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
+				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
