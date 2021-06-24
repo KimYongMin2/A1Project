@@ -75,9 +75,9 @@ public class ShowBookListPage implements Show {
 		if(books.isEmpty()) {
 			System.out.println(">> 랭킹이 존재하지 않습니다.");
 		} else {
-			for(Book book:books) {
-				System.out.println(book);
-				System.out.println();
+			for(int i = 0 ; i < books.size() ; i ++) {
+				System.out.println("▶ 순 위 : "+(i+1)+"위");
+				System.out.println("▶ 도서명 : "+books.get(i).getbName());
 			}
 		}
 	}

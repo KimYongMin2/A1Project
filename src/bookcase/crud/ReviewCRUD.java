@@ -13,6 +13,7 @@ public class ReviewCRUD {
 	public static ReviewCRUD getInstance() {
 		return reviewCrud;
 	}
+	
 	// 1. SELECT //모든 리뷰 가져오기
 	public ArrayList<Review> getReviewList(Connection con) {
 				
