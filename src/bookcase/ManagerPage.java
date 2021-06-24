@@ -67,6 +67,12 @@ public class ManagerPage implements Show {
     public void addBook(){
         System.out.print("▶ 도서명 : ");
         bName = ScannerUtil.getInputString();
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bName.equals(bookList.get(i).getbName())){
+                System.out.println("이미 존재하는 도서입니다");
+                return;
+            }
+        }
 
         System.out.print("▶ 저 자 : ");
         bWriter = ScannerUtil.getInputString();
