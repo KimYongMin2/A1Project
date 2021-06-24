@@ -351,6 +351,8 @@ public class MemberHandler {
 				reviewCrud.deleteReview(con, member);
 				memberCrud.deleteMember(con, member);
 				System.out.println("▶ 탈퇴 되었습니다.");
+				System.out.println("▶ 그동안 이용해주셔서 감사합니다 ◀");
+                System.exit(0); // 시스템 종료
 			} else {
 				System.out.println("▶ 탈퇴를 취소하였습니다.");
 			}
