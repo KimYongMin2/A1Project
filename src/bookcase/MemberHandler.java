@@ -247,22 +247,22 @@ public class MemberHandler {
 					/*입력*/String ID = ScannerUtil.getInputString();
 					isEmpty(ID);
 					for(int i = 0 ; i < members.size() ; i++) {;
-						if(members.get(i).getId().equals("admin")) {
-							System.out.print("▶ PW : ");
-							/*입력*/String password = ScannerUtil.getInputString();
-							isEmpty(password);
-							if (members.get(i).getPassWord().equals("admin")) {
-								System.out.println("==============================");
-								System.out.println("▶ 관리자 로그인이 완료되었습니다!");
-								System.out.println("관리자 페이지로 이동합니다.");
-								System.out.println();
-								return members.get(i);
-							} else {
-								System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
-								System.out.println("[!] 다시 입력해주세요.");
-								System.out.println("==============================");
-							}
-						} 
+					if(members.get(i).getId().equals("admin")) {
+						System.out.print("▶ PW : ");
+						/*입력*/String password = ScannerUtil.getInputString();
+						isEmpty(password);
+						if (members.get(i).getPassWord().equals("admin")) {
+							System.out.println("==============================");
+							System.out.println("▶ 관리자 로그인이 완료되었습니다!");
+							System.out.println("관리자 페이지로 이동합니다.");
+							System.out.println();
+							return members.get(i);
+						} else {
+							System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
+							System.out.println("[!] 다시 입력해주세요.");
+							System.out.println("==============================");
+						}
+					} 
 					} 
 					System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
 					System.out.println("[!] 다시 입력해주세요.");
