@@ -187,7 +187,7 @@ public class MemberHandler {
 				isEmpty(ID);
 				while(chkID) { //관리자 아이디로 가입못하게 막음
 					for(int i = 0 ; i < members.size() ; i++) {
-						if(members.get(i).getId().equals("admin")) {
+						if(ID.equals("admin")) {
 							System.out.println("[!] 해당 ID로는 로그인할 수 없습니다.");
 							System.out.println("확인 후 다시 입력해주세요.");
 							/*입력*/ID = ScannerUtil.getInputString();
@@ -343,14 +343,16 @@ public class MemberHandler {
 			System.out.println("[2] no");
 			int choose = ScannerUtil.getInputInteger();
 			if(choose == 1) {
-				reviewCrud.deleteReview(con, member);
-				memberCrud.deleteMember(con, member);
 				rentalBooks = rentalCrud.getMyRentalList(con, member);
 				if(rentalBooks.size() > 0) {
 					System.out.println("error : 대여하신 책을 먼저 반납하고 탈퇴해주세요.");
 					return;
 				}
+				reviewCrud.deleteReview(con, member);
+				memberCrud.deleteMember(con, member);
 				System.out.println("▶ 탈퇴 되었습니다.");
+				System.out.println("▶ 그동안 이용해주셔서 감사합니다 ◀");
+                System.exit(0); // 시스템 종료
 			} else {
 				System.out.println("▶ 탈퇴를 취소하였습니다.");
 			}

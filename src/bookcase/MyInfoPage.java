@@ -34,8 +34,8 @@ public class MyInfoPage implements Show {
                         break;
                     case 3: //회원 탈퇴
                         mh.leaveMember(member);
-                        System.out.println("▶ 그동안 이용해주셔서 감사합니다 ◀");
-                        System.exit(0); // 시스템 종료
+                        System.out.println();
+                        break;
                     case 4:
                     	System.out.println("[!] 종료합니다.");
                         break;
