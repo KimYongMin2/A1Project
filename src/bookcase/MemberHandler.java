@@ -33,7 +33,7 @@ public class MemberHandler {
 
 	String ID;
 	String passWord;
-	public boolean chk7;
+	public boolean chk7 = false;
 
 	private static Connection con = JDBCconnecting.connecting();
 	private MemberCRUD memberCrud = MemberCRUD.getInstance();
@@ -235,6 +235,7 @@ public class MemberHandler {
 	public Member managerlogin() { // 관리자 로그인 처리 method
 
 		// return 문이 없어요
+		chk7 = false;
 
 		try {
 			System.out.println();
@@ -252,6 +253,7 @@ public class MemberHandler {
 						/*입력*/String password = ScannerUtil.getInputString();
 						isEmpty(password);
 						if (members.get(i).getPassWord().equals("admin")) {
+							chk7 = true;
 							System.out.println("==============================");
 							System.out.println("▶ 관리자 로그인이 완료되었습니다!");
 							System.out.println("관리자 페이지로 이동합니다.");
