@@ -267,7 +267,7 @@ public class MemberHandler {
 							}
 						}
 					}
-					if (idCheck){
+					if (!idCheck){
 						System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
 						System.out.println("==============================");
 						return null;
