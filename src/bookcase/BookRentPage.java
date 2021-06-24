@@ -41,7 +41,7 @@ public class BookRentPage implements Show {
 				switch (menuButton) {
 				case 1:
 					// 대여
-					findBook();
+					usingBook();
 					break;
 				case 2:
 					// 종료
@@ -59,7 +59,7 @@ public class BookRentPage implements Show {
 	}
 
 
-	public void findBook(){
+	public void usingBook(){
 		// 책확인
 		chk = false;
 		bookList = bookCrud.getBookList(con);
@@ -69,16 +69,11 @@ public class BookRentPage implements Show {
 		System.out.println(">> 대여할 도서명을 입력해주세요 : ");
 		bName = ScannerUtil.getInputString();
 
-		for(int i = 0; i < bookList.size(); i++) {
-			if(bName.equals(bookList.get(i).getbName())) {
-				temp = i;
-				chk = true;
-				book = bookList.get(temp);
-			}
-		}
+		findBook();
 		if(!chk) {
 			System.out.println("[!] 해당 도서를 찾지 못하였습니다.");
 		} else { // chk = true
+			book = bookList.get(temp);
 			if(bookList.get(temp).getbUsing().equals("false")) {
 				System.out.println("[!] 대여가 완료되었습니다.");
 				addUsingBook();
@@ -86,6 +81,15 @@ public class BookRentPage implements Show {
 				System.out.println("[!] 이미 대여중인 책입니다.");
 			}
 
+		}
+	}
+
+	private void findBook() {
+		for(int i = 0; i < bookList.size(); i++) {
+			if(bName.equals(bookList.get(i).getbName())) {
+				temp = i;
+				chk = true;
+			}
 		}
 	}
 
