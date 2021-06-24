@@ -68,11 +68,11 @@ public class BookCRUD {
 
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, B.BGENRE, B.BPRICE, B.BUSING, \r\n"
-					+ "B.BAGEUSING FROM BOOK B, (SELECT BOOKCODE, AVG(RSCORE)\r\n"
-					+ "FROM REVIEW\r\n"
-					+ "GROUP BY BOOKCODE\r\n"
-					+ "ORDER BY AVG(RSCORE) DESC) R\r\n"
+			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, B.BGENRE, B.BPRICE, B.BUSING, "
+					+ "B.BAGEUSING FROM BOOK B, (SELECT BOOKCODE, AVG(RSCORE) "
+					+ "FROM REVIEW "
+					+ "GROUP BY BOOKCODE "
+					+ "ORDER BY AVG(RSCORE) DESC) R "
 					+ "WHERE B.BOOKCODE = R.BOOKCODE AND ROWNUM <=5";
 			rs = stmt.executeQuery(sql);
 
