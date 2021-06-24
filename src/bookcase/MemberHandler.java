@@ -7,7 +7,6 @@ import java.util.regex.*;
 import bookcase.crud.*;
 import bookcase.object.*;
 import bookcase.util.*;
-import oracle.net.aso.*;
 
 public class MemberHandler {
 
@@ -37,9 +36,11 @@ public class MemberHandler {
 	public boolean chk7;
 
 	private static Connection con = JDBCconnecting.connecting();
-	private  MemberCRUD memberCrud = MemberCRUD.getInstance();
-	private  ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
+	private MemberCRUD memberCrud = MemberCRUD.getInstance();
+	private ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
+	private RentalCRUD rentalCrud = RentalCRUD.getInstance();
 	private ArrayList<Member> members = new ArrayList<Member>();
+	private ArrayList<Book> rentalBooks = new ArrayList<Book>();
 
 	public void isEmpty(String string) { //공백이 입력될 때, 다시 입력 받는 method
 		while(true) {
@@ -246,22 +247,22 @@ public class MemberHandler {
 					/*입력*/String ID = ScannerUtil.getInputString();
 					isEmpty(ID);
 					for(int i = 0 ; i < members.size() ; i++) {;
-						if(members.get(i).getId().equals("admin")) {
-							System.out.print("▶ PW : ");
-							/*입력*/String password = ScannerUtil.getInputString();
-							isEmpty(password);
-							if (members.get(i).getPassWord().equals("admin")) {
-								System.out.println("==============================");
-								System.out.println("▶ 관리자 로그인이 완료되었습니다!");
-								System.out.println("관리자 페이지로 이동합니다.");
-								System.out.println();
-								return members.get(i);
-							} else {
-								System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
-								System.out.println("[!] 다시 입력해주세요.");
-								System.out.println("==============================");
-							}
-						} 
+					if(members.get(i).getId().equals("admin")) {
+						System.out.print("▶ PW : ");
+						/*입력*/String password = ScannerUtil.getInputString();
+						isEmpty(password);
+						if (members.get(i).getPassWord().equals("admin")) {
+							System.out.println("==============================");
+							System.out.println("▶ 관리자 로그인이 완료되었습니다!");
+							System.out.println("관리자 페이지로 이동합니다.");
+							System.out.println();
+							return members.get(i);
+						} else {
+							System.out.println("[!] 관리자 비밀번호가 일치하지 않습니다. ");
+							System.out.println("[!] 다시 입력해주세요.");
+							System.out.println("==============================");
+						}
+					} 
 					} 
 					System.out.println("[!] 관리자 아이디가 일치하지 않습니다. ");
 					System.out.println("[!] 다시 입력해주세요.");
@@ -325,14 +326,16 @@ public class MemberHandler {
 	}
 
 	public void leaveMember(Member member) { //회원 탈퇴 method
-		//탈퇴 할 때 리뷰 테이블도 전부 삭제해 줘야 함
-		System.out.println("■■■■■■■■■■■ 회 원 탈 퇴 ■■■■■■■■■■■");
 		/**
 		 *  integer타입 memberCode값을 전달받고, 
 		 *  기본키값인 memberCode값을 통해서 해당 계정을 식별해 내어
 		 *  탈퇴를 처리하도록 구현
-		 *  나중에 변경해야함
+		 *  또한 
+		 *  탈퇴 할 때 리뷰 테이블에 자기가 작성한 리뷰도 전부 삭제해 줘야 함(자동)
+		 *  탈퇴 할 때 대여중인 도서가 있으면 반납먼저 해달라고 뜨게 해야 함
 		 */
+
+		System.out.println("■■■■■■■■■■■ 회 원 탈 퇴 ■■■■■■■■■■■");
 
 		try {
 			System.out.println("[!] 정말 탈퇴하시겠습니까 ?");
@@ -342,6 +345,11 @@ public class MemberHandler {
 			if(choose == 1) {
 				reviewCrud.deleteReview(con, member);
 				memberCrud.deleteMember(con, member);
+				rentalBooks = rentalCrud.getMyRentalList(con, member);
+				if(rentalBooks.size() > 0) {
+					System.out.println("error : 대여하신 책을 먼저 반납하고 탈퇴해주세요.");
+					return;
+				}
 				System.out.println("▶ 탈퇴 되었습니다.");
 			} else {
 				System.out.println("▶ 탈퇴를 취소하였습니다.");
