@@ -150,7 +150,7 @@ public class ManagerPage implements Show {
                     for (int i = 0; i < bookList.size(); i++) {
                         if (bName.equals(bookList.get(i).getbName())){
                             System.out.println("이미 존재하는 도서의 이름입니다");
-                            break;
+                            return;
                         }
                     }
                     bookList.get(temp).setbName(bName);
