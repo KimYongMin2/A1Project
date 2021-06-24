@@ -17,11 +17,8 @@ public class JDBCconnecting {
 	public static Connection connecting() {
 		Connection con = null;
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return con;

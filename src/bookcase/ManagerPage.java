@@ -3,11 +3,10 @@ package bookcase;
 import java.sql.*;
 import java.util.*;
 
-import bookcase.crud.BookCRUD;
-import bookcase.object.Book;
-import bookcase.show.Show;
-import bookcase.util.JDBCconnecting;
-import bookcase.util.ScannerUtil;
+import bookcase.crud.*;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
 
 public class ManagerPage implements Show {
 	
