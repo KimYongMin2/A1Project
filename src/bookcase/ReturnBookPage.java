@@ -34,10 +34,6 @@ public class ReturnBookPage implements Show {
         return usingBooks;
     }
 
-    public void setUsingBooks(List<Using> usingBooks) {
-        usingBooks = usingBooks;
-    }
-
     public ReturnBookPage(Member member){
         this.member = member;
     }

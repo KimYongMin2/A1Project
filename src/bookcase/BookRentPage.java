@@ -31,14 +31,6 @@ public class BookRentPage implements Show {
     private List<Using> usingBooks = new ArrayList<>();
     private String bName;
 
-    public List<Using> getUsingBooks() {
-        return usingBooks;
-    }
-
-    public void setUsingBooks(List<Using> usingBooks) {
-        usingBooks = usingBooks;
-    }
-
     public BookRentPage(Member member){
         this.member = member;
     }

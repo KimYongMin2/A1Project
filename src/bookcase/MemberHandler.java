@@ -31,8 +31,6 @@ public class MemberHandler {
 	 *  @author 지원
 	 */
 
-	String ID;
-	String passWord;
 	private boolean chk7;
 
 	private static Connection con = JDBCconnecting.connecting();

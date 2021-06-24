@@ -27,13 +27,6 @@ public class ReviewAddPage implements Show {
 	private int temp;
 	private int menuButton;
 	private boolean chkFindBook;
-	public List<Review> getReviewList() {
-		return reviews;
-	}
-
-	public void setReviewList(ArrayList<Review> reviewList) {
-		this.reviews = reviewList;
-	}
 
 	public ReviewAddPage(Member member) {
 		this.member = member;
