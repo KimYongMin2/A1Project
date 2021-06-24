@@ -70,6 +70,8 @@ public class ReviewAddPage implements Show {
 				case 3:
 					System.out.println(">> 전체 도서 목록을 출력합니다");
 					System.out.println();
+					reviews = reviewCrud.getReviewList(con);
+					books = bookCrud.getBookList(con);
 					for (Book book : books) {
 						System.out.println(book);
 					}
@@ -156,9 +158,6 @@ public class ReviewAddPage implements Show {
 		books = bookCrud.getBookList(con);
 		boolean check = false;
 		while (!check) {
-			for (Book book : books) {
-				System.out.println(book);
-			}
 			System.out.println("================================");
 			System.out.print(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
 			String bName = ScannerUtil.getInputString();
