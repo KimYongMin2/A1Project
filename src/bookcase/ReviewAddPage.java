@@ -29,6 +29,7 @@ public class ReviewAddPage implements Show {
 	private Book book;
 	private int temp;
 	private int menuButton;
+	private boolean chkFindBook;
 	public List<Review> getReviewList() {
 		return reviews;
 	}
@@ -53,10 +54,12 @@ public class ReviewAddPage implements Show {
 				switch (menuButton) {
 				case 1:
 					findBook();
-					setReviewComment();
-					System.out.println("▶ 리뷰 작성이 완료되었습니다!"); 
-					System.out.println("=========================="); 
-					System.out.println();
+					if (chkFindBook) {
+						setReviewComment();
+						System.out.println("▶ 리뷰 작성이 완료되었습니다!");
+						System.out.println("==========================");
+						System.out.println();
+					}
 					break;
 				case 2:
 					System.out.println("▶ 작성된 리뷰 목록을 출력합니다");
@@ -156,8 +159,8 @@ public class ReviewAddPage implements Show {
 	public void findBook() {// 책확인
 		reviews = reviewCrud.getReviewList(con);
 		books = bookCrud.getBookList(con);
-		boolean check = false;
-		while (!check) {
+		chkFindBook = false;
+		while (!chkFindBook) {
 			System.out.println("================================");
 			System.out.print(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
 			String bName = ScannerUtil.getInputString();
@@ -166,11 +169,12 @@ public class ReviewAddPage implements Show {
 			for (int i = 0; i < books.size(); i++) {
 				if (bName.equals(books.get(i).getbName())) {
 					temp = i;
-					check = true;
+					chkFindBook = true;
 				}
 			}
-			if (!check) {
+			if (!chkFindBook) {
 				System.out.println("[!] 해당 도서를 찾을 수 없습니다.");
+				break;
 			} else {
 				book = books.get(temp);
 			}
