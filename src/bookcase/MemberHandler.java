@@ -248,7 +248,7 @@ public class MemberHandler {
 					/*입력*/String ID = ScannerUtil.getInputString();
 					isEmpty(ID);
 					for(int i = 0 ; i < members.size() ; i++) {
-						if(ID.equals("admin") && members.get(i).getId().equals("admin")) {
+						if(ID.equals("admin") && members.get(i).getId().equals(ID)) {
 							System.out.print("▶ PW : ");
 							/*입력*/String password = ScannerUtil.getInputString();
 							isEmpty(password);
