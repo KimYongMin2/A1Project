@@ -200,10 +200,6 @@ public class ManagerPage implements Show {
             System.out.println();
         }
     }
-    /**
-     * 전체 책 리스트 조회
-		아무것도 없으면 리스트가 없습니다라고 뜨게 수정하기 
-     */
 
     public void showUsingBookList() {
     	System.out.println(">> 현재 대여 상태인 도서 리스트를 출력합니다.");

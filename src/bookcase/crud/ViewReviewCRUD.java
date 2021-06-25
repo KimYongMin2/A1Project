@@ -14,7 +14,7 @@ public class ViewReviewCRUD {
 		return viewReviewCrud;
 	}
 	
-	// 1. SELECT //모든 리뷰 가져오기
+	// 1. SELECT //사용자가 리뷰를 볼 때, 책정보와 평점, 한줄평을 한 번에 볼 수 있게 처리
 	public ArrayList<ViewReview> getReviewList(Connection con) {
 				
 		ArrayList<ViewReview> list = new ArrayList<ViewReview>();
