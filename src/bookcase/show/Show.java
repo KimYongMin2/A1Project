@@ -35,7 +35,7 @@ public interface Show {
     }
 
     default void showBookManagerMenu() {
-        System.out.println("■■■■■■■■■■■ 도서 관리 ■■■■■■■■■■■");
+        System.out.println("■■■■■■■■■■■ 관리 페이지  ■■■■■■■■■■■■");
         System.out.println("1. 도서 추가 ");
         System.out.println("2. 도서 삭제 ");
         System.out.println("3. 도서 수정 ");
