@@ -1,21 +1,12 @@
 package bookcase.crud;
 
-import bookcase.object.Book;
+import java.sql.*;
+import java.util.*;
+
+import bookcase.object.*;
 import bookcase.util.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 public class BookCRUD {
-
-	/***
-	 * @author 지원
-	 */
-
 	/*싱글톤 처리*/
 	private BookCRUD() {}
 	private static BookCRUD bookCrud = new BookCRUD();
@@ -38,7 +29,8 @@ public class BookCRUD {
 
 			while(rs.next()){
 				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8)));
+					rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), 
+					rs.getString(8)));
 			}
 
 		} catch (SQLException e) {
@@ -61,8 +53,9 @@ public class BookCRUD {
 
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, B.BGENRE, B.BPRICE, B.BUSING, "
-					+ "B.BAGEUSING FROM BOOK B, (SELECT BOOKCODE, AVG(RSCORE) "
+			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, "
+					+ "B.BGENRE, B.BPRICE, B.BUSING, B.BAGEUSING "
+					+ "FROM BOOK B, (SELECT BOOKCODE, AVG(RSCORE) "
 					+ "FROM REVIEW "
 					+ "GROUP BY BOOKCODE "
 					+ "ORDER BY AVG(RSCORE) DESC) R "
@@ -71,7 +64,8 @@ public class BookCRUD {
 
 			while(rs.next()){
 				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8)));
+					rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), 
+					rs.getString(8)));
 			}
 
 		} catch (SQLException e) {
@@ -85,7 +79,7 @@ public class BookCRUD {
 	}
 
 	// 2. INSERT 메소드
-	public Book insertBook(Connection con, Book book){
+	public void insertBook(Connection con, Book book){
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -110,7 +104,6 @@ public class BookCRUD {
 		} finally {
 			CloseUtil.close(pstmt);
 		}
-		return book;
 	}
 
 	// 3. UPDATE 메소드

@@ -1,45 +1,37 @@
 package bookcase.crud;
 
-import bookcase.object.Member;
-import bookcase.util.*;
-
 import java.sql.*;
 import java.util.*;
 
+import bookcase.object.*;
+import bookcase.util.*;
+
 public class MemberCRUD {
-	
 	/*싱글톤 처리*/
 	private MemberCRUD() {}
 	private static MemberCRUD memberCrud = new MemberCRUD(); 
 	public static MemberCRUD getInstance() {
 		return memberCrud;
 	}
-	
 	// 1. SELECT
 	public static ArrayList<Member> getMemberList(Connection con) {
-		
 		ArrayList<Member> list = new ArrayList<Member>();
-		
 		Statement stmt = null;
 		ResultSet rs = null;
-		
 		try {
 			stmt = con.createStatement();
 			String sql = "SELECT * FROM MEMBER ORDER BY MemberCode";
 			rs = stmt.executeQuery(sql);
-			
 			while(rs.next()){
 				list.add(new Member(rs.getInt(1), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			CloseUtil.close(stmt);
 			CloseUtil.close(rs);
-		}
-		
+		}	
 		return list;
 	}
 
