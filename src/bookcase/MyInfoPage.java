@@ -1,7 +1,5 @@
 package bookcase;
 
-import java.sql.*;
-
 import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;
@@ -13,9 +11,7 @@ public class MyInfoPage implements Show {
 		this.member = member;
 	}
 	
-	private static Connection con = JDBCconnecting.connecting();
 	MemberHandler mh = new MemberHandler();
-	
     private int menuButton = 0;
 	
 	void MyInfoEditStrat() {

@@ -10,9 +10,9 @@ import bookcase.util.*;
 
 public class ManagerPage implements Show {
 	
-    private static Connection con = JDBCconnecting.connecting();
-	private static BookCRUD bookCrud = BookCRUD.getInstance();
-	private static MemberCRUD memberCrud = MemberCRUD.getInstance();
+    private Connection con = JDBCconnecting.connecting();
+	private BookCRUD bookCrud = BookCRUD.getInstance();
+	private MemberCRUD memberCrud = MemberCRUD.getInstance();
 	private ArrayList<Book> bookList = new ArrayList<Book>();
 	private ArrayList<Member> memberList = new ArrayList<Member>();
 	
@@ -33,31 +33,25 @@ public class ManagerPage implements Show {
                 memberList = memberCrud.getMemberList(con);
 
                 switch (menuButton) {
-                    case 1:
-                        // 추가
+                    case 1: // 도서 추가
                         addBook();
                         break;
-                    case 2:
-                        // 삭제
+                    case 2: // 도서 삭제
                         deleteBook(bookList);
                         break;
-                    case 3:
-                        // 수정
+                    case 3: // 도서 수정
                         reBook(bookList);
                         break;
-                    case 4:
-                        // 전체 첵 리스트 조회
+                    case 4: // 전체 첵 리스트 조회
                         showAllBookList(bookList);
                         break;
-                    case 5:
-                        // 대여중인 책 리스트 조회
+                    case 5: // 대여중인 책 리스트 조회
                         showUsingBookList();
                         break;
-                    case 6:
-                    	// 회원리스트 조회 
+                    case 6:	// 회원리스트 조회 
                     	showAllMember(memberList);
                     	break;
-                    case 7:
+                    case 7: // 뒤로가기
                     	System.out.println("[!] 전 단계로 돌아갑니다.");
                         break;
                     default:
@@ -207,8 +201,6 @@ public class ManagerPage implements Show {
             if(book.getbUsing().equals("true")) {
               System.out.println(book);
               System.out.println();
-              // System.out.println(book.getBookCode() + book.getbName());
-
             }
         }
     }

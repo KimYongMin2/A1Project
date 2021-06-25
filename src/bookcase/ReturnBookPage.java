@@ -13,16 +13,14 @@ import bookcase.util.JDBCconnecting;
 import bookcase.util.ScannerUtil;
 
 public class ReturnBookPage implements Show {
-    private boolean chk = false;
-    private boolean chk2 = false;
 
-    private static BookCRUD bookCrud = BookCRUD.getInstance();
-    private static Connection con = JDBCconnecting.connecting();
-    private static RentalCRUD rentalCrud = RentalCRUD.getInstance();
-    
+    private Connection con = JDBCconnecting.connecting();
+    private RentalCRUD rentalCrud = RentalCRUD.getInstance();
+    private BookCRUD bookCrud = BookCRUD.getInstance();
     private ArrayList<Book> bookList = new ArrayList<>();
     private ArrayList<Using> usingBooks = new ArrayList<>();
    
+    private boolean chk = false;
     private int menuButton = 0;
     private Member member;
     private Book book;
@@ -30,7 +28,6 @@ public class ReturnBookPage implements Show {
     private int temp = 0;
     private int temp2 = 0;
     private int bookcode=0;
-
     private String bName;
 
     public ReturnBookPage(Member member){
@@ -42,26 +39,21 @@ public class ReturnBookPage implements Show {
             try {
                 showBookReturnMenu();
                 menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택해주세요 : ");
-
                 switch (menuButton) {
-                    case 1:
-                        // 반납
+                    case 1: // 도서 반납
                         returnBook();
                         break;
-                    case 2:
-                        // 종료
+                    case 2: // 도서 종료
                         break;
                     default:
                         System.out.println("error : 잘못된 입력입니다.");
                         break;
                 }
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("error : 숫자로 입력해주세요.");
             }
         }
-
     }
-
 
     public void returnBook(){
         // 책확인
@@ -104,7 +96,6 @@ public class ReturnBookPage implements Show {
     	for(int i = 0; i < usingBooks.size() ; i ++) {
     		if(bookcode == usingBooks.get(i).getBookCode()) {
     			temp2 =i;
-    			chk2 = true;
     		}
     	}
     }

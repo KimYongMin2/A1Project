@@ -10,13 +10,13 @@ import bookcase.util.*;
 
 public class ShowBookListPage implements Show {
 
-	private static Connection con = JDBCconnecting.connecting();
-	private static BookCRUD bookCrud  = BookCRUD.getInstance();
-	private static RentalCRUD rentalCrud  = RentalCRUD.getInstance();
-	private static ReturnCRUD returnCrud = ReturnCRUD.getInstance();
+	private Connection con = JDBCconnecting.connecting();
+	private BookCRUD bookCrud  = BookCRUD.getInstance();
+	private RentalCRUD rentalCrud  = RentalCRUD.getInstance();
+	private ReturnCRUD returnCrud = ReturnCRUD.getInstance();
 	
-	private static ArrayList<Book> books = new ArrayList<>();
-	private static ArrayList<Return> returns = new ArrayList<>();
+	private ArrayList<Book> books = new ArrayList<>();
+	private ArrayList<Return> returns = new ArrayList<>();
 	private int menuButton = 0;
 	private Member member;
 
@@ -30,20 +30,16 @@ public class ShowBookListPage implements Show {
 				menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
 				
 				switch (menuButton) {
-					case 1:
-						// 내가 대여중인 도서 보기 (반납기한도)
+					case 1: // 내가 대여중인 도서 보기 (반납기한도)
 						showMyUsingBook(member);
 						break;
-					case 2:
-						// 별점랭킹 추천 조회
+					case 2: // 별점랭킹 추천 조회
 						showStarBook();
 						break;
-					case 3:
-						// 대여가능한 도서 조회
+					case 3: // 대여가능한 도서 조회
 						showCanUsingBook();
 						break;
-					case 4:
-						// 종료  case 6:
+					case 4: // 이전으로
 						System.out.println("[!] 전 단계로 돌아갑니다.");
 						break;
 					default:
@@ -94,5 +90,4 @@ public class ShowBookListPage implements Show {
 			}
 		}
 	}
-
 }

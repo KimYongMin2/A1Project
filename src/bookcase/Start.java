@@ -30,7 +30,7 @@ public class Start implements Show {
                         if (member != null) {
                             new ManagerPage().bookManagerStart();
                         }
-                        // ID : admin / PW : admin 일 경우에만 관리자페이지 입장
+                        // ID : admin일 경우에만 관리자페이지 입장
                         break;
                     case 3:
                         //회원가입

@@ -10,15 +10,13 @@ import bookcase.util.*;
 
 public class ReviewAddPage implements Show {
 	
-	//
-	private static Connection con = JDBCconnecting.connecting();
+	private Connection con = JDBCconnecting.connecting();
 	private ReviewCRUD reviewCrud = ReviewCRUD.getInstance();
 	private BookCRUD bookCrud = BookCRUD.getInstance();
 	private ViewReviewCRUD viewReviewCrud = ViewReviewCRUD.getInstance();
 	private ArrayList<Review> reviews = new ArrayList<>();
 	private ArrayList<Book> books = new ArrayList<>();
 	private ArrayList<ViewReview> viewReviews = new ArrayList<>();
-	//
 	
 	private double rScore; // 별점
 	private String rComment; // 한줄평
@@ -93,16 +91,10 @@ public class ReviewAddPage implements Show {
 		reviews = reviewCrud.getReviewList(con);
 		setScore();
 		setComment();
-
-		/**
-		 * 리뷰 DB에 넣게 처리
-		 */
-	
 		reviewCrud.insertReview(con, new Review
 				(0, member.getMemberCode(), 
 						book.getBookCode(), 
 						rScore, rComment));
-
 	}
 
 	private void setScore() {
@@ -125,7 +117,6 @@ public class ReviewAddPage implements Show {
 			}
 		}
 	}
-	
 	
 	private void setComment() {
 		showCommentMenu();
@@ -170,11 +161,3 @@ public class ReviewAddPage implements Show {
 		}
 	}
 }
-
-// 멤버코드 -> 받아서 (memberCode)
-// 책코드 -> 책 검색 (bookCode)
-
-// review class
-// 멤버코드get-책코드get-(String한줄평-float평점: 사용자가 직접입력)
-//
-// List<review> 만들어서 삽입
