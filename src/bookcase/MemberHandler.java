@@ -389,7 +389,7 @@ public class MemberHandler {
 				isEmpty(newID);
 				boolean chkId = Pattern.matches("^[a-zA-Z0-9]*$", newID);
 				if(!chkId) {
-					System.out.println("error : 잘못된 입력입니다.");
+					throw new MyMadeException("error : 잘못된 입력입니다.");
 				}
 				boolean chk = true;
 				if(members.size() > 0) {
