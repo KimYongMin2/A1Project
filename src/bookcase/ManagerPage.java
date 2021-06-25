@@ -174,8 +174,8 @@ public class ManagerPage implements Show {
                     break;
             }
             
-            bookCrud.updateBook(con, bookList.get(temp)); /*오류*/
-//            System.out.println("▶ 수정이 완료되었습니다.\n");
+            bookCrud.updateBook(con, bookList.get(temp));
+            System.out.println("▶ 수정이 완료되었습니다.\n");
             
         } else {
             System.out.println("[!] 수정할 데이터가 존재하지 않습니다.");
