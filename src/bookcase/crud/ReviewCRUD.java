@@ -44,7 +44,7 @@ public class ReviewCRUD {
 	}
 
 	// 2. INSERT 메소드
-	public Review insertReview(Connection con, Review review){
+	public void insertReview(Connection con, Review review){
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -66,7 +66,6 @@ public class ReviewCRUD {
 		} finally {
 			CloseUtil.close(pstmt);
 		}
-		return review;
 	}
 
 	// 3. DELETE // 탈퇴 할 때 작성자가 적은 모든 리뷰 날리기

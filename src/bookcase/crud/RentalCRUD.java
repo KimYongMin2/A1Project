@@ -146,7 +146,7 @@ public class RentalCRUD {
 	}
 
 	// 2. INSERT 메소드
-	public Using insertRental(Connection con, Using using){
+	public void insertRental(Connection con, Using using){
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -168,7 +168,6 @@ public class RentalCRUD {
 		} finally {
 			CloseUtil.close(pstmt);
 		}
-		return using;
 	}
 
 	// 4. DELETE 메소드
