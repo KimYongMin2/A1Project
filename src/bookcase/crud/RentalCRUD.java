@@ -148,7 +148,6 @@ public class RentalCRUD {
 	// 2. INSERT 메소드
 	public void insertRental(Connection con, Using using){
 
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
@@ -161,7 +160,7 @@ public class RentalCRUD {
 			pstmt.setInt(3, using.getMemberCode());
 			pstmt.setInt(4, using.getBookCode());
 
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -172,14 +171,14 @@ public class RentalCRUD {
 
 	// 4. DELETE 메소드
 	public void deleteRental(Connection con, int bCode) {
-		int result = 0;
+		
 		PreparedStatement pstmt = null;
 
 		try {
 			String deleteSql = "DELETE FROM RENTAL WHERE BOOKCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
 			pstmt.setInt(1, bCode);
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -46,7 +46,6 @@ public class ReviewCRUD {
 	// 2. INSERT 메소드
 	public void insertReview(Connection con, Review review){
 
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
@@ -59,7 +58,7 @@ public class ReviewCRUD {
 			pstmt.setDouble(3, review.getrScore());
 			pstmt.setString(4, review.getrComment());
 
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

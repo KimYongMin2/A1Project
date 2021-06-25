@@ -81,7 +81,6 @@ public class BookCRUD {
 	// 2. INSERT 메소드
 	public void insertBook(Connection con, Book book){
 
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
@@ -97,7 +96,7 @@ public class BookCRUD {
 			pstmt.setString(6, book.getbUsing());
 			pstmt.setString(7, book.getbAgeUsing());
 
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,11 +108,11 @@ public class BookCRUD {
 	// 3. UPDATE 메소드
 	public void updateBook(Connection con, Book book) {
 
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
-			String updateSql = "UPDATE BOOK SET BNAME = ?, BWRITER = ?, BPUBLISHER = ?, BGENRE = ?, BPRICE = ?"
+			String updateSql = "UPDATE BOOK SET BNAME = ?, BWRITER = ?, "
+					+ "BPUBLISHER = ?, BGENRE = ?, BPRICE = ?"
 					+ ", BUSING = ?, BAGEUSING = ? WHERE BOOKCODE = ?";
 			pstmt = con.prepareStatement(updateSql);
 
@@ -126,7 +125,7 @@ public class BookCRUD {
 			pstmt.setString(7, book.getbAgeUsing());
 			pstmt.setInt(8, book.getBookCode());
 
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -137,14 +136,13 @@ public class BookCRUD {
 
 	// 4. DELETE 메소드
 	public void deleteBook(Connection con, Book book) {
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
 			String deleteSql = "DELETE FROM BOOK WHERE BOOKCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
 			pstmt.setInt(1, book.getBookCode());
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

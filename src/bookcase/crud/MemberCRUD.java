@@ -37,8 +37,7 @@ public class MemberCRUD {
 
 	// 2. INSERT 메소드
 	public Member insertMember(Connection con, Member member){
-		
-		int result = 0;
+
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -53,7 +52,7 @@ public class MemberCRUD {
 			pstmt.setString(5, member.getPhoneNum());
 			pstmt.setString(6, member.getEmail());
 				
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,8 +64,7 @@ public class MemberCRUD {
 
 	// 3. UPDATE 메소드
 	public void updateMember(Connection con, Member member) {
-		
-		int result = 0;
+
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -81,7 +79,7 @@ public class MemberCRUD {
 			pstmt.setString(6, member.getEmail());
 			pstmt.setInt(7, member.getMemberCode());
 				
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,14 +90,13 @@ public class MemberCRUD {
 	
 	// 4. DELETE 메소드
 	public void deleteMember(Connection con, Member member) {
-		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
 			String deleteSql = "DELETE FROM MEMBER WHERE MEMBERCODE = ?";
 			pstmt = con.prepareStatement(deleteSql);
 			pstmt.setInt(1, member.getMemberCode());
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) { // 보통 예외 던지지 않고, 여기서 처리함
 			e.printStackTrace();
