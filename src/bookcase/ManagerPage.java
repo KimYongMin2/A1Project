@@ -25,7 +25,7 @@ public class ManagerPage implements Show {
     private int chkAge;
 
     public void bookManagerStart(){
-        while (menuButton != 6) {
+        while (menuButton != 7) {
             try {
                 showBookManagerMenu();
                 menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
