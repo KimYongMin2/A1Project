@@ -216,6 +216,9 @@ public class ManagerPage implements Show {
     public void showAllMember(ArrayList<Member> members) {
     	System.out.println(">>전체 회원 리스트를 출력합니다.");
     	for(Member member: members) {
+    		if(member.getId().equals("admin")) { // 관리자 제외
+    			continue;
+    		}
     		System.out.println(member);
     		System.out.println();
     	}
