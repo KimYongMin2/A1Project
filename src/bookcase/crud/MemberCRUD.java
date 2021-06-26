@@ -14,7 +14,7 @@ public class MemberCRUD {
 		return memberCrud;
 	}
 	// 1. SELECT
-	public static ArrayList<Member> getMemberList(Connection con) {
+	public ArrayList<Member> getMemberList(Connection con) {
 		ArrayList<Member> list = new ArrayList<Member>();
 		Statement stmt = null;
 		ResultSet rs = null;

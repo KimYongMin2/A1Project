@@ -1,10 +1,11 @@
-package bookcase;
+package bookcase.page;
 
-import bookcase.object.Member;
-import bookcase.show.Show;
-import bookcase.util.ScannerUtil;
+import bookcase.*;
+import bookcase.object.*;
+import bookcase.show.*;
+import bookcase.util.*;
 
-public class MemberPage implements Show {
+public class MemberPage extends Common implements Show {
     private int menuButton = 0;
     private Member member;
     public MemberPage(Member member){
@@ -40,8 +41,9 @@ public class MemberPage implements Show {
                         new MyInfoPage(member).MyInfoEditStrat();
                         break;
                     case 6:
-                        // 종료
-                    	System.out.println("[!] 종료합니다.");
+                        // 이전 단계
+                    	System.out.println("▶ 로그아웃이 완료되었습니다!");
+                    	System.out.println();
                         break;
                     default:
                     	System.out.println("error : 잘못된 입력입니다.");

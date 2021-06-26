@@ -1,7 +1,6 @@
-package bookcase;
+package bookcase.page;
 
-import java.sql.*;
-
+import bookcase.*;
 import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;
@@ -12,32 +11,30 @@ public class MyInfoPage implements Show {
 	public MyInfoPage(Member member) {
 		this.member = member;
 	}
-	
-	private static Connection con = JDBCconnecting.connecting();
-	MemberHandler mh = new MemberHandler();
-	
     private int menuButton = 0;
 	
-	void MyInfoEditStrat() {
+	public void MyInfoEditStrat() {
 		while (menuButton != 4) {
 		    try {
                 showEditMyInfoMenu();
+                MemberHandler mh = new MemberHandler();
                 menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택하세요 : ");
                 switch (menuButton) {
                 	case 1: // 내 정보 확인하기
                 		mh.showMyInfo(member);
                 		System.out.println();
                 		break;
-                    case 2: //회원 정보 수정
+                    case 2: // 회원 정보 수정
                         mh.updateMember(member);
                         System.out.println();
                         break;
-                    case 3: //회원 탈퇴
+                    case 3: // 회원 탈퇴
                         mh.leaveMember(member);
                         System.out.println();
                         break;
-                    case 4:
-                    	System.out.println("[!] 종료합니다.");
+                    case 4: // 이전 단계
+                    	System.out.println("[!] 이전 단계로 돌아갑니다.");
+    					System.out.println();
                         break;
                     default:
                     	System.out.println("error : 잘못된 입력입니다.");

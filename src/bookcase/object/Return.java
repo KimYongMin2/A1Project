@@ -72,13 +72,14 @@ public class Return {
 
 	@Override
 	public String toString() {
-		return "■■■■■■■■■■ 대여 도서 목록 ■■■■■■■■■■" +
-		"\n▶ 도서 이름 : " + bName +
+		return 
+		"▶ 도서 이름 : " + bName +
 		"\n▶ 저   자 : " + bWriter +
 		"\n▶ 출 판 사 : " + bPublisher +
 		"\n▶ 장   르 : " + bGenre +
 		"\n▶ 대여 일자 : " + rentalDate +
-		"\n▶ 반납예정일 : " + returnDate;
+		"\n▶ 반납예정일 : " + returnDate +
+		"\n================================";
 	}
 	
 	

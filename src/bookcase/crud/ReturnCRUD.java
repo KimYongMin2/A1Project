@@ -18,7 +18,7 @@ public class ReturnCRUD {
 		return returnCrud;
 	}
 
-	// 1. SELECT //리턴테이블과 책테이블 조인해서 원하는 값 뽑기 (내가 대여한 
+	// 1. SELECT //리턴테이블과 책테이블 조인해서 원하는 값 뽑기 (내가 대여한 책정보, 대여날짜, 반납날짜 얻기
 	public ArrayList<Return> getReturnList(Connection con, Member member) {
 
 		ArrayList<Return> list = new ArrayList<Return>();

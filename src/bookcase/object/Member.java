@@ -65,13 +65,15 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "■■■■■■■■ 회원 정보 ■■■■■■■■" +
-				"\n▶ I    D : " + id +
-				"\n▶ P    W : " + passWord +
+		return 
+				"▶ 아 이 디 : " + id +
+				"\n▶ 비밀 번호 : " + passWord +
 				"\n▶ 이    름 : " + mName +
 				"\n▶ 나    이 : " + age +
 				"\n▶ 연 락 처 : " + phoneNum +
-				"\n▶ 이 메 일 : " + email;
+				"\n▶ 이 메 일 : " + email + 
+				"\n▶ 회원코드 : " + memberCode +
+				"\n================================";
 	}
 
 

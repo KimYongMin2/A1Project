@@ -17,7 +17,7 @@ import java.util.*;
 public class RentalCRUD {
 
 	/* 싱글톤 처리 */
-	private RentalCRUD() {
+	public RentalCRUD() {
 	}
 
 	private static RentalCRUD rentalCRUD = new RentalCRUD();
@@ -27,9 +27,9 @@ public class RentalCRUD {
 	}
 
 	// 1. SELECT // 대여중인 모든 도서 가져오기: 관리자가 사용
-	public ArrayList<Book> getRentalList(Connection con) {
+	public ArrayList<Book> bookList(Connection con) {
 
-		ArrayList<Book> list = new ArrayList<Book>();
+		ArrayList<Book> bookList = new ArrayList<Book>();
 
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -42,7 +42,7 @@ public class RentalCRUD {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				list.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), 
+				bookList.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), 
 						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),  rs.getString(8)));
 			}
 		} catch (SQLException e) {
@@ -51,7 +51,7 @@ public class RentalCRUD {
 			CloseUtil.close(stmt);
 			CloseUtil.close(rs);
 		}
-		return list;
+		return bookList;
 	}
 
 	// 1-2. SELECT 

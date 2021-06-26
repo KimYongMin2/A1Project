@@ -56,15 +56,5 @@ public class Review {
 	public void setrComment(String rComment) {
 		this.rComment = rComment;
 	}	
-	
+    
 }
-
-//리뷰코드
-//회원코드 memberCode -member
-//도서코드 BookCode -Book
-//평점 RScore - reviewadd
-//한줄평 RComment - reviewadd  
-
-// 추가 join
-//도서명 bName
-//저자 bWriter
