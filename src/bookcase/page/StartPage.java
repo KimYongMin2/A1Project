@@ -28,8 +28,8 @@ public class StartPage implements Show {
                         if (member != null) {
                             new ManagerPage().bookManagerStart();
                          // 관리자ID admin 로그인 할 경우에만 ManagerPage 입장
-                        }
-                        break;
+                        } break;
+                        // ID : admin일 경우에만 관리자페이지 입장
                     case 3: // 회원가입
                         mh.joinMember();
                         break;

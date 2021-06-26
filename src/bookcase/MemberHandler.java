@@ -1,12 +1,17 @@
 package bookcase;
 
-import java.sql.*;
-import java.util.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.regex.Pattern;
 
-import bookcase.crud.*;
-import bookcase.object.*;
-import bookcase.util.*;
+import bookcase.crud.MemberCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.crud.ReviewCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.util.Common;
+import bookcase.util.MyMadeException;
+import bookcase.util.ScannerUtil;
 
 public class MemberHandler extends Common {
 
@@ -468,7 +473,7 @@ public class MemberHandler extends Common {
 	}
 
 	public void showMyInfo(Member member) { // 내 정보를 확인시켜주는 method
-		System.out.println("\n■■■■■■■■■■■ 내 정보 ■■■■■■■■■■■");
+		System.out.println("■■■■■■■■■■■ 내 정 보 ■■■■■■■■■■■");
 		System.out.println(member);
 	}
 
