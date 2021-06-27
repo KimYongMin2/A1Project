@@ -2,8 +2,7 @@ package bookcase.object;
 
 /***
  * 
- * @author 지원
- * 0627
+ * @author 지원 (0627)
  * 매니저 관리페이지 내 "현재 대여중인 도서" 목록 수정
  * 기존 : bUsing 값이 true인 BOOK 테이블 조회
  * 변경 : BOOK 테이블 +  MEMBER, RENTAL 테이블 조인
