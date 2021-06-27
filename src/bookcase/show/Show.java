@@ -3,7 +3,7 @@ package bookcase.show;
 public interface Show {
 	
     default void showStartMenu() {
-    	System.out.println("■■■■■  도서대여 서비스 <책꽂이>  ■■■■■");
+    	System.out.println("■■■■■ 도서대여 서비스 <책꽂이> ■■■■■");
     	System.out.println("■■■■■■■■■■■ H O M E ■■■■■■■■■■■");
         System.out.println("1. 회원 로그인");
         System.out.println("2. 관리자 로그인");
