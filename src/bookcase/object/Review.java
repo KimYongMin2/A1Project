@@ -8,7 +8,6 @@ public class Review {
 	private String rComment;
 	
 	public Review(int reviewCode, int memberCode, int bookCode, double rScore, String rComment) {
-		super();
 		this.reviewCode = reviewCode;
 		this.memberCode = memberCode;
 		this.bookCode = bookCode;

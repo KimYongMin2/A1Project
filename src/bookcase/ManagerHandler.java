@@ -9,9 +9,13 @@ import bookcase.util.*;
 
 public class ManagerHandler extends Common implements Show {
 
+	private ArrayList<mUsingBook> mUsingBooks = new ArrayList<mUsingBook>();
 	private BookCRUD bookCrud = BookCRUD.getInstance();
+	private RentalCRUD rentalCrud = RentalCRUD.getInstance();
 	private int chkAge;
 
+	
+	
 	public void addBook(){
 		bName = ScannerUtil.getInputStringS("▶ 도서명 : ");
 		if (checkSameBookName()) return;
@@ -131,16 +135,26 @@ public class ManagerHandler extends Common implements Show {
 	}
 	
 
-	public void showUsingBookList(ArrayList<Book> bookList) {
+	public void showmUsingBookList(ArrayList<mUsingBook> mUsingBooks) {
+		mUsingBooks = rentalCrud.mUsingBooks(con);
 		System.out.println("\n>> 현재 대여 상태인 도서 리스트를 조회합니다.");
 		System.out.println("■■■■■■■■■■■ 대여 도서 목록 ■■■■■■■■■■■");
-		for (Book book : bookList) {
-			if(book.getbUsing().equals("true")) {
-				System.out.println(book);
-			}
+		if(mUsingBooks.size() > 0) {
+			for (int i = 0; i < mUsingBooks.size(); i++) {
+				System.out.println(mUsingBooks.get(i));
+			} 
+		} else {
+			System.out.println("[!] 대여 상태인 도서 존재하지 않습니다.");
 		}
 		System.out.println();
 	}
+//		for (BUsingbook busingBook : BUsingBook) {
+//			if(book.getbUsing().equals("true")) {
+//				System.out.println(book);
+//			}
+//		}
+//		System.out.println();
+//	}
 
 	public void showAllMember(ArrayList<Member> members) {
 		System.out.println("\n>> 전체 회원 리스트를 출력합니다.");

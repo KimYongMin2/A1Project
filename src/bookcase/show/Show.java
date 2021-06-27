@@ -89,7 +89,7 @@ public interface Show {
     default void showScoreMenu() {
         System.out.println("\n■■■■■■■■■■■ 평      점 ■■■■■■■■■■■");
         System.out.println(">> 평점을 입력해주세요.");
-        System.out.println("[!]평점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
+        System.out.println("[!] 평점은 0 ~ 5점까지 입력 가능합니다.");
         System.out.println("================================");
     }
 
@@ -103,7 +103,7 @@ public interface Show {
     default void showScoreError() {
         System.out.println("================================");
         System.out.println("[!] 입력할 수 없는 평점입니다.");
-        System.out.println("[!] 평점은 0 ~ 5 점 사이로 소수점 한자리까지 입력 가능합니다.");
+        System.out.println("[!] 평점은 0 ~ 5점까지 입력 가능합니다.");
         System.out.println("================================");
     }
 
@@ -114,10 +114,10 @@ public interface Show {
         System.out.println("================================");
     }
 
-    default void showReturnBookPage() {
-        System.out.println(">> 반납 페이지 입니다");
-        System.out.println("================================");
-    }
+//    default void showReturnBookPage() {
+//        System.out.println(">> 반납 페이지 입니다");
+//        System.out.println("================================");
+//    }
 
     default void showRentalBookPage() {
         System.out.println(">> 대여 페이지 입니다.");

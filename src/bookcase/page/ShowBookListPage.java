@@ -39,7 +39,7 @@ public class ShowBookListPage implements Show {
 						break;
 				}
 			} catch (NumberFormatException e){
-                System.out.println("error : 숫자로 입력해주세요");
+                System.out.println("error : 숫자로 입력해주세요. \n");
 			}
 		}
 	}

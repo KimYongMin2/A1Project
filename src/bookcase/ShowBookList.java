@@ -33,7 +33,7 @@ public class ShowBookList extends Common {
 		System.out.println("\n>> <책꽂이> 현재 도서 랭킹입니다.");
 		System.out.println("■■■■■■■■■■■ 랭    킹 ■■■■■■■■■■■");
 		if(bookList.isEmpty()) {
-			System.out.println(">> 랭킹이 존재하지 않습니다.");
+			System.out.println(">> 랭킹이 존재하지 않습니다.\n");
 		} else {
 			for(int i = 0 ; i < bookList.size() ; i ++) {
 				System.out.println("<" + (i+1) + "위> " + bookList.get(i).getbName());

@@ -14,6 +14,7 @@ public class BookCRUD {
 		return bookCrud;
 	}
 
+	
 	// 1. SELECT //전체 책 가져오기
 	public ArrayList<Book> getBookList(Connection con) {
 
@@ -43,7 +44,13 @@ public class BookCRUD {
 		return list;
 	}
 	
+	
 	// 1-2. SELECT 메소드: 별점 상위 5개 책 리스트 가져오기
+	/**
+	 * @author 지원
+	 * 0627
+	 * 쿼리문 수정
+	 */
 	public ArrayList<Book> getBestBookList(Connection con) {
 
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -53,13 +60,12 @@ public class BookCRUD {
 
 		try {
 			stmt = con.createStatement();
-			String sql = "SELECT B.BOOKCODE, B.BNAME, B.BWRITER, B.BPUBLISHER, "
-					+ "B.BGENRE, B.BPRICE, B.BUSING, B.BAGEUSING "
-					+ "FROM BOOK B, (SELECT BOOKCODE, AVG(RSCORE) "
-					+ "FROM REVIEW "
-					+ "GROUP BY BOOKCODE "
-					+ "ORDER BY AVG(RSCORE) DESC) R "
-					+ "WHERE B.BOOKCODE = R.BOOKCODE AND ROWNUM <=5";
+			String sql = "SELECT BOOKCODE, BNAME, BWRITER, BPUBLISHER, BGENRE, BPRICE, BUSING, BAGEUSING "
+					+ "FROM BOOK NATURAL JOIN REVIEW "
+					+ "WHERE BOOKCODE = BOOKCODE AND ROWNUM <=5 "
+					+ "GROUP BY BOOKCODE, BNAME, BWRITER, BPUBLISHER, BGENRE, BPRICE, BUSING, BAGEUSING "
+					+ "ORDER BY AVG(RSCORE) DESC";
+			
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()){
@@ -78,6 +84,8 @@ public class BookCRUD {
 		return list;
 	}
 
+	
+	
 	// 2. INSERT 메소드
 	public void insertBook(Connection con, Book book){
 
@@ -105,6 +113,7 @@ public class BookCRUD {
 		}
 	}
 
+	
 	// 3. UPDATE 메소드
 	public void updateBook(Connection con, Book book) {
 
@@ -133,6 +142,7 @@ public class BookCRUD {
 			CloseUtil.close(pstmt);
 		}
 	}
+	
 
 	// 4. DELETE 메소드
 	public void deleteBook(Connection con, Book book) {

@@ -5,7 +5,7 @@ import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;
 
-public class ReturnBookPage implements Show {
+public class ReturnBookPage extends ShowBookList implements Show {
 	
 	private Member member;
 	private int menuButton = 0;
@@ -22,6 +22,7 @@ public class ReturnBookPage implements Show {
 				menuButton = ScannerUtil.getInputIntegerS(">> 원하시는 메뉴를 선택해주세요 : ");
 				switch (menuButton) {
 				case 1: // 도서 반납
+					showMyUsingBook(member);
 					returnbooks.returnBook();
 					break;
 				case 2: // 도서 종료

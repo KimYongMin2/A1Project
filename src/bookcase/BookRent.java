@@ -38,18 +38,27 @@ public class BookRent extends Common implements Show {
 		}
 	}
 
+	
 	public void addUsingBook() {
 		// 대여리스트에 책 리스트 추가
 		// 대여 날짜 오늘로 설정
-		Date today = new Date();        
-		SimpleDateFormat date = new SimpleDateFormat("yyMMdd");
-		String toDay = date.format(today);
+		
+		/***
+		 * @author 지원
+		 * SQL쿼리문 수정
+		 */
 
+		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+
+		Date date = cal.getTime();
+		String toDay = sdf.format(date);
+		
 		// 대여기간 1주일 기한
-		Calendar week = Calendar.getInstance();
-		week.add(Calendar.DATE , +7);
-		String afterWeek = new java.text.SimpleDateFormat("yyMMdd").format(week.getTime());    	
-
+		cal.add(Calendar.DATE, 7);
+		String afterWeek = sdf.format(cal.getTime());
+		
+		
 		Using usingBook = new Using(0, toDay, afterWeek, member.getMemberCode(), book.getBookCode());
 
 		book.setbUsing("true"); // 아까 담아놨던 bookList.get(temp)의 using 값을 true로 바꿈
@@ -57,5 +66,6 @@ public class BookRent extends Common implements Show {
 		rentalCrud.insertRental(con, usingBook); //대여 테이블에 위의 내용 반영
 		bookCrud.updateBook(con, book);
 		System.out.println("▶ 대여가 완료되었습니다.\n");
+		
 	}
 }

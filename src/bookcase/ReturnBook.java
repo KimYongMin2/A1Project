@@ -24,7 +24,7 @@ public class ReturnBook extends Common implements Show {
 		bookFindChk = false;
 		bookList = rentalCrud.getMyRentalList(con, member);
 		usingBooks = rentalCrud.getRentalTable(con);
-		showReturnBookPage();
+//		showReturnBookPage();
 
 		System.out.print(">> 반납하실 도서명을 입력하세요 : ");
 		bName = ScannerUtil.getInputString();
@@ -34,7 +34,7 @@ public class ReturnBook extends Common implements Show {
 		findBookCode();
 
 		if(!bookFindChk) {
-			System.out.println("[!] 반납실패. 다시 확인해주세요.");
+			System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
 		} else { // chk = true
 			use = usingBooks.get(temp);
 			checkUsingbook = setCheckUsingBook(book);
@@ -42,7 +42,7 @@ public class ReturnBook extends Common implements Show {
 				deleteUsingBook();
 				System.out.println("▶ 반납이 완료되었습니다.\n");
 			}else{
-				System.out.println("[!] 반납실패. 다시 확인해주세요.");
+				System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
 			}
 		}
 	}
