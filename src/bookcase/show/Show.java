@@ -88,14 +88,14 @@ public interface Show {
 
     default void showScoreMenu() {
         System.out.println("\n■■■■■■■■■■■ 평      점 ■■■■■■■■■■■");
-        System.out.println("평점을 입력해주세요");
-        System.out.println("평점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
+        System.out.println(">> 평점을 입력해주세요.");
+        System.out.println("[!]평점은 0 ~ 5 점 사이로 소수점 한 자리까지 입력 가능합니다.");
         System.out.println("================================");
     }
 
     default void showCommentMenu() {
         System.out.println("\n■■■■■■■■■■■ 한  줄  평 ■■■■■■■■■■■");
-        System.out.println("한줄평을 입력해주세요.");
+        System.out.println(">> 한줄평을 입력해주세요.");
         System.out.println("한줄평은 40자까지 입력 가능합니다.");
         System.out.println("================================");
     }
