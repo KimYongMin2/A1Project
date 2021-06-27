@@ -1,5 +1,4 @@
 
-
 -- 테이블 값 날림
 DELETE FROM REVIEW;
 DELETE FROM RENTAL;
@@ -40,10 +39,12 @@ BUsing Varchar2(50),
 BAgeUsing Varchar2(50)
 );
 
+-- 0627 지원 수정
+-- 대여일자, 반납일자 쿼리문 수정 (문자값으로 변환 YY-MM-DD)
 Create Table Rental (
 	Rentalcode Number(4) Constraint Rental_Code_Pk Primary Key, /* 대여코드 */
-	Rentaldate Date Default Sysdate Constraint Retal_Rentaldate_Nn Not Null, /* 대여날짜 */
-	Returndate Date Default Sysdate+7 Constraint Retal_Returndate_Nn Not Null, /* 반납날짜 */
+	Rentaldate  varchar2(50) constraint Retal_Rentaldate_Nn Not Null, /* 대여날짜 */
+	Returndate  varchar2(50) constraint Retal_Returndate_Nn Not Null, /* 반납날짜 */
 	Membercode Number(4) Not Null Constraint Rental_Membercode_Fk References Member (Membercode), /* 회원코드 */
 	Bookcode Number(4) Not Null Constraint Rental_Bookcode_Fk References Book (Bookcode) /* 도서코드 */
 );
