@@ -1,6 +1,7 @@
 package bookcase.page;
 
-import bookcase.*;
+import bookcase.handler.ReturnBook;
+import bookcase.handler.ShowBookList;
 import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;

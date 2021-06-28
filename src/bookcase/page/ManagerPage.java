@@ -3,8 +3,8 @@ package bookcase.page;
 import java.sql.*;
 import java.util.*;
 
-import bookcase.*;
 import bookcase.crud.*;
+import bookcase.handler.ManagerHandler;
 import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;

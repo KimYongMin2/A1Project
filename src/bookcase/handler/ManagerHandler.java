@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.handler;
 
 import java.util.ArrayList;
 

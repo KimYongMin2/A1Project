@@ -46,7 +46,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="bookcase.MemberHandler" project="BookcaseMiniProject" 
+  <class id="6" language="java" name="bookcase.handler.MemberHandler" project="BookcaseMiniProject"
     file="/BookcaseMiniProject/src/bookcase/MemberHandler.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="120" y="474"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

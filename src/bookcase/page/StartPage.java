@@ -1,6 +1,6 @@
 package bookcase.page;
 
-import bookcase.*;
+import bookcase.handler.MemberHandler;
 import bookcase.object.*;
 import bookcase.show.*;
 import bookcase.util.*;
