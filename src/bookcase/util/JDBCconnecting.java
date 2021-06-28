@@ -8,12 +8,6 @@ public class JDBCconnecting {
 	private static String user = "USER1";
 	private static String password = "tiger";
 	
-	private JDBCconnecting() {}
-	private static JDBCconnecting jdbc = new JDBCconnecting();	
-	public static JDBCconnecting getInstence() {
-		return jdbc;
-	}
-	
 	public static Connection connecting() {
 		Connection con = null;
 		try {
