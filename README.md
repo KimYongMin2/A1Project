@@ -14,15 +14,15 @@
 - 2021.06.21 ~ 2021.06.28
 
 # 핵심기능✔
-- 설계
-+ Usecase Diagram
-+ ERD Diagram
-+ Class Diagram
+* 설계
+  - Usecase Diagram
+  - ERD Diagram
+  - Class Diagram
 
-- 구현 기술
-+ JAVA
-+ JDBC
-+ Oracle
+* 구현 기술
+  - JAVA
+  - JDBC
+  - Oracle
 
 # 완성 PPT📙
 + PPT 조회 [여기](https://docs.google.com/presentation/d/1SXyDnyQgXCsvxtBKe6qt0Q84MWUqOsxCx2qsq6qyj7U/edit#slide=id.ge2642960bc_2_23)
