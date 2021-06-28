@@ -12,8 +12,8 @@ public class Common {
 	protected Member member;
 	protected Book book;
 	protected boolean bookFindChk = false;
-	protected boolean checkUsingbook;
-	protected int bookcode, bPrice;
+	protected boolean checkUsingBook;
+	protected int bookCode, bPrice;
 	protected String bName, bWriter, bPublisher, bGenre, bAgeUsing;
 
 	protected boolean setFindBookCheck(Book book) {
@@ -30,11 +30,11 @@ public class Common {
 	protected boolean setCheckUsingBook(Book book) {
 		if(bookFindChk){
 			if(book.getbUsing().equals("false")) {
-				checkUsingbook = false;
+				checkUsingBook = false;
 			} else {
-				checkUsingbook = true;
+				checkUsingBook = true;
 			}
 		}
-		return checkUsingbook;
+		return checkUsingBook;
 	}
 }

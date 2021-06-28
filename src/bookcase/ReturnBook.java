@@ -37,8 +37,8 @@ public class ReturnBook extends Common implements Show {
 			System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
 		} else { // chk = true
 			use = usingBooks.get(temp);
-			checkUsingbook = setCheckUsingBook(book);
-			if(checkUsingbook) {
+			checkUsingBook = setCheckUsingBook(book);
+			if(checkUsingBook) {
 				deleteUsingBook();
 				System.out.println("▶ 반납이 완료되었습니다.\n");
 			}else{

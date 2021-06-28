@@ -29,8 +29,8 @@ public class BookRent extends Common implements Show {
 		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		if(bookFindChk){
-			checkUsingbook = setCheckUsingBook(book);
-			if(!checkUsingbook) {
+			checkUsingBook = setCheckUsingBook(book);
+			if(!checkUsingBook) {
 				addUsingBook();
 			} else { // bUsing = true : 누군가 사용 중
 				System.out.println("[!] 이미 대여중인 책입니다.");
