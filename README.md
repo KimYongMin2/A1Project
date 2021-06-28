@@ -6,7 +6,7 @@
 # 참여자
 - 황지원(@jiwondotcom)
 - 신은경(@heybrilliant)
-- 김용민([@KimYongMin2]https://github.com/KimYongMin2)
+- 김용민(@KimYongMin2)
 - 박상명(@parksangmyeong1)
 - 곽민주(@skyju)
 
