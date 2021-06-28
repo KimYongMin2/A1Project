@@ -23,7 +23,7 @@
   - Class Diagram
 ---
 * 구현 기술
-  - JAVA
+  - <code>java</code>
   - JDBC
   - Oracle
 ---
