@@ -26,7 +26,7 @@ public class BookRent extends Common implements Show {
 		
 		bName = ScannerUtil.getInputStringS(">> 대여할 도서명을 입력해주세요 : ");
 		
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		if(bookFindChk){
 			checkUsingbook = setCheckUsingBook(book);

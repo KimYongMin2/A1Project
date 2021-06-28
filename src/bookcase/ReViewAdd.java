@@ -26,7 +26,7 @@ public class ReViewAdd extends Common implements Show {
 		bookList = bookCrud.getBookList(con);
 //		showReviewAdd();
 		bName = ScannerUtil.getInputStringS(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		if (bookFindChk) {
 			setReviewComment();

@@ -29,7 +29,7 @@ public class ReturnBook extends Common implements Show {
 		System.out.print(">> 반납하실 도서명을 입력하세요 : ");
 		bName = ScannerUtil.getInputString();
 
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		findBookCode();
 
