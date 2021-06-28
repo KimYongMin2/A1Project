@@ -10,7 +10,7 @@
 - 박상명([@parksangmyeong1](https://github.com/parksangmyeong1))
 - 곽민주([@skyju](https://github.com/skyju))
 
-# 개발기간👀�
+# 개발기간👀
 - 2021.06.21 ~ 2021.06.28
 
 # 핵심기능✔
