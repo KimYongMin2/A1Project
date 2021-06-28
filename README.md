@@ -27,7 +27,7 @@
 ---
 * 구현 기술
   - <code>java</code>
-  - <code>Oracle<code>
+  - <code>Oracle</code>
   - JDBC
 ---
 # 완성 PPT📙
