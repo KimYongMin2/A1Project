@@ -7,7 +7,7 @@
 - 콘솔 기반(with out UI/UX)
 ---
 # 참여자😎
-| Header | Description |
+| 이름 | 깃 주소 |
 |:--|:--|
 |  황지원 | [@jiwondotcom](https://github.com/jiwondotcom)         |
 |  신은경 | [@heybrilliant](https://github.com/heybrilliant)       |
