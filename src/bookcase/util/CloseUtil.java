@@ -23,10 +23,10 @@ public class CloseUtil {
         }
     }
 
-    public static void close(PreparedStatement preparedStatement){
-        if (preparedStatement != null){
+    public static void close(Connection connecton){
+        if (connecton != null){
             try {
-                preparedStatement.close();
+            	connecton.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
