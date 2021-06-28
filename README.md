@@ -27,7 +27,7 @@
 
 
 * 구현 기술
-  - <code>java</code> 1.8v
+  - <code>java</code> v1.8
   - <code>Oracle</code> 11g
   - <code>JDBC</code>
 ---
