@@ -4,11 +4,11 @@
 - 콘솔 기반(with out UI/UX)
 
 # 참여자😎
-- |황지원([@jiwondotcom](https://github.com/jiwondotcom))|
-- |신은경([@heybrilliant](https://github.com/heybrilliant))|
-- |김용민([@KimYongMin2](https://github.com/KimYongMin2))|
-- |박상명([@parksangmyeong1](https://github.com/parksangmyeong1))|
-- |곽민주([@skyju](https://github.com/skyju))|
+- 황지원([@jiwondotcom](https://github.com/jiwondotcom))
+- 신은경([@heybrilliant](https://github.com/heybrilliant))
+- 김용민([@KimYongMin2](https://github.com/KimYongMin2))
+- 박상명([@parksangmyeong1](https://github.com/parksangmyeong1))
+- 곽민주([@skyju](https://github.com/skyju))
 
 # 개발기간👀
 - 2021.06.21 ~ 2021.06.28
