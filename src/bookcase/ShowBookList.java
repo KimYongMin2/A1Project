@@ -1,9 +1,13 @@
 package bookcase;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import bookcase.crud.*;
-import bookcase.object.*;
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.crud.ReturnCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.Return;
 import bookcase.util.*;
 
 public class ShowBookList extends Common {
@@ -13,8 +17,9 @@ public class ShowBookList extends Common {
 	private ReturnCRUD returnCrud = ReturnCRUD.getInstance();
 
 	private ArrayList<Return> returns = new ArrayList<>();
-
+	
 	public void showMyUsingBook(Member member){ //내가 대여한 도서 목록, 반납기한 보기
+
 		returns = returnCrud.getReturnList(con, member);
 		if (returns.isEmpty()) { // 수정 : 리스트 비어있는지 확인
 			System.out.println("[!] 현재 대여중인 도서가 없습니다.\n");

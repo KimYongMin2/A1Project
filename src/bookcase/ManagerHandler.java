@@ -1,15 +1,18 @@
 package bookcase;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import bookcase.crud.*;
-import bookcase.object.*;
-import bookcase.show.*;
-import bookcase.util.*;
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.mUsingBook;
+import bookcase.show.Show;
+import bookcase.util.Common;
+import bookcase.util.ScannerUtil;
 
 public class ManagerHandler extends Common implements Show {
 
-	private ArrayList<mUsingBook> mUsingBooks = new ArrayList<mUsingBook>();
 	private BookCRUD bookCrud = BookCRUD.getInstance();
 	private RentalCRUD rentalCrud = RentalCRUD.getInstance();
 	private int chkAge;

@@ -1,9 +1,9 @@
 package bookcase.page;
 
-import bookcase.*;
-import bookcase.object.*;
-import bookcase.show.*;
-import bookcase.util.*;
+import bookcase.object.Member;
+import bookcase.show.Show;
+import bookcase.util.Common;
+import bookcase.util.ScannerUtil;
 
 public class MemberPage extends Common implements Show {
     private int menuButton = 0;
