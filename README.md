@@ -7,7 +7,7 @@
 - 황지원(@jiwondotcom)
 - 신은경(@heybrilliant)
 - 김용민(@KimYongMin2)
-- 박상명(@parksangmyeong1)
+- 박상명([@parksangmyeong1](https://github.com/parksangmyeong1))
 - 곽민주(@skyju)
 
 # 개발기간
