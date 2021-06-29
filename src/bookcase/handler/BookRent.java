@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.handler;
 
 import java.text.*;
 import java.util.*;
@@ -26,11 +26,11 @@ public class BookRent extends Common implements Show {
 		
 		bName = ScannerUtil.getInputStringS(">> 대여할 도서명을 입력해주세요 : ");
 		
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		if(bookFindChk){
-			checkUsingbook = setCheckUsingBook(book);
-			if(!checkUsingbook) {
+			checkUsingBook = setCheckUsingBook(book);
+			if(!checkUsingBook) {
 				addUsingBook();
 			} else { // bUsing = true : 누군가 사용 중
 				System.out.println("[!] 이미 대여중인 책입니다.");

@@ -160,4 +160,29 @@ public class BookCRUD {
 			CloseUtil.close(pstmt);
 		}
 	}
+
+	// findBook메소드
+	public Book findBook(Connection con, String bname) {
+		PreparedStatement pstmt = null;
+		Book book = null;
+		ResultSet rs = null;
+		try {
+			String findBookSql = "select BOOKCODE, BNAME, BWRITER, BPUBLISHER, BGENRE, BPRICE, BUSING, BAGEUSING FROM BOOK WHERE bname = ?";
+			pstmt = con.prepareStatement(findBookSql);
+			pstmt.setString(1, bname);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				book = new Book(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),
+						rs.getString(8));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+		}
+
+		return book;
+	}
 }

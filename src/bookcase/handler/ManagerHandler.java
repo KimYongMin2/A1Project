@@ -1,15 +1,18 @@
-package bookcase;
+package bookcase.handler;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import bookcase.crud.*;
-import bookcase.object.*;
-import bookcase.show.*;
-import bookcase.util.*;
+import bookcase.crud.BookCRUD;
+import bookcase.crud.RentalCRUD;
+import bookcase.object.Book;
+import bookcase.object.Member;
+import bookcase.object.mUsingBook;
+import bookcase.show.Show;
+import bookcase.util.Common;
+import bookcase.util.ScannerUtil;
 
 public class ManagerHandler extends Common implements Show {
 
-	private ArrayList<mUsingBook> mUsingBooks = new ArrayList<mUsingBook>();
 	private BookCRUD bookCrud = BookCRUD.getInstance();
 	private RentalCRUD rentalCrud = RentalCRUD.getInstance();
 	private int chkAge;
@@ -59,7 +62,7 @@ public class ManagerHandler extends Common implements Show {
 		if(bookList == null) {
 			System.out.println("[!] 현재 삭제할 도서가 존재하지 않습니다.");
 		} else {
-			book = findBook(bookList, bName);
+			book = bookCrud.findBook(con, bName);
 			bookFindChk = setFindBookCheck(book);
 			if(bookFindChk) {
 				bookCrud.deleteBook(con, book);
@@ -76,7 +79,7 @@ public class ManagerHandler extends Common implements Show {
 
 		bName = ScannerUtil.getInputStringS(">> 수정하실 도서명을 입력하세요. : ");
 
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 
 		if (bookFindChk) {
@@ -148,13 +151,6 @@ public class ManagerHandler extends Common implements Show {
 		}
 		System.out.println();
 	}
-//		for (BUsingbook busingBook : BUsingBook) {
-//			if(book.getbUsing().equals("true")) {
-//				System.out.println(book);
-//			}
-//		}
-//		System.out.println();
-//	}
 
 	public void showAllMember(ArrayList<Member> members) {
 		System.out.println("\n>> 전체 회원 리스트를 출력합니다.");

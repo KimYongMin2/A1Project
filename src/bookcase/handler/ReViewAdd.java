@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.handler;
 
 import java.util.*;
 
@@ -26,7 +26,7 @@ public class ReViewAdd extends Common implements Show {
 		bookList = bookCrud.getBookList(con);
 //		showReviewAdd();
 		bName = ScannerUtil.getInputStringS(">> 리뷰를 작성하실 도서명을 입력하세요 : ");
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		if (bookFindChk) {
 			setReviewComment();
@@ -45,46 +45,36 @@ public class ReViewAdd extends Common implements Show {
 	}
 
 	private void setScore() { // 평점 주기
-		showScoreMenu();
-		rScore = ScannerUtil.getInputDoubleS("▶ 평점 : ");
-		checkScore();
-		System.out.println("[평점 입력 완료]");
+		boolean chk = false;
+		do {
+			showScoreMenu();
+			rScore = ScannerUtil.getInputDoubleS("▶ 평점 : ");
+			if (rScore > 5 || rScore < 0) {
+				showScoreError();
+				chk = false;
+			}else{
+				chk = true;
+			}
+		}while (!chk);
+			System.out.println("[평점 입력 완료]");
 	}
 
-	private void checkScore() { // 이상한 평점 값 못 주게 막기
-		boolean chk1 = true;
-		if (rScore > 5 || rScore < 0) {
-			while (chk1) {
-				showScoreError();
-				rScore = ScannerUtil.getInputDoubleS("▶ 평점 : ");
-				if (rScore <= 5) {
-					chk1 = false;
-					break;
-				}
-			}
-		}
-	}
 
 	private void setComment() { // 한줄평 입력하기
-		showCommentMenu();
-		rComment = ScannerUtil.getInputStringS("▶ 한줄평 : ");
-		checkComment();
+		boolean chk = false;
+		do {
+			showCommentMenu();
+			rComment = ScannerUtil.getInputStringS("▶ 한줄평 : ");
+			if (rComment.length() > 40) {
+				showCommentError();
+				chk = false;
+			}else {
+				chk = true;
+			}
+		}while (!chk);
 		System.out.println("[한줄평 입력 완료]");
 	}
 
-	private void checkComment() { // 한줄평 사이즈 제한
-		boolean chk = true;
-		if (rComment.length() > 40) {
-			while (chk) {
-				showCommentError();
-				rComment = ScannerUtil.getInputStringS("▶ 한줄평 : ");
-				if (rComment.length() <= 40) {
-					chk = false;
-					break;
-				}
-			}
-		}
-	}
 	
 	public void showReview() { // 리뷰 조회
 		viewReviews = viewReviewCrud.getReviewList(con);

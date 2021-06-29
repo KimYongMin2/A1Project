@@ -1,4 +1,4 @@
-package bookcase;
+package bookcase.handler;
 
 import java.util.*;
 
@@ -29,7 +29,7 @@ public class ReturnBook extends Common implements Show {
 		System.out.print(">> 반납하실 도서명을 입력하세요 : ");
 		bName = ScannerUtil.getInputString();
 
-		book = findBook(bookList, bName);
+		book = bookCrud.findBook(con, bName);
 		bookFindChk = setFindBookCheck(book);
 		findBookCode();
 
@@ -37,8 +37,8 @@ public class ReturnBook extends Common implements Show {
 			System.out.println("[!] 반납실패. 다시 확인해주세요.\n");
 		} else { // chk = true
 			use = usingBooks.get(temp);
-			checkUsingbook = setCheckUsingBook(book);
-			if(checkUsingbook) {
+			checkUsingBook = setCheckUsingBook(book);
+			if(checkUsingBook) {
 				deleteUsingBook();
 				System.out.println("▶ 반납이 완료되었습니다.\n");
 			}else{
