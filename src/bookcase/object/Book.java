@@ -20,7 +20,7 @@ public class Book {
         this.bGenre = bGenre;
         this.bPrice = bPrice;
         this.bUsing = bUsing;
-        this.bAgeUsing = bAgeUsing;
+        this.bAgeUsing =  bAgeUsing;
     }
 
     public int getBookCode() {
